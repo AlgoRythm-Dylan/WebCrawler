@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Windows.h>
 #include <string>
 
 #define EXP __declspec(dllexport)
@@ -9,7 +10,7 @@ using std::string;
 namespace ansicolor
 {
 #ifdef USE_ANSI_COLORS
-	EXP const string reset = "\x1B[0m";
+	EXP const string reset = "\x1B[0;0m";
 	EXP const string black = "\x1B[30m";
 	EXP const string red = "\x1B[31m";
 	EXP const string green = "\x1B[32m";
@@ -85,4 +86,16 @@ namespace ansicolor
 		string("\t") + blink + "BLINK\n" + reset +
 		string("\t") + reverse + "REVERSE\n" + reset +
 		string("\t") + strikethrough + "STRIKETHROUGH\n" + reset;
+	// By default, cmd.exe on win 10 doesn't recognize ANSI sequences,
+	// even though it has the ability. Need to enable it.
+	EXP void setup_ansi_mode()
+	{
+		// Get current console mode
+		HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+		DWORD mode = 0;
+		GetConsoleMode(out, &mode);
+		// Add ansi sequence processing
+		mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+		SetConsoleMode(out, mode);
+	}
 }
