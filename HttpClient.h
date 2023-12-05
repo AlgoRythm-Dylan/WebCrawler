@@ -7,12 +7,7 @@ using std::string;
 
 class HttpClient
 {
-protected:
-	CURL* curl;
 public:
-	HttpClient();
-	~HttpClient();
-
-	string get_string(string);
+	static string get_string(string);
 };
 

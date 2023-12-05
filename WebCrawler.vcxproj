@@ -136,9 +136,11 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="HttpClient.cpp" />
+    <ClCompile Include="HttpResponse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HttpClient.h" />
+    <ClInclude Include="HttpResponse.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
