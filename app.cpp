@@ -4,8 +4,6 @@
 #include "AnsiColors.hpp"
 #include "Helpers.h"
 
-using wcrawl::URL;
-
 int main()
 {
 	ansicolor::setup_ansi_mode();
