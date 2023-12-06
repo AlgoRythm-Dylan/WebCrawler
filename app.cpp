@@ -14,6 +14,12 @@ int main()
 
 	URL url;
 	url.protocol = "https";
+	url.username = "AzureDiamond";
+	url.password = "hunter2";
+	url.host = "bash.org";
+	url.host_parts = { "bash", "org" };
+	url.path = "/chat";
+	url.query = "?topic=security";
 	
 	std::cout << "Testing URL pretty printing\n\t";
 
