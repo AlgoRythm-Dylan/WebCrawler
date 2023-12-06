@@ -135,10 +135,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="HttpClient.cpp" />
     <ClCompile Include="HttpResponse.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Helpers.h" />
     <ClInclude Include="HttpClient.h" />
     <ClInclude Include="HttpResponse.h" />
   </ItemGroup>
