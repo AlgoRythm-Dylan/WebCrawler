@@ -139,9 +139,16 @@
     <ClCompile Include="HttpClient.cpp" />
     <ClCompile Include="HttpResponse.cpp" />
     <ClCompile Include="Lexer.cpp" />
+    <ClCompile Include="LexingScanResult.cpp" />
+    <ClCompile Include="LexingState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
-    <ClCompile Include="URL.cpp" />
+    <ClCompile Include="Token.cpp" />
+    <ClCompile Include="Token\PunctuationToken.cpp" />
+    <ClCompile Include="Token\StringToken.cpp" />
+    <ClCompile Include="Url.cpp" />
+    <ClCompile Include="Url\Lexer\UrlLexer.cpp" />
+    <ClCompile Include="Url\Lexer\UrlLexProtocolPuncState.cpp" />
     <ClCompile Include="Url\Lexer\UrlLexStartState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +157,16 @@
     <ClInclude Include="HttpClient.h" />
     <ClInclude Include="HttpResponse.h" />
     <ClInclude Include="Lexer.h" />
+    <ClInclude Include="LexingScanResult.h" />
+    <ClInclude Include="LexingState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
-    <ClInclude Include="URL.h" />
+    <ClInclude Include="Token.h" />
+    <ClInclude Include="Token\PunctuationToken.h" />
+    <ClInclude Include="Token\StringToken.h" />
+    <ClInclude Include="Url.h" />
+    <ClInclude Include="Url\Lexer\UrlLexer.h" />
+    <ClInclude Include="Url\Lexer\UrlLexProtocolPuncState.h" />
     <ClInclude Include="Url\Lexer\UrlLexStartState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

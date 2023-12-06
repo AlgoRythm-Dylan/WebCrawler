@@ -3,7 +3,7 @@
 #include "Helpers.h"
 #include "AnsiColors.hpp"
 
-void pretty_print_url(const URL& url, bool colors)
+void pretty_print_url(const Url& url, bool colors)
 {
 	if (url.protocol != "")
 	{

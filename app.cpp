@@ -10,8 +10,9 @@ int main()
 
 	std::cout << ansicolor::screen_test << std::endl;
 
-	URL url;
-	url.protocol = "https";
+	string url_str = "https://";
+	Url url(url_str);
+	/*url.protocol = "https";
 	url.username = "AzureDiamond";
 	url.password = "hunter2";
 	url.host = "bash.org";
@@ -21,7 +22,7 @@ int main()
 	
 	std::cout << "Testing URL pretty printing\n\t";
 
-	pretty_print_url(url);
+	pretty_print_url(url);*/
 
 	std::cout << "\n";
 	return 0;

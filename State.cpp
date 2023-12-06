@@ -4,6 +4,5 @@
 
 void State::transition(shared_ptr<State> state)
 {
-	auto ptr = machine.lock();
-	ptr->transition(state);
+	machine->transition(state);
 }
