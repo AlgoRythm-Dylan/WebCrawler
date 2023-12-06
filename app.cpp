@@ -20,9 +20,9 @@ int main()
 	url.path = "/chat";
 	url.query = "?topic=security";
 	
-	std::cout << "Testing URL pretty printing\n\t";
+	std::cout << "Testing URL pretty printing\n\t";*/
 
-	pretty_print_url(url);*/
+	pretty_print_url(url);
 
 	std::cout << "\n";
 	return 0;

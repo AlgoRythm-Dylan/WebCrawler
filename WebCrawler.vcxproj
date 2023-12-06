@@ -141,6 +141,8 @@
     <ClCompile Include="Lexer.cpp" />
     <ClCompile Include="LexingScanResult.cpp" />
     <ClCompile Include="LexingState.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="ParsingState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Token.cpp" />
@@ -150,6 +152,8 @@
     <ClCompile Include="Url\Lexer\UrlLexer.cpp" />
     <ClCompile Include="Url\Lexer\UrlLexProtocolPuncState.cpp" />
     <ClCompile Include="Url\Lexer\UrlLexStartState.cpp" />
+    <ClCompile Include="Url\Parser\UrlParser.cpp" />
+    <ClCompile Include="Url\Parser\UrlParseStartState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnsiColors.hpp" />
@@ -159,6 +163,8 @@
     <ClInclude Include="Lexer.h" />
     <ClInclude Include="LexingScanResult.h" />
     <ClInclude Include="LexingState.h" />
+    <ClInclude Include="Parser.h" />
+    <ClInclude Include="ParsingState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Token.h" />
@@ -168,6 +174,8 @@
     <ClInclude Include="Url\Lexer\UrlLexer.h" />
     <ClInclude Include="Url\Lexer\UrlLexProtocolPuncState.h" />
     <ClInclude Include="Url\Lexer\UrlLexStartState.h" />
+    <ClInclude Include="Url\Parser\UrlParser.h" />
+    <ClInclude Include="Url\Parser\UrlParseStartState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
