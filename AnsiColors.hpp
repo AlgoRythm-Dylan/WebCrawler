@@ -3,8 +3,6 @@
 #include <Windows.h>
 #include <string>
 
-#define EXP __declspec(dllexport)
-
 using std::string;
 
 namespace ansicolor
