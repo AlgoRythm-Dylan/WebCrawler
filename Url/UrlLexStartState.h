@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../LexingState.h"
-#include "../../LexingScanResult.h"
+#include <LexingState.h>
+#include <LexingScanResult.h>
 
 class UrlLexStartState : public LexingState
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../LexingState.h"
+#include <LexingState.h>
 
 class UrlLexProtocolPuncState : public LexingState
 {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <queue>
-#include "../../Lexer.h"
+#include <Lexer.h>
 
 using std::queue;
 

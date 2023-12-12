@@ -1,7 +1,5 @@
 #include <memory>
 #include "UrlLexer.h"
-#include "../../LexingState.h"
-#include "../../LexingScanResult.h"
 #include "UrlLexStartState.h"
 
 UrlLexer::UrlLexer(std::string& input) : source(input) 

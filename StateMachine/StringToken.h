@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "../Token.h"
+#include "Token.h"
 
 using std::string;
 

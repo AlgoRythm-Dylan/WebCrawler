@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>CURL_STATICLIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);USE_ANSI_COLORS;CURL_STATICLIB</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Url;$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,7 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CURL_STATICLIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);USE_ANSI_COLORS;CURL_STATICLIB</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Url;$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,48 +136,17 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="Helpers.cpp" />
-    <ClCompile Include="HttpResponse.cpp" />
-    <ClCompile Include="Lexer.cpp" />
-    <ClCompile Include="LexingScanResult.cpp" />
-    <ClCompile Include="LexingState.cpp" />
-    <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="ParsingState.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="StateMachine.cpp" />
-    <ClCompile Include="Token.cpp" />
-    <ClCompile Include="Token\PunctuationToken.cpp" />
-    <ClCompile Include="Token\StringToken.cpp" />
-    <ClCompile Include="Url.cpp" />
-    <ClCompile Include="Url\Lexer\UrlLexer.cpp" />
-    <ClCompile Include="Url\Lexer\UrlLexProtocolPuncState.cpp" />
-    <ClCompile Include="Url\Lexer\UrlLexStartState.cpp" />
-    <ClCompile Include="Url\Parser\UrlParser.cpp" />
-    <ClCompile Include="Url\Parser\UrlParseStartState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnsiColors.hpp" />
     <ClInclude Include="Helpers.h" />
-    <ClInclude Include="HttpResponse.h" />
-    <ClInclude Include="Lexer.h" />
-    <ClInclude Include="LexingScanResult.h" />
-    <ClInclude Include="LexingState.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="ParsingState.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateMachine.h" />
-    <ClInclude Include="Token.h" />
-    <ClInclude Include="Token\PunctuationToken.h" />
-    <ClInclude Include="Token\StringToken.h" />
-    <ClInclude Include="Url.h" />
-    <ClInclude Include="Url\Lexer\UrlLexer.h" />
-    <ClInclude Include="Url\Lexer\UrlLexProtocolPuncState.h" />
-    <ClInclude Include="Url\Lexer\UrlLexStartState.h" />
-    <ClInclude Include="Url\Parser\UrlParser.h" />
-    <ClInclude Include="Url\Parser\UrlParseStartState.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="HttpClient\HttpClient.vcxproj">
       <Project>{2230e3ef-a3b2-44a6-b4e5-a22dfb6f81a8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Url\Url.vcxproj">
+      <Project>{4b4b2fe3-354d-4c7d-affd-016f38a44464}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

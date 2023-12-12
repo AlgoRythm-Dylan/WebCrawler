@@ -1,7 +1,7 @@
 #include "UrlLexStartState.h"
 #include "UrlLexer.h"
-#include "../../Token/StringToken.h"
-#include "../../Token/PunctuationToken.h"
+#include <StringToken.h>
+#include <PunctuationToken.h>
 #include "UrlLexProtocolPuncState.h"
 
 using std::unique_ptr;

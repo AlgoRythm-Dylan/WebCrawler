@@ -19,18 +19,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HttpClient.cpp" />
-    <ClCompile Include="HttpResponse.cpp" />
+    <ClCompile Include="Url.cpp" />
+    <ClCompile Include="UrlLexer.cpp" />
+    <ClCompile Include="UrlLexProtocolPuncState.cpp" />
+    <ClCompile Include="UrlLexStartState.cpp" />
+    <ClCompile Include="UrlParser.cpp" />
+    <ClCompile Include="UrlParseStartState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HttpClient.h" />
-    <ClInclude Include="HttpResponse.h" />
+    <ClInclude Include="Url.h" />
+    <ClInclude Include="UrlLexer.h" />
+    <ClInclude Include="UrlLexProtocolPuncState.h" />
+    <ClInclude Include="UrlLexStartState.h" />
+    <ClInclude Include="UrlParser.h" />
+    <ClInclude Include="UrlParseStartState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StateMachine\StateMachine.vcxproj">
+      <Project>{040c1d69-a889-46e2-928f-35af91f41fba}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2230e3ef-a3b2-44a6-b4e5-a22dfb6f81a8}</ProjectGuid>
-    <RootNamespace>HttpClient</RootNamespace>
+    <ProjectGuid>{4b4b2fe3-354d-4c7d-affd-016f38a44464}</ProjectGuid>
+    <RootNamespace>Url</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -116,11 +129,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>CURL_STATICLIB;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\StateMachine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -134,11 +147,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>CURL_STATICLIB;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\StateMachine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

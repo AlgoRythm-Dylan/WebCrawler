@@ -1,8 +1,8 @@
 #include <memory>
 
 #include "URL.h"
-#include "Url/Lexer/UrlLexer.h"
-#include "Url/Parser/UrlParser.h"
+#include "UrlLexer.h"
+#include "UrlParser.h"
 
 using std::unique_ptr;
 

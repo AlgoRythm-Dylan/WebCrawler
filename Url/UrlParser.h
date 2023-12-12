@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Parser.h"
-#include "../../Url.h"
+#include <Parser.h>
+#include "Url.h"
 
 class UrlParser : public Parser
 {
