@@ -3,7 +3,7 @@
 #include "URL.h"
 #include "AnsiColors.hpp"
 #include "Helpers.h"
-#include "HttpClient/HttpClient.h"
+#include <HttpClient.h>
 
 int main()
 {
