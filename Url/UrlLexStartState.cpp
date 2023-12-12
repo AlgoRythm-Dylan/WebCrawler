@@ -23,12 +23,10 @@ LexingScanResult UrlLexStartState::scan(const char character)
 		auto lexer_pointer = (UrlLexer*)machine;
 		if (memory.length() != 0)
 		{
-			auto new_token = new StringToken();
-			new_token->value = memory;
+			auto new_token = new StringToken(memory);
 			lexer_pointer->token_buffer.push(unique_ptr<Token>(new_token));
 		}
-		auto new_punc_token = new PunctuationToken();
-		new_punc_token->value = ":";
+		auto new_punc_token = new PunctuationToken(":");
 		lexer_pointer->token_buffer.push(unique_ptr<Token>(new_punc_token));
 		auto next_state = std::make_shared<UrlLexProtocolPuncState>();
 		transition(next_state);
@@ -40,6 +38,11 @@ LexingScanResult UrlLexStartState::scan(const char character)
 	else if (character == '?')
 	{
 		// Transition to query parsing state
+	}
+	else
+	{
+		// Nothing to do here except remember what we're being told
+		memory += character;
 	}
 	return result;
 }

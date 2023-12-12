@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EOFToken.cpp" />
     <ClCompile Include="Lexer.cpp" />
     <ClCompile Include="LexingScanResult.cpp" />
     <ClCompile Include="LexingState.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="Token.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EOFToken.h" />
     <ClInclude Include="Lexer.h" />
     <ClInclude Include="LexingScanResult.h" />
     <ClInclude Include="LexingState.h" />

@@ -27,21 +27,24 @@ namespace TestSuite
 			auto colonToken = lexer.next();
 			auto firstSlashToken = lexer.next();
 			auto secondSlashToken = lexer.next();
+			auto eofToken = lexer.next();
 			// Make sure none of the pointers are not null
 			Assert::IsTrue((bool)httpsToken);
 			Assert::IsTrue((bool)colonToken);
 			Assert::IsTrue((bool)firstSlashToken);
 			Assert::IsTrue((bool)secondSlashToken);
+			Assert::IsTrue((bool)eofToken);
 			// Make sure pointers are of correct type
-			Assert::AreEqual(httpsToken->type, StdTokenType::str);
-			Assert::AreEqual(colonToken->type, StdTokenType::punctuation);
-			Assert::AreEqual(firstSlashToken->type, StdTokenType::punctuation);
-			Assert::AreEqual(secondSlashToken->type, StdTokenType::punctuation);
+			Assert::AreEqual(StdTokenType::str, httpsToken->type);
+			Assert::AreEqual(StdTokenType::punctuation, colonToken->type);
+			Assert::AreEqual(StdTokenType::punctuation, firstSlashToken->type);
+			Assert::AreEqual(StdTokenType::punctuation, secondSlashToken->type);
+			Assert::AreEqual(StdTokenType::end, eofToken->type);
 			// Make sure pointers have correct value
-			Assert::AreEqual(((StringToken*)httpsToken.get())->value, string("https"));
-			Assert::AreEqual(((PunctuationToken*)colonToken.get())->value, string(":"));
-			Assert::AreEqual(((PunctuationToken*)firstSlashToken.get())->value, string("/"));
-			Assert::AreEqual(((PunctuationToken*)secondSlashToken.get())->value, string("/"));
+			Assert::AreEqual(string("https"), ((StringToken*)httpsToken.get())->value);
+			Assert::AreEqual(string(":"), ((PunctuationToken*)colonToken.get())->value);
+			Assert::AreEqual(string("/"), ((PunctuationToken*)firstSlashToken.get())->value);
+			Assert::AreEqual(string("/"), ((PunctuationToken*)secondSlashToken.get())->value);
 		}
 	};
 }

@@ -11,5 +11,6 @@ public:
 	string value;
 
 	StringToken();
+	StringToken(string value);
 };
 
