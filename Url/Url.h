@@ -24,6 +24,7 @@ public:
 	string protocol, username, password, host, path, query;
 	vector<string> host_parts;
 	int port;
+	bool is_valid, is_relative, is_fully_qualified;
 
 	Url();
 	Url(string&);

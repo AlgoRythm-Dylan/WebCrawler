@@ -1,9 +1,7 @@
 #pragma once
-
 #include <LexingState.h>
-#include <LexingScanResult.h>
 
-class UrlLexStartState : public LexingState
+class UrlLexPathState : public LexingState
 {
 protected:
 	string memory;

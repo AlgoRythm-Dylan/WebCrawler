@@ -33,6 +33,9 @@
     <ClCompile Include="UrlParseStartState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UrlLexPathState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Url.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UrlParseStartState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UrlLexPathState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

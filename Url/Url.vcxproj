@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Url.cpp" />
     <ClCompile Include="UrlLexer.cpp" />
+    <ClCompile Include="UrlLexPathState.cpp" />
     <ClCompile Include="UrlLexProtocolPuncState.cpp" />
     <ClCompile Include="UrlLexStartState.cpp" />
     <ClCompile Include="UrlParser.cpp" />
@@ -29,6 +30,7 @@
   <ItemGroup>
     <ClInclude Include="Url.h" />
     <ClInclude Include="UrlLexer.h" />
+    <ClInclude Include="UrlLexPathState.h" />
     <ClInclude Include="UrlLexProtocolPuncState.h" />
     <ClInclude Include="UrlLexStartState.h" />
     <ClInclude Include="UrlParser.h" />

@@ -23,8 +23,6 @@ int main()
 	
 	std::cout << "Testing URL pretty printing\n\t";*/
 
-	std::cout << HttpClient::get_string("http://www.google.com");
-
 	pretty_print_url(url);
 
 	std::cout << "\n";
