@@ -18,35 +18,41 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HttpClient.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HttpClient.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{bedc98ec-9a94-46ec-865e-e2ede2a356a7}</ProjectGuid>
-    <RootNamespace>WebCrawler</RootNamespace>
+    <ProjectGuid>{2230e3ef-a3b2-44a6-b4e5-a22dfb6f81a8}</ProjectGuid>
+    <RootNamespace>HttpClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -74,11 +80,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -88,11 +97,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -102,16 +114,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>CURL_STATICLIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);USE_ANSI_COLORS;CURL_STATICLIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CURL_STATICLIB;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libcurl_a.lib;ws2_32.lib;wldap32.lib;advapi32.lib;kernel32.lib;comdlg32.lib;crypt32.lib;normaliz.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir)libcurl\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -120,66 +132,20 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>CURL_STATICLIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);USE_ANSI_COLORS;CURL_STATICLIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CURL_STATICLIB;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir)libcurl\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcurl_a.lib;ws2_32.lib;wldap32.lib;advapi32.lib;kernel32.lib;comdlg32.lib;crypt32.lib;normaliz.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="app.cpp" />
-    <ClCompile Include="Helpers.cpp" />
-    <ClCompile Include="HttpResponse.cpp" />
-    <ClCompile Include="Lexer.cpp" />
-    <ClCompile Include="LexingScanResult.cpp" />
-    <ClCompile Include="LexingState.cpp" />
-    <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="ParsingState.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="StateMachine.cpp" />
-    <ClCompile Include="Token.cpp" />
-    <ClCompile Include="Token\PunctuationToken.cpp" />
-    <ClCompile Include="Token\StringToken.cpp" />
-    <ClCompile Include="Url.cpp" />
-    <ClCompile Include="Url\Lexer\UrlLexer.cpp" />
-    <ClCompile Include="Url\Lexer\UrlLexProtocolPuncState.cpp" />
-    <ClCompile Include="Url\Lexer\UrlLexStartState.cpp" />
-    <ClCompile Include="Url\Parser\UrlParser.cpp" />
-    <ClCompile Include="Url\Parser\UrlParseStartState.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AnsiColors.hpp" />
-    <ClInclude Include="Helpers.h" />
-    <ClInclude Include="HttpResponse.h" />
-    <ClInclude Include="Lexer.h" />
-    <ClInclude Include="LexingScanResult.h" />
-    <ClInclude Include="LexingState.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="ParsingState.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateMachine.h" />
-    <ClInclude Include="Token.h" />
-    <ClInclude Include="Token\PunctuationToken.h" />
-    <ClInclude Include="Token\StringToken.h" />
-    <ClInclude Include="Url.h" />
-    <ClInclude Include="Url\Lexer\UrlLexer.h" />
-    <ClInclude Include="Url\Lexer\UrlLexProtocolPuncState.h" />
-    <ClInclude Include="Url\Lexer\UrlLexStartState.h" />
-    <ClInclude Include="Url\Parser\UrlParser.h" />
-    <ClInclude Include="Url\Parser\UrlParseStartState.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="HttpClient\HttpClient.vcxproj">
-      <Project>{2230e3ef-a3b2-44a6-b4e5-a22dfb6f81a8}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -3,6 +3,7 @@
 #include "URL.h"
 #include "AnsiColors.hpp"
 #include "Helpers.h"
+#include "HttpClient/HttpClient.h"
 
 int main()
 {
@@ -21,6 +22,8 @@ int main()
 	url.query = "?topic=security";
 	
 	std::cout << "Testing URL pretty printing\n\t";*/
+
+	std::cout << HttpClient::get_string("http://www.google.com");
 
 	pretty_print_url(url);
 
