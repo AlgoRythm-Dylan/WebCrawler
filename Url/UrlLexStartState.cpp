@@ -47,17 +47,3 @@ LexingScanResult UrlLexStartState::scan(const char character)
 	}
 	return result;
 }
-
-
-// If any memory, emit it as a token to the token buffer
-// as a string token
-void UrlLexStartState::emit_memory()
-{
-	auto lexer_pointer = (UrlLexer*)machine;
-	if (memory.length() != 0)
-	{
-		auto new_token = new StringToken(memory);
-		lexer_pointer->token_buffer.push(unique_ptr<Token>(new_token));
-	}
-	memory = "";
-}

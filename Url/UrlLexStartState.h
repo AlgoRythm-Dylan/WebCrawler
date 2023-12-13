@@ -1,14 +1,10 @@
 #pragma once
 
-#include <LexingState.h>
+#include "UrlStringMemoryState.h"
 #include <LexingScanResult.h>
 
-class UrlLexStartState : public LexingState
+class UrlLexStartState : public UrlStringMemoryState
 {
-protected:
-	string memory;
-	void emit_memory();
 public:
 	LexingScanResult scan(const char) override;
 };
-

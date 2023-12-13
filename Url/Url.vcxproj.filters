@@ -36,6 +36,9 @@
     <ClCompile Include="UrlLexPathState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UrlStringMemoryState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Url.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UrlLexPathState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UrlStringMemoryState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
