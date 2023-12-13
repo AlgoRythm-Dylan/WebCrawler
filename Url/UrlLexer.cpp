@@ -18,12 +18,11 @@ unique_ptr<Token> UrlLexer::next()
 		return token;
 	}
 
-
-	auto lexing_state = std::static_pointer_cast<LexingState>(current_state);
-	LexingScanResult result;
-
 	while (token_buffer.size() == 0)
 	{
+		auto lexing_state = std::static_pointer_cast<LexingState>(current_state);
+		LexingScanResult result;
+
 		if (source_caret >= source.length())
 		{
 			auto eof = std::make_unique<Token>();

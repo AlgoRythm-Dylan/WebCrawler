@@ -1,6 +1,7 @@
 #include "UrlLexPathState.h"
 #include "UrlLexer.h"
 #include <StringToken.h>
+#include <PunctuationToken.h>
 
 LexingScanResult UrlLexPathState::scan(const char character)
 {
@@ -9,6 +10,8 @@ LexingScanResult UrlLexPathState::scan(const char character)
 	{
 		emit_memory();
 		// Create punctuation token
+		auto tok = new PunctuationToken("/");
+		((UrlLexer*)machine)->token_buffer.push(unique_ptr<Token>(tok));
 	}
 	else if (character == '?')
 	{

@@ -46,5 +46,37 @@ namespace TestSuite
 			Assert::AreEqual(string("/"), ((PunctuationToken*)firstSlashToken.get())->value);
 			Assert::AreEqual(string("/"), ((PunctuationToken*)secondSlashToken.get())->value);
 		}
+
+		TEST_METHOD(CanLexAbsoluteRelativePath)
+		{
+			// "absolute-relative" path is a path that starts
+			// with root, but is still relative to the current
+			// domain
+			string source = "/hello/world";
+			UrlLexer lexer(source);
+			// Should emit 4 tokens: 2 punctuation, 2 str
+			auto firstSlashToken = lexer.next();
+			auto firstPathToken = lexer.next();
+			auto secondSlashToken = lexer.next();
+			auto secondPathToken = lexer.next();
+			auto eofToken = lexer.next();
+			// Check the tokens are created
+			Assert::IsTrue((bool)firstSlashToken);
+			Assert::IsTrue((bool)firstPathToken);
+			Assert::IsTrue((bool)secondSlashToken);
+			Assert::IsTrue((bool)secondPathToken);
+			Assert::IsTrue((bool)eofToken);
+			// Check token types
+			Assert::AreEqual(StdTokenType::punctuation, firstSlashToken->type);
+			Assert::AreEqual(StdTokenType::str, firstPathToken->type);
+			Assert::AreEqual(StdTokenType::punctuation, secondSlashToken->type);
+			Assert::AreEqual(StdTokenType::str, secondPathToken->type);
+			Assert::AreEqual(StdTokenType::end, eofToken->type);
+			// Check token values
+			Assert::AreEqual(string("/"), ((PunctuationToken*)firstSlashToken.get())->value);
+			Assert::AreEqual(string("hello"), ((StringToken*)firstPathToken.get())->value);
+			Assert::AreEqual(string("/"), ((PunctuationToken*)secondSlashToken.get())->value);
+			Assert::AreEqual(string("world"), ((StringToken*)secondPathToken.get())->value);
+		}
 	};
 }
