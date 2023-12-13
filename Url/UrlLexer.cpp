@@ -23,19 +23,20 @@ unique_ptr<Token> UrlLexer::next()
 		auto lexing_state = std::static_pointer_cast<LexingState>(current_state);
 		LexingScanResult result;
 
+		char to_scan;
 		if (source_caret >= source.length())
 		{
-			auto eof = std::make_unique<Token>();
-			eof->type = StdTokenType::end;
-			return eof;
+			to_scan = '\0';
 		}
 		else
 		{
-			result = lexing_state->scan(source[source_caret]);
-			if (result.consumed)
-			{
-				source_caret++;
-			}
+			to_scan = source[source_caret];
+		}
+
+		result = lexing_state->scan(to_scan);
+		if (result.consumed)
+		{
+			source_caret++;
 		}
 	}
 	auto token = std::move(token_buffer.front());

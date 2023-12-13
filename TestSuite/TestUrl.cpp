@@ -17,8 +17,17 @@ namespace TestSuite
 	TEST_CLASS(TestUrl)
 	{
 	public:
-		
-		TEST_METHOD(LexerCanParseProtocol)
+		TEST_METHOD(CanLexEmptyString)
+		{
+			string source = "";
+			UrlLexer lexer(source);
+			auto eofToken = lexer.next();
+			// Token should not be null
+			Assert::IsTrue((bool)eofToken);
+			// Token type should be EOF
+			Assert::AreEqual(StdTokenType::end, eofToken->type);
+		}
+		TEST_METHOD(CanLexProtocol)
 		{
 			string source = "https://";
 			UrlLexer lexer(source);

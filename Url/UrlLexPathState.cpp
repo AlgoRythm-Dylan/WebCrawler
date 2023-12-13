@@ -2,6 +2,7 @@
 #include "UrlLexer.h"
 #include <StringToken.h>
 #include <PunctuationToken.h>
+#include <EOFToken.h>
 
 LexingScanResult UrlLexPathState::scan(const char character)
 {
@@ -16,6 +17,13 @@ LexingScanResult UrlLexPathState::scan(const char character)
 	else if (character == '?')
 	{
 		// Emit memory and then transition to URL param parse state
+	}
+	else if (character == '\0')
+	{
+		emit_memory();
+		// Create end token
+		auto tok = new EOFToken();
+		((UrlLexer*)machine)->token_buffer.push(unique_ptr<Token>(tok));
 	}
 	else
 	{
