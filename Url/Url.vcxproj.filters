@@ -39,6 +39,15 @@
     <ClCompile Include="UrlStringMemoryState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UrlLexAuthorityState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UrlLexQueryState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UrlLexFragmentState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Url.h">
@@ -63,6 +72,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UrlStringMemoryState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UrlLexAuthorityState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UrlLexQueryState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UrlLexFragmentState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="UrlLexAuthorityState.cpp" />
+    <ClCompile Include="UrlLexFragmentState.cpp" />
+    <ClCompile Include="UrlLexQueryState.cpp" />
     <ClCompile Include="UrlStringMemoryState.cpp" />
     <ClCompile Include="Url.cpp" />
     <ClCompile Include="UrlLexer.cpp" />
@@ -29,6 +32,9 @@
     <ClCompile Include="UrlParseStartState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UrlLexAuthorityState.h" />
+    <ClInclude Include="UrlLexFragmentState.h" />
+    <ClInclude Include="UrlLexQueryState.h" />
     <ClInclude Include="UrlStringMemoryState.h" />
     <ClInclude Include="Url.h" />
     <ClInclude Include="UrlLexer.h" />
