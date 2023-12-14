@@ -11,6 +11,7 @@ class UrlParseAuthorityState : public ParsingState
 {
 protected:
 	deque<unique_ptr<Token>> memory;
+	void finish();
 public:
 	unique_ptr<Token> scan(unique_ptr<Token>);
 };

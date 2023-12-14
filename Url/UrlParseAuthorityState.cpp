@@ -13,11 +13,24 @@ unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
 		auto puncToken = (PunctuationToken*)token.get();
 		if (puncToken->value == "/")
 		{
-
+			finish();
+			// TODO: transition to path parse state
 		}
 	}
 	else if (token->type == StdTokenType::end)
 	{
 
 	}
+}
+
+/*
+	This state keeps a rather large memory
+	because there is plenty of shared punctuation
+	such as : for user:pass and : for port.
+	At the end, after everything was loaded into
+	memory, we put the puzle pieces together
+*/
+void UrlParseAuthorityState::finish()
+{
+
 }
