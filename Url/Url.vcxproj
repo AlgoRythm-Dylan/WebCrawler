@@ -22,6 +22,8 @@
     <ClCompile Include="UrlLexAuthorityState.cpp" />
     <ClCompile Include="UrlLexFragmentState.cpp" />
     <ClCompile Include="UrlLexQueryState.cpp" />
+    <ClCompile Include="UrlParseAuthorityState.cpp" />
+    <ClCompile Include="UrlParseProtocolPuncState.cpp" />
     <ClCompile Include="UrlStringMemoryState.cpp" />
     <ClCompile Include="Url.cpp" />
     <ClCompile Include="UrlLexer.cpp" />
@@ -35,6 +37,8 @@
     <ClInclude Include="UrlLexAuthorityState.h" />
     <ClInclude Include="UrlLexFragmentState.h" />
     <ClInclude Include="UrlLexQueryState.h" />
+    <ClInclude Include="UrlParseAuthorityState.h" />
+    <ClInclude Include="UrlParseProtocolPuncState.h" />
     <ClInclude Include="UrlStringMemoryState.h" />
     <ClInclude Include="Url.h" />
     <ClInclude Include="UrlLexer.h" />

@@ -8,13 +8,21 @@ using std::unique_ptr;
 
 Url::Url()
 {
-	port = 0;
+	setup_defaults();
 }
 
 Url::Url(string& source)
 {
-	port = 0;
+	setup_defaults();
 	parse(source);
+}
+
+void Url::setup_defaults()
+{
+	port = 0;
+	is_valid = true;
+	is_relative = false;
+	is_fully_qualified = false;
 }
 
 void Url::parse(string& source)
@@ -32,9 +40,13 @@ void Url::parse(string& source)
 		// current state, but the state may pass the token
 		// back if it was not scanned. In this case, the token
 		// should be passed back to the parser until it consumes it.
-		while (tok)
+		while (tok && is_valid)
 		{
 			tok = parser.scan(std::move(tok));
+			if (tok->type == StdTokenType::end)
+			{
+				tok = nullptr;
+			}
 		}
 	}
 }

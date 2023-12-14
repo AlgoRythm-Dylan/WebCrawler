@@ -10,6 +10,14 @@ Scheme User Password    Host       Port  Path |   | Fragment
 					   |               Path parameter
 				   Authority
 
+VALID URLs:
+	https://abc123.edu/123  ("fully-qualified")
+	/123 ("absolute-relative")
+	123 ("relative")
+
+INVALID URLs:
+	localhost:8080/abc123
+	bob:bobby@www.lunatech.com/test
  */
 
 #include <string>
@@ -20,6 +28,8 @@ using std::vector;
 
 class Url
 {
+protected:
+	void setup_defaults();
 public:
 	string protocol, username, password, host, path, query;
 	vector<string> host_parts;
