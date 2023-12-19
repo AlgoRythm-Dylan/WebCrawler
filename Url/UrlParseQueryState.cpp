@@ -50,18 +50,24 @@ unique_ptr<Token> UrlParseQueryState::scan(unique_ptr<Token> token)
 		}
 		if (pToken->value == "?" || pToken->value == "&")
 		{
-			if (!key.empty())
-			{
-				((UrlParser*)machine)->url.query_parts.push_back(UrlQueryEntry(key, value));
-				key = "";
-				value = "";
-			}
+			emit_memory();
 		}
 		complete_query += pToken->value;
 	}
 	else if (token->type == StdTokenType::end)
 	{
+		emit_memory();
 		((UrlParser*)machine)->url.query = complete_query;
 	}
 	return nullptr;
+}
+
+void UrlParseQueryState::emit_memory()
+{
+	if (!key.empty())
+	{
+		((UrlParser*)machine)->url.query_parts.push_back(UrlQueryEntry(key, value));
+		key = "";
+		value = "";
+	}
 }
