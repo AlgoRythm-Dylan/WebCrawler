@@ -3,13 +3,14 @@
 #include <PunctuationToken.h>
 
 #include "UrlParser.h"
+#include "UrlParseQueryState.h"
 
 unique_ptr<Token> UrlParsePathState::scan(unique_ptr<Token> token)
 {
 	if (token->type == StdTokenType::punctuation)
 	{
 		auto pToken = (PunctuationToken*)token.get();
-		if (pToken->value == "?")
+		if (pToken->value == "?" || pToken->value == "&")
 		{
 			// Eject any memory
 			if (!memory.empty())
@@ -19,7 +20,9 @@ unique_ptr<Token> UrlParsePathState::scan(unique_ptr<Token> token)
 				parser->url.path = complete_path + memory;
 			}
 			// Transition to query parsing state
-			return std::move(token);
+			auto nextState = new UrlParseQueryState();
+			transition(shared_ptr<State>(nextState));
+			return token;
 		}
 		else if (pToken->value == "/")
 		{

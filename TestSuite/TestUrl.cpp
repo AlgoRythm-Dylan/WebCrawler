@@ -52,5 +52,18 @@ namespace TestSuite
 			Assert::AreEqual(string("/dylan/skills/"), url.path);
 			Assert::AreEqual((size_t)2, url.path_parts.size());
 		}
+		TEST_METHOD(AbsoluteWithQueryNoEndSlashOneParam)
+		{
+			string source = "https://www.dylan.com/dylan/skills?abc=123";
+			Url url(source);
+			Assert::AreEqual(string("www.dylan.com"), url.host);
+			Assert::AreEqual((size_t)3, url.host_parts.size());
+			Assert::AreEqual(string("/dylan/skills"), url.path);
+			Assert::AreEqual((size_t)2, url.path_parts.size());
+			Assert::AreEqual((size_t)1, url.query_parts.size());
+			Assert::AreEqual(string("abc"), url.query_parts[0].key);
+			Assert::AreEqual(string("123"), url.query_parts[0].value);
+			Assert::AreEqual(string("?abc=123"), url.query);
+		}
 	};
 }
