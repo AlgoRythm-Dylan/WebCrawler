@@ -94,5 +94,10 @@ namespace TestSuite
 			Assert::AreEqual(string("https"), url.protocol);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 		}
+		TEST_METHOD(UrlCanParseAuthority)
+		{
+			string source = "https://dylan:password@www.dylan.com";
+			Url url(source);
+		}
 	};
 }

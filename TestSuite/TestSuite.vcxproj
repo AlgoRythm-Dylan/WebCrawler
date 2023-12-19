@@ -164,6 +164,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestUrl.cpp" />
     <ClCompile Include="TestUrlLex.cpp" />
     <ClCompile Include="TestUrlParse.cpp" />
   </ItemGroup>
