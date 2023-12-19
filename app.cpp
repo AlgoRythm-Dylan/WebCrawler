@@ -11,10 +11,23 @@ int main()
 
 	std::cout << ansicolor::screen_test << std::endl;
 
-	string url_str = "https://AzureDiamond:hunter2@bash.org";///chat?topic=security";
+	string url_str;// = "https://AzureDiamond:hunter2@bash.org";///chat?topic=security";
+	//Url url(url_str);
+
+	std::cout << "Please type any URL: " << ansicolor::yellow;
+	std::getline(std::cin, url_str);
+	std::cout << ansicolor::reset;
+
 	Url url(url_str);
 
-	pretty_print_url(url);
+	if (url.is_valid)
+	{
+		pretty_print_url(url);
+	}
+	else
+	{
+		std::cout << ansicolor::red << "The provided URL is not valid (\"" << url_str << "\")" << ansicolor::reset;
+	}
 
 	std::cout << "\n";
 	return 0;
