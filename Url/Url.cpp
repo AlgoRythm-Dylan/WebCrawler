@@ -43,9 +43,10 @@ void Url::parse(string& source)
 		while (tok && is_valid)
 		{
 			tok = parser.scan(std::move(tok));
-			if (tok->type == StdTokenType::end)
+			// Exit out of this loop if end token type detected
+			if (tok && tok->type == StdTokenType::end)
 			{
-				tok = nullptr;
+				break;
 			}
 		}
 	}

@@ -27,7 +27,8 @@ unique_ptr<Token> UrlParseStartState::scan(unique_ptr<Token> token)
 					((UrlParser*)machine)->url.is_fully_qualified = true;
 					// Transition to protocol parsing state and return the
 					// token to be re-scanned
-					auto nextState = new UrlParseProtocolPuncState();
+					auto nextState = std::make_shared<UrlParseProtocolPuncState>();//new UrlParseProtocolPuncState();
+					transition(nextState);
 				}
 				else
 				{
@@ -49,9 +50,9 @@ unique_ptr<Token> UrlParseStartState::scan(unique_ptr<Token> token)
 			return token;
 		}
 	}
-	if (token->type == StdTokenType::end)
+	else if (token->type == StdTokenType::end)
 	{
-
+		
 	}
 	return nullptr;
 }

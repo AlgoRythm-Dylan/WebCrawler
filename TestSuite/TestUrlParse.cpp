@@ -32,9 +32,11 @@ namespace TestSuite
 			Url url;
 			UrlLexer lexer(source);
 			UrlParser parser(url);
-			auto firstTok = lexer.next();
-			auto strFirstTok = (StringToken*)firstTok.get();
-			parser.scan(std::move(firstTok));
+			for (int i = 0; i < 3; i++)
+			{
+				auto tok = lexer.next();
+				parser.scan(std::move(tok));
+			}
 			Assert::AreEqual(string("https"), url.protocol);
 		}
 	};
