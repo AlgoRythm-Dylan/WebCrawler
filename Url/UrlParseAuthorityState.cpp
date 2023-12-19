@@ -1,5 +1,6 @@
 #include <PunctuationToken.h>
 
+#include "UrlParser.h"
 #include "UrlParseAuthorityState.h"
 
 unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
@@ -16,10 +17,14 @@ unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
 			finish();
 			// TODO: transition to path parse state
 		}
+		else
+		{
+			memory.push_back(std::move(token));
+		}
 	}
 	else if (token->type == StdTokenType::end)
 	{
-
+		finish();
 	}
 	return nullptr;
 }
@@ -33,5 +38,107 @@ unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
 */
 void UrlParseAuthorityState::finish()
 {
-
+	auto parser = (UrlParser*)machine;
+	// Is there an "@" symbol? - there is a username/password.
+	bool foundAtSymbol = false;
+	for (auto& token : memory)
+	{
+		if (token->type == StdTokenType::punctuation)
+		{
+			auto pToken = (PunctuationToken*)token.get();
+			if (pToken->value == "@")
+			{
+				foundAtSymbol = true;
+				break;
+			}
+		}
+	}
+	int memoryCursor = 0;
+	// Parse as if we are reading username:password@host
+	if (foundAtSymbol)
+	{
+		string username, password;
+		// Read up until ":" symbol for username
+		while (memoryCursor < memory.size())
+		{
+			if (memory[memoryCursor]->type == StdTokenType::str)
+			{
+				username += ((StringToken*)memory[memoryCursor].get())->value;
+			}
+			else if (memory[memoryCursor]->type == StdTokenType::punctuation)
+			{
+				auto pToken = (PunctuationToken*)memory[memoryCursor].get();
+				if (pToken->value == ":")
+				{
+					// Colon found, so we have read the whole username
+					memoryCursor++;
+					break;
+				}
+				else
+				{
+					username += pToken->value;
+				}
+			}
+			memoryCursor++;
+		}
+		// Read up until "@" symbol for password
+		while (memoryCursor < memory.size())
+		{
+			if (memory[memoryCursor]->type == StdTokenType::str)
+			{
+				password += ((StringToken*)memory[memoryCursor].get())->value;
+			}
+			else if (memory[memoryCursor]->type == StdTokenType::punctuation)
+			{
+				auto pToken = (PunctuationToken*)memory[memoryCursor].get();
+				if (pToken->value == "@")
+				{
+					// @ found, so we have read the whole password
+					memoryCursor++;
+					break;
+				}
+				else
+				{
+					password += pToken->value;
+				}
+			}
+			memoryCursor++;
+		}
+		parser->url.username = username;
+		parser->url.password = password;
+	}
+	// At this point we assume username and password
+	// are either already read, or did not exist.
+	// ipv6 not supported YET so dots represent separation
+	// between parts of a host, anything else is hostname
+	string completeHost, currentHostPart;
+	while (memoryCursor < memory.size())
+	{
+		if (memory[memoryCursor]->type == StdTokenType::str)
+		{
+			currentHostPart += ((StringToken*)memory[memoryCursor].get())->value;
+		}
+		else if (memory[memoryCursor]->type == StdTokenType::punctuation)
+		{
+			auto pToken = (PunctuationToken*)memory[memoryCursor].get();
+			if (pToken->value == ".")
+			{
+				completeHost += currentHostPart + ".";
+				parser->url.host_parts.push_back(currentHostPart);
+				currentHostPart = "";
+			}
+			else
+			{
+				currentHostPart += pToken->value;
+			}
+		}
+		memoryCursor++;
+	}
+	if (currentHostPart.length() > 0)
+	{
+		// Clean up any remaining host parts
+		completeHost += currentHostPart;
+		parser->url.host_parts.push_back(currentHostPart);
+	}
+	parser->url.host = completeHost;
 }

@@ -3,6 +3,7 @@
 #include <PunctuationToken.h>
 #include <EOFToken.h>
 #include "UrlLexer.h"
+#include "UrlLexAuthorityState.h"
 
 LexingScanResult UrlLexProtocolPuncState::scan(const char character)
 {
@@ -20,9 +21,9 @@ LexingScanResult UrlLexProtocolPuncState::scan(const char character)
 	else
 	{
 		// Transition to next state
-		// TEMP: just end the parsing
-		auto token = new EOFToken();
-		((UrlLexer*)machine)->token_buffer.push(std::unique_ptr<Token>(token));
+		result.consumed = false;
+		auto nextState = new UrlLexAuthorityState();
+		transition(shared_ptr<State>(nextState));
 	}
 	return result;
 }

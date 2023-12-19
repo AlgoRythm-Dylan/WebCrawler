@@ -1,16 +1,16 @@
 #pragma once
 
-#include <deque>
+#include <vector>
 
 #include <ParsingState.h>
 #include <Token.h>
 
-using std::deque;
+using std::vector;
 
 class UrlParseAuthorityState : public ParsingState
 {
 protected:
-	deque<unique_ptr<Token>> memory;
+	vector<unique_ptr<Token>> memory;
 	void finish();
 public:
 	unique_ptr<Token> scan(unique_ptr<Token>);

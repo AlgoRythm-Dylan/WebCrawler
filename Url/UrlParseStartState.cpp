@@ -29,6 +29,7 @@ unique_ptr<Token> UrlParseStartState::scan(unique_ptr<Token> token)
 					// token to be re-scanned
 					auto nextState = std::make_shared<UrlParseProtocolPuncState>();//new UrlParseProtocolPuncState();
 					transition(nextState);
+					return token;
 				}
 				else
 				{

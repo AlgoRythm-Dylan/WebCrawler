@@ -13,9 +13,13 @@ unique_ptr<Token> UrlParseProtocolPuncState::scan(unique_ptr<Token> token)
 		{
 			if (memory.empty())
 			{
+				// This state likely isn't possible. Would
+				// require http//, but the previous state would
+				// never even transition to this state in such
+				// a scenario
 				((UrlParser*)machine)->url.is_valid = false;
 			}
-			if (memory.size() == 1)
+			else if (memory.size() == 1)
 			{
 				auto colonTok = (Token*)memory[0].get();
 				if (colonTok->type == StdTokenType::punctuation)
@@ -25,9 +29,17 @@ unique_ptr<Token> UrlParseProtocolPuncState::scan(unique_ptr<Token> token)
 					{
 						((UrlParser*)machine)->url.is_valid = false;
 					}
+					else
+					{
+						memory.push_back(std::move(token));
+					}
+				}
+				else
+				{
+					((UrlParser*)machine)->url.is_valid = false;
 				}
 			}
-			if (memory.size() == 2)
+			else if (memory.size() == 2)
 			{
 				auto colonTok = (Token*)memory[0].get();
 				auto firstSlashTok = (Token*)memory[1].get();
@@ -47,6 +59,9 @@ unique_ptr<Token> UrlParseProtocolPuncState::scan(unique_ptr<Token> token)
 						((UrlParser*)machine)->url.is_valid = false;
 					}
 				}
+				// we have "://" - transition to next state!
+				auto nextState = new UrlParseAuthorityState();
+				transition(shared_ptr<State>(nextState));
 			}
 			else
 			{
@@ -57,8 +72,7 @@ unique_ptr<Token> UrlParseProtocolPuncState::scan(unique_ptr<Token> token)
 		{
 			if (memory.empty())
 			{
-				auto tok = new PunctuationToken(puncToken->value);
-				memory.push_back(unique_ptr<Token>(tok));
+				memory.push_back(std::move(token));
 			}
 			else
 			{
@@ -67,23 +81,8 @@ unique_ptr<Token> UrlParseProtocolPuncState::scan(unique_ptr<Token> token)
 		}
 		else
 		{
-			if (memory.size() == 3)
-			{
-				auto nextState = new UrlParseAuthorityState();
-				transition(shared_ptr<State>(nextState));
-			}
-			else
-			{
-				((UrlParser*)machine)->url.is_valid = false;
-			}
+			((UrlParser*)machine)->url.is_valid = false;
 		}
-	}
-	else
-	{
-		auto nextState = new UrlParseAuthorityState();
-		transition(unique_ptr<State>(nextState));
-		// Transition to next state and do not consume the token
-		return token;
 	}
 	return nullptr;
 }
