@@ -22,6 +22,9 @@ INVALID URLs:
 
 #include <string>
 #include <vector>
+#include <utility>
+
+#include "UrlQueryEntry.h"
 
 using std::string;
 using std::vector;
@@ -32,7 +35,8 @@ protected:
 	void setup_defaults();
 public:
 	string protocol, username, password, host, path, query;
-	vector<string> host_parts;
+	vector<string> host_parts, path_parts;
+	vector<vector<UrlQueryEntry>> query_parts;
 	int port;
 	bool is_valid, is_relative, is_fully_qualified;
 

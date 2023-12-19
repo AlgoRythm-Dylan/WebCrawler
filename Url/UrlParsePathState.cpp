@@ -2,6 +2,8 @@
 
 #include <PunctuationToken.h>
 
+#include "UrlParser.h"
+
 unique_ptr<Token> UrlParsePathState::scan(unique_ptr<Token> token)
 {
 	if (token->type == StdTokenType::punctuation)
@@ -9,8 +11,25 @@ unique_ptr<Token> UrlParsePathState::scan(unique_ptr<Token> token)
 		auto pToken = (PunctuationToken*)token.get();
 		if (pToken->value == "?")
 		{
+			// Eject any memory
+			if (!memory.empty())
+			{
+				auto parser = ((UrlParser*)machine);
+				parser->url.path_parts.push_back(memory);
+				parser->url.path = complete_path + memory;
+			}
 			// Transition to query parsing state
 			return std::move(token);
+		}
+		else if (pToken->value == "/")
+		{
+			auto parser = ((UrlParser*)machine);
+			if (!memory.empty())
+			{
+				parser->url.path_parts.push_back(memory);
+			}
+			complete_path += memory + "/";
+			memory = "";
 		}
 		else
 		{
@@ -21,6 +40,21 @@ unique_ptr<Token> UrlParsePathState::scan(unique_ptr<Token> token)
 	{
 		auto sToken = (StringToken*)token.get();
 		memory += sToken->value;
+	}
+	else if (token->type == StdTokenType::end)
+	{
+		// Eject any memory
+		if (!memory.empty())
+		{
+			auto parser = ((UrlParser*)machine);
+			parser->url.path_parts.push_back(memory);
+			parser->url.path = complete_path + memory;
+		}
+		else if(!complete_path.empty())
+		{
+			auto parser = ((UrlParser*)machine);
+			parser->url.path = complete_path;
+		}
 	}
 	return nullptr;
 }

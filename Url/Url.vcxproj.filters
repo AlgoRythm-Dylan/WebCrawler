@@ -57,6 +57,9 @@
     <ClCompile Include="UrlParsePathState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UrlQueryEntry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Url.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UrlParsePathState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UrlQueryEntry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

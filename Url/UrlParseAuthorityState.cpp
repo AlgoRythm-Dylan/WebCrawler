@@ -2,6 +2,7 @@
 
 #include "UrlParser.h"
 #include "UrlParseAuthorityState.h"
+#include "UrlParsePathState.h"
 
 unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
 {
@@ -15,7 +16,20 @@ unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
 		if (puncToken->value == "/")
 		{
 			finish();
-			// TODO: transition to path parse state
+			auto nextState = new UrlParsePathState();
+			transition(shared_ptr<State>(nextState));
+			// Don't consume token so that the path
+			// parsing state may consume it instead
+			return token;
+		}
+		else if (puncToken->value == "?")
+		{
+			finish();
+			// TODO: transition to query parsing state
+		}
+		else if (puncToken->value == "#")
+		{
+			// TODO: transition to fragment parsing state
 		}
 		else
 		{

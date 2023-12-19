@@ -22,6 +22,7 @@ int main()
 
 	if (url.is_valid)
 	{
+		std::cout << "\nHere is how your URL was parsed:\n";
 		pretty_print_url(url);
 	}
 	else

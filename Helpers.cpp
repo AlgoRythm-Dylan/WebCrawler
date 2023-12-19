@@ -64,16 +64,24 @@ void pretty_print_url(const Url& url, bool colors)
 			}
 		}
 	}
-	if (url.path != "")
+	if (!url.path_parts.empty())
 	{
-		if (colors)
+		for (auto& part : url.path_parts)
 		{
-			std::cout << ansicolor::yellow;
-		}
-		std::cout << url.path;
-		if (colors)
-		{
-			std::cout << ansicolor::reset;
+			if (colors)
+			{
+				std::cout << ansicolor::reset;
+			}
+			std::cout << "/";
+			if (colors)
+			{
+				std::cout << ansicolor::bold << ansicolor::yellow;
+			}
+			std::cout << part;
+			if (colors)
+			{
+				std::cout << ansicolor::reset;
+			}
 		}
 	}
 	if (url.query != "")

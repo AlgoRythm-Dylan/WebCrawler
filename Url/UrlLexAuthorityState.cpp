@@ -10,6 +10,7 @@ LexingScanResult UrlLexAuthorityState::scan(const char character)
 	LexingScanResult result;
 	if (character == '/')
 	{
+		emit_memory();
 		result.consumed = false;
 		// Transition to path parsing state
 		auto pathParsingState = std::make_shared<UrlLexPathState>();
