@@ -18,14 +18,14 @@ LexingScanResult UrlLexAuthorityState::scan(const char character)
 	else if (character == '.' || character == ':' || character == '@')
 	{
 		emit_memory();
-		auto tok = new PunctuationToken(string(1, character));
-		((UrlLexer*)machine)->token_buffer.push(unique_ptr<Token>(tok));
+		auto tok = unique_ptr<Token>(new PunctuationToken(string(1, character)));
+		((UrlLexer*)machine)->token_buffer.push(std::move(tok));
 	}
 	else if (character == '\0')
 	{
 		emit_memory();
-		auto tok = new EOFToken();
-		((UrlLexer*)machine)->token_buffer.push(unique_ptr<Token>(tok));
+		auto tok = unique_ptr<Token>(new EOFToken());
+		((UrlLexer*)machine)->token_buffer.push(std::move(tok));
 	}
 	else
 	{

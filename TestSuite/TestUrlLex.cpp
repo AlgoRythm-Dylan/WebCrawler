@@ -14,7 +14,7 @@ using std::string;
 
 namespace TestSuite
 {
-	TEST_CLASS(TestUrl)
+	TEST_CLASS(TestUrlLex)
 	{
 	public:
 		TEST_METHOD(CanLexEmptyString)

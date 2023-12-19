@@ -6,7 +6,7 @@ unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
 {
 	if (token->type == StdTokenType::str)
 	{
-		memory.push_back(token);
+		memory.push_back(std::move(token));
 	}
 	else if (token->type == StdTokenType::punctuation)
 	{
@@ -21,6 +21,7 @@ unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
 	{
 
 	}
+	return nullptr;
 }
 
 /*

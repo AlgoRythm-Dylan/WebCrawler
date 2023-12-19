@@ -9,9 +9,9 @@ unique_ptr<Token> UrlParseStartState::scan(unique_ptr<Token> token)
 {
 	if (token->type == StdTokenType::str)
 	{
-		memory.push_back(token);
+		memory.push_back(std::move(token));
 	}
-	if (token->type == StdTokenType::punctuation)
+	else if (token->type == StdTokenType::punctuation)
 	{
 		PunctuationToken* pToken = (PunctuationToken*)token.get();
 		if (pToken->value == ":")
@@ -45,6 +45,8 @@ unique_ptr<Token> UrlParseStartState::scan(unique_ptr<Token> token)
 			// Starting to see relative or absolute-relative path
 			((UrlParser*)machine)->url.path = "/";
 			((UrlParser*)machine)->url.is_relative = true;
+
+			return token;
 		}
 	}
 	if (token->type == StdTokenType::end)
