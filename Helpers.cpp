@@ -84,16 +84,50 @@ void pretty_print_url(const Url& url, bool colors)
 			}
 		}
 	}
-	if (url.query != "")
+	if (!url.query_parts.empty())
 	{
-		if (colors)
+		for (int i = 0; i < url.query_parts.size(); i++)
 		{
-			std::cout << ansicolor::bold << ansicolor::magenta;
-		}
-		std::cout << url.query;
-		if (colors)
-		{
-			std::cout << ansicolor::reset;
+
+			if (colors)
+			{
+				std::cout << ansicolor::bold << ansicolor::magenta;
+			}
+			if (i == 0)
+			{
+				std::cout << "?";
+			}
+			else
+			{
+				std::cout << "&";
+			}
+			if (colors)
+			{
+				std::cout << ansicolor::reset << ansicolor::bold << ansicolor::blue;
+			}
+			std::cout << url.query_parts[i].key;
+			if (!url.query_parts[i].value.empty())
+			{
+				if (colors)
+				{
+					std::cout << ansicolor::reset << ansicolor::dim;
+				}
+				std::cout << "=";
+				if (colors)
+				{
+					std::cout << ansicolor::reset << ansicolor::cyan;
+				}
+				std::cout << url.query_parts[i].value;
+				if (colors)
+				{
+					std::cout << ansicolor::reset;
+				}
+			}
 		}
 	}
+}
+
+void print_url_details(const Url& url, bool colors)
+{
+
 }
