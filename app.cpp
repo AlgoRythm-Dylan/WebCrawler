@@ -9,7 +9,7 @@ int main()
 {
 	ansicolor::setup_ansi_mode();
 
-	std::cout << ansicolor::screen_test << std::endl;
+	//std::cout << ansicolor::screen_test << std::endl;
 
 	string url_str;// = "https://AzureDiamond:hunter2@bash.org";///chat?topic=security";
 	//Url url(url_str);
