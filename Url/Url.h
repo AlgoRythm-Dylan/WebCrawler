@@ -34,7 +34,7 @@ class Url
 protected:
 	void setup_defaults();
 public:
-	string protocol, username, password, host, path, query;
+	string protocol, username, password, host, path, query, fragment;
 	vector<string> host_parts, path_parts;
 	vector<UrlQueryEntry> query_parts;
 	int port;

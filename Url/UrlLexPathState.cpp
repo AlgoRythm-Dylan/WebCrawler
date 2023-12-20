@@ -6,6 +6,7 @@
 
 #include "UrlLexer.h"
 #include "UrlLexQueryState.h"
+#include "UrlLexFragmentState.h"
 
 LexingScanResult UrlLexPathState::scan(const char character)
 {
@@ -22,6 +23,14 @@ LexingScanResult UrlLexPathState::scan(const char character)
 		emit_memory();
 		result.consumed = false;
 		auto nextState = new UrlLexQueryState();
+		transition(shared_ptr<State>(nextState));
+	}
+	else if (character == '#')
+	{
+		emit_memory();
+		auto tok = new PunctuationToken("#");
+		((UrlLexer*)machine)->token_buffer.push(unique_ptr<Token>(tok));
+		auto nextState = new UrlLexFragmentState();
 		transition(shared_ptr<State>(nextState));
 	}
 	else if (character == '\0')

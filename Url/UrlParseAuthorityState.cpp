@@ -3,6 +3,8 @@
 #include "UrlParser.h"
 #include "UrlParseAuthorityState.h"
 #include "UrlParsePathState.h"
+#include "UrlParseQueryState.h"
+#include "UrlParseFragmentState.h"
 
 unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
 {
@@ -25,11 +27,12 @@ unique_ptr<Token> UrlParseAuthorityState::scan(unique_ptr<Token> token)
 		else if (puncToken->value == "?")
 		{
 			finish();
-			// TODO: transition to query parsing state
+			transition(new UrlParseQueryState());
 		}
 		else if (puncToken->value == "#")
 		{
-			// TODO: transition to fragment parsing state
+			finish();
+			transition(new UrlParseFragmentState());
 		}
 		else
 		{

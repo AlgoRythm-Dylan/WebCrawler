@@ -125,6 +125,19 @@ void pretty_print_url(const Url& url, bool colors)
 			}
 		}
 	}
+	if (!url.fragment.empty())
+	{
+		if (colors)
+		{
+			std::cout << ansicolor::yellow << ansicolor::bold;
+		}
+		std::cout << "#";
+		if (colors)
+		{
+			std::cout << ansicolor::reset;
+		}
+		std::cout << url.fragment;
+	}
 }
 
 void print_url_details(const Url& url, bool colors)
@@ -178,6 +191,7 @@ void print_url_details(const Url& url, bool colors)
 	print_str_with_label("\nHost: ", url.host);
 	print_str_with_label("\nPath: ", url.path);
 	print_str_with_label("\nQuery: ", url.query);
+	print_str_with_label("\nFragment: ", url.fragment);
 }
 
 void print_str_with_label(const string& label, const string& text, bool colors)

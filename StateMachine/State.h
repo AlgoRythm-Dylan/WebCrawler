@@ -15,7 +15,9 @@ public:
 	StateMachine* machine;
 	string name;
 	void transition(shared_ptr<State>);
+	void transition(State*);
 
 	State();
+	virtual ~State() {}
 };
 

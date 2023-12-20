@@ -4,6 +4,7 @@
 
 #include "UrlParser.h"
 #include "UrlParseQueryState.h"
+#include "UrlParseFragmentState.h"
 
 unique_ptr<Token> UrlParsePathState::scan(unique_ptr<Token> token)
 {
@@ -33,6 +34,16 @@ unique_ptr<Token> UrlParsePathState::scan(unique_ptr<Token> token)
 			}
 			complete_path += memory + "/";
 			memory = "";
+		}
+		else if (pToken->value == "#")
+		{
+			auto parser = ((UrlParser*)machine);
+			if (!memory.empty())
+			{
+				parser->url.path_parts.push_back(memory);
+			}
+			complete_path += memory;
+			transition(new UrlParseFragmentState());
 		}
 		else
 		{

@@ -23,6 +23,8 @@ LexingScanResult UrlLexQueryState::scan(const char character)
 	else if (character == '#')
 	{
 		emit_memory();
+		auto tok = new PunctuationToken("#");
+		((UrlLexer*)machine)->token_buffer.push(unique_ptr<Token>(tok));
 		// Parse fragment
 		auto nextState = new UrlLexFragmentState();
 		transition(shared_ptr<State>(nextState));
