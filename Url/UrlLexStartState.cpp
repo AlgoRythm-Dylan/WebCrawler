@@ -1,10 +1,14 @@
 #include "UrlLexStartState.h"
-#include "UrlLexer.h"
+
 #include <StringToken.h>
 #include <PunctuationToken.h>
 #include <EOFToken.h>
+
+#include "UrlLexer.h"
 #include "UrlLexProtocolPuncState.h"
 #include "UrlLexPathState.h"
+#include "UrlLexFragmentState.h"
+#include "UrlLexQueryState.h"
 
 using std::unique_ptr;
 
@@ -37,9 +41,18 @@ LexingScanResult UrlLexStartState::scan(const char character)
 		auto next_state = std::make_shared<UrlLexPathState>();
 		transition(next_state);
 	}
-	else if (character == '?')
+	else if (character == '#')
 	{
-		// Transition to query parsing state
+		// Transition to path parsing state
+		emit_memory();
+		((UrlLexer*)machine)->token_buffer.push(unique_ptr<Token>(new PunctuationToken("#")));
+		transition(new UrlLexFragmentState());
+	}
+	else if (character == '?' || character == '&')
+	{
+		emit_memory();
+		((UrlLexer*)machine)->token_buffer.push(unique_ptr<Token>(new PunctuationToken(string(1, character))));
+		transition(new UrlLexQueryState());
 	}
 	else if (character == '\0')
 	{

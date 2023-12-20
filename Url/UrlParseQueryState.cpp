@@ -57,7 +57,7 @@ unique_ptr<Token> UrlParseQueryState::scan(unique_ptr<Token> token)
 	else if (token->type == StdTokenType::end)
 	{
 		emit_memory();
-		((UrlParser*)machine)->url.query = complete_query;
+		((UrlParser*)machine)->url.query += complete_query;
 	}
 	return nullptr;
 }
