@@ -24,7 +24,6 @@ unique_ptr<Token> UrlParseStartState::scan(unique_ptr<Token> token)
 				{
 					// The last token in memory was a string so this is good!
 					((UrlParser*)machine)->url.protocol = ((StringToken*)lastToken)->value;
-					((UrlParser*)machine)->url.is_fully_qualified = true;
 					// Transition to protocol parsing state and return the
 					// token to be re-scanned
 					auto nextState = std::make_shared<UrlParseProtocolPuncState>();//new UrlParseProtocolPuncState();

@@ -22,7 +22,6 @@ void Url::setup_defaults()
 	port = 0;
 	is_valid = true;
 	is_relative = false;
-	is_fully_qualified = false;
 }
 
 void Url::parse(string& source)

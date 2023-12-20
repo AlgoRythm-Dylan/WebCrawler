@@ -129,5 +129,79 @@ void pretty_print_url(const Url& url, bool colors)
 
 void print_url_details(const Url& url, bool colors)
 {
+	std::cout << "Valid: ";
+	if (!url.is_valid)
+	{
+		if (colors)
+		{
+			std::cout << ansicolor::red;
+		}
+		std::cout << "false\n";
+		if (colors)
+		{
+			std::cout << ansicolor::reset;
+		}
+		return; // Invalid URLs shouldn't be printed
+	}
+	else
+	{
+		if (colors)
+		{
+			std::cout << ansicolor::green;
+		}
+		std::cout << "true";
+		if (colors)
+		{
+			std::cout << ansicolor::reset;
+		}
+	}
+	std::cout << "\nRelative/absolute: ";
+	if (colors)
+	{
+		std::cout << ansicolor::yellow << ansicolor::bold;
+	}
+	if (url.is_relative)
+	{
+		std::cout << "relative";
+	}
+	else
+	{
+		std::cout << "absolute";
+	}
+	if (colors)
+	{
+		std::cout << ansicolor::reset;
+	}
+	print_str_with_label("\nProtocol: ", url.protocol);
+	print_str_with_label("\nUsername: ", url.username);
+	print_str_with_label("\nPassword: ", url.password);
+	print_str_with_label("\nHost: ", url.host);
+	print_str_with_label("\nPath: ", url.path);
+	print_str_with_label("\nQuery: ", url.query);
+}
 
+void print_str_with_label(const string& label, const string& text, bool colors)
+{
+	std::cout << label;
+	
+	if (text.empty())
+	{
+		if (colors)
+		{
+			std::cout << ansicolor::dim;
+		}
+		std::cout << "<None>";
+	}
+	else
+	{
+		if (colors)
+		{
+			std::cout << ansicolor::yellow << ansicolor::bold;
+		}
+		std::cout << text;
+	}
+	if (colors)
+	{
+		std::cout << ansicolor::reset;
+	}
 }

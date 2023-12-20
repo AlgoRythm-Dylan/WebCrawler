@@ -24,6 +24,8 @@ int main()
 	{
 		std::cout << "\nHere is how your URL was parsed:\n";
 		pretty_print_url(url);
+		std::cout << "\n\n";
+		print_url_details(url);
 	}
 	else
 	{
