@@ -42,7 +42,7 @@ unique_ptr<Token> UrlParsePathState::scan(unique_ptr<Token> token)
 			{
 				parser->url.path_parts.push_back(memory);
 			}
-			complete_path += memory;
+			parser->url.path += complete_path + memory;
 			transition(new UrlParseFragmentState());
 		}
 		else

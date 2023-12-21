@@ -5,7 +5,7 @@
 
 void pretty_print_url(const Url& url, bool colors)
 {
-	if (url.protocol != "")
+	if (!url.protocol.empty())
 	{
 		if (colors)
 		{
@@ -22,7 +22,7 @@ void pretty_print_url(const Url& url, bool colors)
 			std::cout << ansicolor::reset;
 		}
 	}
-	if (url.username != "" && url.password != "")
+	if (!url.username.empty() && !url.password.empty())
 	{
 		if (colors)
 		{
@@ -45,7 +45,7 @@ void pretty_print_url(const Url& url, bool colors)
 		}
 		std::cout << "@";
 	}
-	if (url.host_parts.size() != 0)
+	if (!url.host_parts.empty())
 	{
 		for (int i = 0; i < url.host_parts.size(); i++)
 		{
@@ -66,13 +66,34 @@ void pretty_print_url(const Url& url, bool colors)
 	}
 	if (!url.path_parts.empty())
 	{
+		bool firstRun = true;
 		for (auto& part : url.path_parts)
 		{
-			if (colors)
+			// These two paths are different:
+			//     /home/index       "absolute-relative"
+			//     home/index        "relative"
+			//
+			// Therefore, they must be pretty-printed as such
+			if (firstRun)
 			{
-				std::cout << ansicolor::reset;
+				if (url.path.starts_with("/"))
+				{
+					if (colors)
+					{
+						std::cout << ansicolor::reset;
+					}
+					std::cout << "/";
+				}
 			}
-			std::cout << "/";
+			else
+			{
+				if (colors)
+				{
+					std::cout << ansicolor::reset;
+				}
+				std::cout << "/";
+			}
+			firstRun = false;
 			if (colors)
 			{
 				std::cout << ansicolor::bold << ansicolor::yellow;
@@ -129,14 +150,18 @@ void pretty_print_url(const Url& url, bool colors)
 	{
 		if (colors)
 		{
-			std::cout << ansicolor::yellow << ansicolor::bold;
+			std::cout << ansicolor::reset;
 		}
 		std::cout << "#";
 		if (colors)
 		{
-			std::cout << ansicolor::reset;
+			std::cout << ansicolor::yellow << ansicolor::bold;
 		}
 		std::cout << url.fragment;
+		if (colors)
+		{
+			std::cout << ansicolor::reset;
+		}
 	}
 }
 

@@ -48,12 +48,8 @@ unique_ptr<Token> UrlParseStartState::scan(unique_ptr<Token> token)
 		{
 			auto parser = ((UrlParser*)machine);
 			// If we have anything in memory, treat it as a relative URL
-			if (!memory.empty())
-			{
-				parser->url.path += serialize_memory();
-			}
+			parse_memory_as_path();
 			// Starting to see relative or absolute-relative path
-			parser->url.path = "/";
 			parser->url.is_relative = true;
 			transition(new UrlParsePathState());
 			return token;
@@ -61,43 +57,37 @@ unique_ptr<Token> UrlParseStartState::scan(unique_ptr<Token> token)
 		else if (pToken->value == "#")
 		{
 			auto parser = ((UrlParser*)machine);
-			if (!memory.empty())
-			{
-				parser->url.path += serialize_memory();
-			}
+			parse_memory_as_path();
 			parser->url.is_relative = true;
 			transition(new UrlParseFragmentState());
 		}
 		else if (pToken->value == "?" || pToken->value == "&")
 		{
 			auto parser = ((UrlParser*)machine);
-			if (!memory.empty())
-			{
-				parser->url.path += serialize_memory();
-			}
+			parse_memory_as_path();
 			parser->url.is_relative = true;
 			parser->url.query += pToken->value;
 			transition(new UrlParseQueryState());
 		}
 	}
-	else if (token->type == StdTokenType::end)
-	{
-		
-	}
 	return nullptr;
 }
 
-// BUGBUG: this is not good enough! it only adds to the string, not
-// parsing out the path_parts!
-string UrlParseStartState::serialize_memory()
+void UrlParseStartState::parse_memory_as_path()
 {
-	string serialized;
+	if (memory.empty()) return; // nothing to do
+	auto parser = (UrlParser*)machine;
+	string path;
 	for (auto& tok : memory)
 	{
 		if (tok->type == StdTokenType::str || tok->type == StdTokenType::punctuation)
 		{
-			serialized += ((StringToken*)tok.get())->value;
+			path += ((StringToken*)tok.get())->value;
 		}
 	}
-	return serialized;
+	if (!path.empty())
+	{
+		parser->url.path_parts.push_back(path);
+		parser->url.path += path;
+	}
 }
