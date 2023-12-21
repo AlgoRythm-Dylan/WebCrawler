@@ -3,6 +3,7 @@
 #include <PunctuationToken.h>
 
 #include "UrlParser.h"
+#include "UrlParseFragmentState.h"
 
 unique_ptr<Token> UrlParseQueryState::scan(unique_ptr<Token> token)
 {
@@ -48,7 +49,13 @@ unique_ptr<Token> UrlParseQueryState::scan(unique_ptr<Token> token)
 		{
 			value += "=";
 		}
-		if (pToken->value == "?" || pToken->value == "&")
+		else if (pToken->value == "#")
+		{
+			emit_memory();
+			((UrlParser*)machine)->url.query += complete_query;
+			transition(new UrlParseFragmentState());
+		}
+		else if (pToken->value == "?" || pToken->value == "&")
 		{
 			emit_memory();
 		}

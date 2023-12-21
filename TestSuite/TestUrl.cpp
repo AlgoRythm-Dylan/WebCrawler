@@ -134,7 +134,7 @@ namespace TestSuite
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
-			Assert::AreEqual(string("resource"), url.path);
+			Assert::AreEqual(string("resource/action"), url.path);
 			Assert::AreEqual(string("?query=val"), url.query);
 			Assert::AreEqual(string("section"), url.fragment);
 			Assert::AreEqual((size_t)1, url.query_parts.size());
