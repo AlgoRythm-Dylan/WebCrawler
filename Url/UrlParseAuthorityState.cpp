@@ -146,6 +146,23 @@ void UrlParseAuthorityState::finish()
 				parser->url.host_parts.push_back(currentHostPart);
 				currentHostPart = "";
 			}
+			else if (pToken->value == ":")
+			{
+				// This *could* be port if:
+				// this is the second-to-last token in the buffer
+				// the next token is numeric
+				if (memoryCursor + 2 == memory.size() &&
+					memory[memoryCursor+1]->type == StdTokenType::str)
+				{
+					auto maybePort = ((StringToken*)memory[memoryCursor+1].get());
+					if (LexingTools::is_numeric(maybePort->value))
+					{
+						parser->url.port = std::stoi(maybePort->value);
+						memoryCursor += 2;
+						continue;
+					}
+				}
+			}
 			else
 			{
 				currentHostPart += pToken->value;

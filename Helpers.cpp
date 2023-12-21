@@ -68,6 +68,23 @@ void pretty_print_url(const Url& url, bool colors)
 			}
 		}
 	}
+	if (url.port != 0)
+	{
+		if (colors)
+		{
+			std::cout << ansicolor::reset;
+		}
+		std::cout << ":";
+		if (colors)
+		{
+			std::cout << ansicolor::red << ansicolor::bold;
+		}
+		std::cout << url.port;
+		if (colors)
+		{
+			std::cout << ansicolor::reset;
+		}
+	}
 	if (!url.path_parts.empty())
 	{
 		bool firstRun = true;
@@ -198,6 +215,14 @@ void print_url_details(const Url& url, bool colors)
 	print_str_with_label("\nUsername: ", url.username);
 	print_str_with_label("\nPassword: ", url.password);
 	print_str_with_label("\nHost: ", url.host);
+	if (url.port == 0)
+	{
+		print_str_with_label("\nPort: ", "");
+	}
+	else
+	{
+		print_str_with_label("\nPort: ", std::to_string(url.port));
+	}
 	print_str_with_label("\nPath: ", url.path);
 	print_str_with_label("\nQuery: ", url.query);
 	print_str_with_label("\nFragment: ", url.fragment);
