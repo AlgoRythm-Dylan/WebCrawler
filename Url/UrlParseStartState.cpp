@@ -70,6 +70,11 @@ unique_ptr<Token> UrlParseStartState::scan(unique_ptr<Token> token)
 			transition(new UrlParseQueryState());
 		}
 	}
+	else if (token->type == StdTokenType::end)
+	{
+		((UrlParser*)machine)->url.is_relative = true;
+		parse_memory_as_path();
+	}
 	return nullptr;
 }
 
