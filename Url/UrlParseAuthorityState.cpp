@@ -1,7 +1,9 @@
+#include "UrlParseAuthorityState.h"
+
 #include <PunctuationToken.h>
+#include <LexingTools.h>
 
 #include "UrlParser.h"
-#include "UrlParseAuthorityState.h"
 #include "UrlParsePathState.h"
 #include "UrlParseQueryState.h"
 #include "UrlParseFragmentState.h"
@@ -158,4 +160,27 @@ void UrlParseAuthorityState::finish()
 		parser->url.host_parts.push_back(currentHostPart);
 	}
 	parser->url.host = completeHost;
+	// Check if ipv4
+	bool isipv4 = true;
+	if (parser->url.host_parts.size() == 4)
+	{
+		for (const auto& part : parser->url.host_parts)
+		{
+			if (LexingTools::is_numeric(part))
+			{
+				int value = std::stoi(part);
+				if (value <= 0 || value > 255)
+				{
+					isipv4 = false;
+					break;
+				}
+			}
+			else
+			{
+				isipv4 = false;
+				break;
+			}
+		}
+	}
+	parser->url.is_ipv4 = isipv4;
 }

@@ -38,7 +38,7 @@ public:
 	vector<string> host_parts, path_parts;
 	vector<UrlQueryEntry> query_parts;
 	int port;
-	bool is_valid, is_relative;
+	bool is_valid, is_relative, is_ipv4;
 
 	Url();
 	Url(string&);

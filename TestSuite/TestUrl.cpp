@@ -144,5 +144,17 @@ namespace TestSuite
 			Assert::AreEqual(string("resource"), url.path_parts[0]);
 			Assert::AreEqual(string("action"), url.path_parts[1]);
 		}
+		TEST_METHOD(IPV4PostiveDetection)
+		{
+			string source = "http://192.168.1.1";
+			Url url(source);
+			Assert::IsTrue(url.is_ipv4);
+		}
+		TEST_METHOD(IPV4NegativeDetection)
+		{
+			string source = "http://192.168.0.1";
+			Url url(source);
+			Assert::IsFalse(url.is_ipv4);
+		}
 	};
 }

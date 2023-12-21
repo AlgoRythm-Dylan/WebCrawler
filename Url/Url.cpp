@@ -22,6 +22,7 @@ void Url::setup_defaults()
 	port = 0;
 	is_valid = true;
 	is_relative = false;
+	is_ipv4 = false;
 }
 
 void Url::parse(string& source)

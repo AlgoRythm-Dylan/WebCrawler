@@ -52,6 +52,10 @@ void pretty_print_url(const Url& url, bool colors)
 			if (colors)
 			{
 				std::cout << ansicolor::bold << ansicolor::green;
+				if (url.is_ipv4)
+				{
+					std::cout << ansicolor::underline;
+				}
 			}
 			std::cout << url.host_parts[i];
 			if (colors)
@@ -167,31 +171,11 @@ void pretty_print_url(const Url& url, bool colors)
 
 void print_url_details(const Url& url, bool colors)
 {
-	std::cout << "Valid: ";
+	print_bool_with_label("Valid: ", url.is_valid);
 	if (!url.is_valid)
 	{
-		if (colors)
-		{
-			std::cout << ansicolor::red;
-		}
-		std::cout << "false\n";
-		if (colors)
-		{
-			std::cout << ansicolor::reset;
-		}
-		return; // Invalid URLs shouldn't be printed
-	}
-	else
-	{
-		if (colors)
-		{
-			std::cout << ansicolor::green;
-		}
-		std::cout << "true";
-		if (colors)
-		{
-			std::cout << ansicolor::reset;
-		}
+		// Invalid URLs should not be printed
+		return;
 	}
 	std::cout << "\nRelative/absolute: ";
 	if (colors)
@@ -217,6 +201,7 @@ void print_url_details(const Url& url, bool colors)
 	print_str_with_label("\nPath: ", url.path);
 	print_str_with_label("\nQuery: ", url.query);
 	print_str_with_label("\nFragment: ", url.fragment);
+	print_bool_with_label("\nIPv4: ", url.is_ipv4);
 }
 
 void print_str_with_label(const string& label, const string& text, bool colors)
@@ -238,6 +223,31 @@ void print_str_with_label(const string& label, const string& text, bool colors)
 			std::cout << ansicolor::yellow << ansicolor::bold;
 		}
 		std::cout << text;
+	}
+	if (colors)
+	{
+		std::cout << ansicolor::reset;
+	}
+}
+
+void print_bool_with_label(const string& label, const bool value, bool colors)
+{
+	std::cout << label;
+	if (value)
+	{
+		if (colors)
+		{
+			std::cout << ansicolor::green;
+		}
+		std::cout << "true";
+	}
+	else
+	{
+		if (colors)
+		{
+			std::cout << ansicolor::red;
+		}
+		std::cout << "false";
 	}
 	if (colors)
 	{

@@ -23,6 +23,7 @@
     <ClCompile Include="Lexer.cpp" />
     <ClCompile Include="LexingScanResult.cpp" />
     <ClCompile Include="LexingState.cpp" />
+    <ClCompile Include="LexingTools.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="ParsingState.cpp" />
     <ClCompile Include="PunctuationToken.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="Lexer.h" />
     <ClInclude Include="LexingScanResult.h" />
     <ClInclude Include="LexingState.h" />
+    <ClInclude Include="LexingTools.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="ParsingState.h" />
     <ClInclude Include="PunctuationToken.h" />

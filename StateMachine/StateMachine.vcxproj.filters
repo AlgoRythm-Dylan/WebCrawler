@@ -48,6 +48,9 @@
     <ClCompile Include="EOFToken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LexingTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EOFToken.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LexingTools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
