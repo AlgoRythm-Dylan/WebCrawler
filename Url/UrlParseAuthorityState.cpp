@@ -182,5 +182,9 @@ void UrlParseAuthorityState::finish()
 			}
 		}
 	}
+	else
+	{
+		isipv4 = false;
+	}
 	parser->url.is_ipv4 = isipv4;
 }
