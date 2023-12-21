@@ -22,6 +22,7 @@ namespace TestSuite
 		{
 			string source = "https://www.dylan.com";
 			Url url(source);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
 		}
@@ -29,6 +30,7 @@ namespace TestSuite
 		{
 			string source = "https://dylan:password@www.dylan.com";
 			Url url(source);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
 			Assert::AreEqual(string("dylan"), url.username);
@@ -38,6 +40,7 @@ namespace TestSuite
 		{
 			string source = "https://www.dylan.com/dylan/skills";
 			Url url(source);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
 			Assert::AreEqual(string("/dylan/skills"), url.path);
@@ -47,6 +50,7 @@ namespace TestSuite
 		{
 			string source = "https://www.dylan.com/dylan/skills/";
 			Url url(source);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
 			Assert::AreEqual(string("/dylan/skills/"), url.path);
@@ -56,6 +60,7 @@ namespace TestSuite
 		{
 			string source = "https://www.dylan.com/dylan/skills?abc=123";
 			Url url(source);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
 			Assert::AreEqual(string("/dylan/skills"), url.path);
@@ -71,6 +76,7 @@ namespace TestSuite
 			Url url(source);
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("page"), url.path);
 			Assert::AreEqual((size_t)1, url.path_parts.size());
@@ -82,6 +88,7 @@ namespace TestSuite
 			Url url(source);
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource/action"), url.path);
 			Assert::AreEqual((size_t)2, url.path_parts.size());
@@ -94,6 +101,7 @@ namespace TestSuite
 			Url url(source);
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource"), url.path);
 			Assert::AreEqual(string("section"), url.fragment);
@@ -106,6 +114,7 @@ namespace TestSuite
 			Url url(source);
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource"), url.path);
 			Assert::AreEqual(string("?query=val"), url.query);
@@ -119,6 +128,7 @@ namespace TestSuite
 			Url url(source);
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource"), url.path);
 			Assert::AreEqual(string("?query=val"), url.query);
@@ -133,6 +143,7 @@ namespace TestSuite
 			Url url(source);
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
+			Assert::IsFalse(url.is_ipv4);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource/action"), url.path);
 			Assert::AreEqual(string("?query=val"), url.query);
