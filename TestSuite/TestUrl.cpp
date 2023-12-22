@@ -189,5 +189,24 @@ namespace TestSuite
 			Assert::AreEqual(3000, url.port);
 			Assert::AreEqual(string("localhost"), url.host);
 		}
+		TEST_METHOD(IPV6Positive)
+		{
+			string source = "http://[2001:db8:2a:3256:adfe:5c0:3:6]:3000";
+			Url url(source);
+			Assert::IsTrue(url.is_valid);
+			Assert::IsFalse(url.is_ipv4);
+			Assert::IsTrue(url.is_ipv6);
+			Assert::AreEqual(3000, url.port);
+			Assert::AreEqual(string("2001:db8:2a:3256:adfe:5c0:3:6"), url.host);
+		}
+		TEST_METHOD(IPV6Negative)
+		{
+			string source = "http://localhost:3000";
+			Url url(source);
+			Assert::IsTrue(url.is_valid);
+			Assert::IsFalse(url.is_ipv4);
+			Assert::AreEqual(3000, url.port);
+			Assert::AreEqual(string("localhost"), url.host);
+		}
 	};
 }

@@ -23,6 +23,7 @@ void Url::setup_defaults()
 	is_valid = true;
 	is_relative = false;
 	is_ipv4 = false;
+	is_ipv6 = false;
 }
 
 void Url::parse(string& source)

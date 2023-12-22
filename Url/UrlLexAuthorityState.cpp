@@ -16,7 +16,9 @@ LexingScanResult UrlLexAuthorityState::scan(const char character)
 		auto pathParsingState = std::make_shared<UrlLexPathState>();
 		transition(pathParsingState);
 	}
-	else if (character == '.' || character == ':' || character == '@' || character == '#')
+	else if (character == '.' || character == ':' ||
+		     character == '@' || character == '#' ||
+		     character == '[' || character == ']')
 	{
 		emit_memory();
 		auto tok = unique_ptr<Token>(new PunctuationToken(string(1, character)));
