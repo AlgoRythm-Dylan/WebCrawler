@@ -131,6 +131,8 @@ void UrlParseAuthorityState::finish()
 	// ipv6 not supported YET so dots represent separation
 	// between parts of a host, anything else is hostname
 	string completeHost, currentHostPart;
+	bool startParseIpv6 = false;
+	bool parsedIPv6 = false;
 	while (memoryCursor < memory.size())
 	{
 		if (memory[memoryCursor]->type == StdTokenType::str)
