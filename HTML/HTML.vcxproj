@@ -20,31 +20,37 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HTMLAttribute.h" />
-    <ClInclude Include="HTMLLexStartState.h" />
+    <ClInclude Include="HTMLLexGenericState.h" />
     <ClInclude Include="HTMLDocument.h" />
     <ClInclude Include="HTMLElement.h" />
     <ClInclude Include="HTMLLexer.h" />
+    <ClInclude Include="HTMLLexTagState.h" />
     <ClInclude Include="HTMLNode.h" />
     <ClInclude Include="HTMLNodeParent.h" />
     <ClInclude Include="HTMLParser.h" />
-    <ClInclude Include="HTMLParseStartState.h" />
+    <ClInclude Include="HTMLParseGenericState.h" />
     <ClInclude Include="HTMLQuery.h" />
     <ClInclude Include="HTMLQueryExecutor.h" />
     <ClInclude Include="HTMLQueryRule.h" />
+    <ClInclude Include="HTMLLexStringState.h" />
+    <ClInclude Include="HTMLStringMemoryState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HTMLAttribute.cpp" />
-    <ClCompile Include="HTMLLexStartState.cpp" />
+    <ClCompile Include="HTMLLexGenericState.cpp" />
     <ClCompile Include="HTMLDocument.cpp" />
     <ClCompile Include="HTMLElement.cpp" />
     <ClCompile Include="HTMLLexer.cpp" />
+    <ClCompile Include="HTMLLexTagState.cpp" />
     <ClCompile Include="HTMLNode.cpp" />
     <ClCompile Include="HTMLNodeParent.cpp" />
     <ClCompile Include="HTMLParser.cpp" />
-    <ClCompile Include="HTMLParseStartState.cpp" />
+    <ClCompile Include="HTMLParseGenericState.cpp" />
     <ClCompile Include="HTMLQuery.cpp" />
     <ClCompile Include="HTMLQueryExecutor.cpp" />
     <ClCompile Include="HTMLQueryRule.cpp" />
+    <ClCompile Include="HTMLLexStringState.cpp" />
+    <ClCompile Include="HTMLStringMemoryState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StateMachine\StateMachine.vcxproj">

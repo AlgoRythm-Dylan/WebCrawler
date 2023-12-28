@@ -1,10 +1,10 @@
 #include "HTMLParser.h"
 
-#include "HTMLParseStartState.h"
+#include "HTMLParseGenericState.h"
 
 HTMLParser::HTMLParser(HTMLDocument& d) : document(d)
 {
-	current_state = unique_ptr<State>(new HTMLParseStartState());
+	current_state = unique_ptr<State>(new HTMLParseGenericState());
 	current_state->machine = this;
 }
 

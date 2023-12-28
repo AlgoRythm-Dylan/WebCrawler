@@ -30,13 +30,13 @@
     <ClInclude Include="HTMLLexer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTMLLexStartState.h">
+    <ClInclude Include="HTMLLexGenericState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HTMLParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTMLParseStartState.h">
+    <ClInclude Include="HTMLParseGenericState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HTMLQuery.h">
@@ -49,6 +49,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HTMLNodeParent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLStringMemoryState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLLexTagState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLLexStringState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,13 +77,13 @@
     <ClCompile Include="HTMLLexer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HTMLLexStartState.cpp">
+    <ClCompile Include="HTMLLexGenericState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HTMLParseStartState.cpp">
+    <ClCompile Include="HTMLParseGenericState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLQuery.cpp">
@@ -87,6 +96,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLNodeParent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLStringMemoryState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLLexTagState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLLexStringState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
