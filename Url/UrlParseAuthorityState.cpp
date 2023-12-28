@@ -128,11 +128,9 @@ void UrlParseAuthorityState::finish()
 	}
 	// At this point we assume username and password
 	// are either already read, or did not exist.
-	// ipv6 not supported YET so dots represent separation
-	// between parts of a host, anything else is hostname
 	string completeHost, currentHostPart;
-	bool startParseIpv6 = false;
-	bool parsedIPv6 = false;
+	bool parsingipv6 = false;
+	int domainCursorStartPosition = memoryCursor;
 	while (memoryCursor < memory.size())
 	{
 		if (memory[memoryCursor]->type == StdTokenType::str)
@@ -164,6 +162,31 @@ void UrlParseAuthorityState::finish()
 						continue;
 					}
 				}
+				else if (parsingipv6 == true)
+				{
+					completeHost += currentHostPart + ":";
+					if (!currentHostPart.empty())
+					{
+						parser->url.host_parts.push_back(currentHostPart);
+						currentHostPart = "";
+					}
+				}
+			}
+			else if (pToken->value == "[" && memoryCursor == domainCursorStartPosition)
+			{
+				completeHost += "[";
+				parser->url.is_ipv6 = true;
+				parsingipv6 = true;
+			}
+			else if (parsingipv6 && pToken->value == "]")
+			{
+				completeHost += currentHostPart + "]";
+				if (!currentHostPart.empty())
+				{
+					parser->url.host_parts.push_back(currentHostPart);
+					currentHostPart = "";
+				}
+				parsingipv6 = false;
 			}
 			else
 			{
@@ -171,6 +194,13 @@ void UrlParseAuthorityState::finish()
 			}
 		}
 		memoryCursor++;
+	}
+	// If we never encountered a closing square bracket,
+	// then the flag for "parsing ipv6" will still be set.
+	// This means it's malformed and the URL is invalid
+	if (parsingipv6)
+	{
+		parser->url.is_valid = false;
 	}
 	if (currentHostPart.length() > 0)
 	{

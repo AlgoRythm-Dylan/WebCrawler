@@ -23,6 +23,7 @@ namespace TestSuite
 			string source = "https://www.dylan.com";
 			Url url(source);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
@@ -32,6 +33,7 @@ namespace TestSuite
 			string source = "https://dylan:password@www.dylan.com";
 			Url url(source);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
@@ -43,6 +45,7 @@ namespace TestSuite
 			string source = "https://www.dylan.com/dylan/skills";
 			Url url(source);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
@@ -54,6 +57,7 @@ namespace TestSuite
 			string source = "https://www.dylan.com/dylan/skills/";
 			Url url(source);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
@@ -65,6 +69,7 @@ namespace TestSuite
 			string source = "https://www.dylan.com/dylan/skills?abc=123";
 			Url url(source);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual(string("www.dylan.com"), url.host);
 			Assert::AreEqual((size_t)3, url.host_parts.size());
@@ -82,6 +87,7 @@ namespace TestSuite
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("page"), url.path);
@@ -95,6 +101,7 @@ namespace TestSuite
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource/action"), url.path);
@@ -109,6 +116,7 @@ namespace TestSuite
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource"), url.path);
@@ -123,6 +131,7 @@ namespace TestSuite
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource"), url.path);
@@ -138,6 +147,7 @@ namespace TestSuite
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource"), url.path);
@@ -154,6 +164,7 @@ namespace TestSuite
 			Assert::IsTrue(url.is_relative);
 			Assert::IsTrue(url.is_valid);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 			Assert::AreEqual((size_t)0, url.host_parts.size());
 			Assert::AreEqual(string("resource/action"), url.path);
@@ -171,6 +182,7 @@ namespace TestSuite
 			string source = "http://192.168.1.1";
 			Url url(source);
 			Assert::IsTrue(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 		}
 		TEST_METHOD(IPV4NegativeDetection)
@@ -178,6 +190,7 @@ namespace TestSuite
 			string source = "http://192.168.0.1";
 			Url url(source);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(0, url.port);
 		}
 		TEST_METHOD(PortSimple)
@@ -186,6 +199,7 @@ namespace TestSuite
 			Url url(source);
 			Assert::IsTrue(url.is_valid);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(3000, url.port);
 			Assert::AreEqual(string("localhost"), url.host);
 		}
@@ -197,7 +211,8 @@ namespace TestSuite
 			Assert::IsFalse(url.is_ipv4);
 			Assert::IsTrue(url.is_ipv6);
 			Assert::AreEqual(3000, url.port);
-			Assert::AreEqual(string("2001:db8:2a:3256:adfe:5c0:3:6"), url.host);
+			Assert::AreEqual(string("[2001:db8:2a:3256:adfe:5c0:3:6]"), url.host);
+			Assert::AreEqual((size_t)8, url.host_parts.size());
 		}
 		TEST_METHOD(IPV6Negative)
 		{
@@ -205,6 +220,7 @@ namespace TestSuite
 			Url url(source);
 			Assert::IsTrue(url.is_valid);
 			Assert::IsFalse(url.is_ipv4);
+			Assert::IsFalse(url.is_ipv6);
 			Assert::AreEqual(3000, url.port);
 			Assert::AreEqual(string("localhost"), url.host);
 		}

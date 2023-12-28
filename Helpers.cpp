@@ -47,6 +47,10 @@ void pretty_print_url(const Url& url, bool colors)
 	}
 	if (!url.host_parts.empty())
 	{
+		if (url.is_ipv6)
+		{
+			std::cout << "[";
+		}
 		for (int i = 0; i < url.host_parts.size(); i++)
 		{
 			if (colors)
@@ -64,8 +68,19 @@ void pretty_print_url(const Url& url, bool colors)
 			}
 			if (i != url.host_parts.size() - 1)
 			{
-				std::cout << ".";
+				if (url.is_ipv6)
+				{
+					std::cout << ":";
+				}
+				else
+				{
+					std::cout << ".";
+				}
 			}
+		}
+		if (url.is_ipv6)
+		{
+			std::cout << "]";
 		}
 	}
 	if (url.port != 0)
@@ -227,6 +242,7 @@ void print_url_details(const Url& url, bool colors)
 	print_str_with_label("\nQuery: ", url.query);
 	print_str_with_label("\nFragment: ", url.fragment);
 	print_bool_with_label("\nIPv4: ", url.is_ipv4);
+	print_bool_with_label("\nIPv6: ", url.is_ipv6);
 }
 
 void print_str_with_label(const string& label, const string& text, bool colors)

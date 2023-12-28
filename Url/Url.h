@@ -2,14 +2,6 @@
 
 /*
 
-https://bob:bobby@www.lunatech.com:8080/file;p=1?q=2#third
-\___/   \_/ \___/ \______________/ \__/\_______/ \_/ \___/
-  |      |    |          |          |      | \_/  |    |
-Scheme User Password    Host       Port  Path |   | Fragment
-		\_____________________________/       | Query
-					   |               Path parameter
-				   Authority
-
 VALID URLs:
 	https://abc123.edu/123  ("fully-qualified")
 	/123 ("absolute-relative")
