@@ -33,6 +33,12 @@
     <ClInclude Include="HTMLLexStartState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HTMLParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLParseStartState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HTMLDocument.cpp">
@@ -51,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLLexStartState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLParseStartState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

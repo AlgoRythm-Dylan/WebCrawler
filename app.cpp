@@ -57,4 +57,5 @@ void html_mode()
 	ifstream source("..\\..\\HTMLFiles\\simple.html");
 	HTMLDocument doc;
 	doc.parse(source);
+	std::cout << doc.doctype << std::endl;
 }

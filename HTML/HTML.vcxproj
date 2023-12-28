@@ -25,6 +25,8 @@
     <ClInclude Include="HTMLElement.h" />
     <ClInclude Include="HTMLLexer.h" />
     <ClInclude Include="HTMLNode.h" />
+    <ClInclude Include="HTMLParser.h" />
+    <ClInclude Include="HTMLParseStartState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HTMLAttribute.cpp" />
@@ -33,6 +35,8 @@
     <ClCompile Include="HTMLElement.cpp" />
     <ClCompile Include="HTMLLexer.cpp" />
     <ClCompile Include="HTMLNode.cpp" />
+    <ClCompile Include="HTMLParser.cpp" />
+    <ClCompile Include="HTMLParseStartState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StateMachine\StateMachine.vcxproj">

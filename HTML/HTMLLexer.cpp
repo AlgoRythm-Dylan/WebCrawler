@@ -1,5 +1,7 @@
 #include "HTMLLexer.h"
 
+#include <EOFToken.h>
+
 #include "HTMLLexStartState.h"
 
 HTMLLexer::HTMLLexer(istream& s) : stream(s)
@@ -10,5 +12,5 @@ HTMLLexer::HTMLLexer(istream& s) : stream(s)
 
 unique_ptr<Token> HTMLLexer::next()
 {
-	return nullptr;
+	return unique_ptr<Token>(new EOFToken());
 }
