@@ -20,15 +20,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HTMLAttribute.h" />
+    <ClInclude Include="HTMLLexStartState.h" />
     <ClInclude Include="HTMLDocument.h" />
     <ClInclude Include="HTMLElement.h" />
+    <ClInclude Include="HTMLLexer.h" />
     <ClInclude Include="HTMLNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HTMLAttribute.cpp" />
+    <ClCompile Include="HTMLLexStartState.cpp" />
     <ClCompile Include="HTMLDocument.cpp" />
     <ClCompile Include="HTMLElement.cpp" />
+    <ClCompile Include="HTMLLexer.cpp" />
     <ClCompile Include="HTMLNode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StateMachine\StateMachine.vcxproj">
+      <Project>{040c1d69-a889-46e2-928f-35af91f41fba}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -122,9 +131,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)StateMachine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -140,9 +151,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)StateMachine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

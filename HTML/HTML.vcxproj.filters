@@ -27,6 +27,12 @@
     <ClInclude Include="HTMLAttribute.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HTMLLexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HTMLLexStartState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HTMLDocument.cpp">
@@ -39,6 +45,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLAttribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLLexer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLLexStartState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
