@@ -21,10 +21,10 @@ in under 100ms.
 ## What do you have to show?
 
 ```
-Working: ANSI terminal colors library
-In development: URL parser, state machine framework
-Prototype:
-Planned: HTML parser, JSON parser, XML parser
+Working: ANSI terminal colors library, URL parser
+In development: state machine framework
+Prototype: HTML parser
+Planned: JSON parser, XML parser
 ```
 
 Plus, a unit testing project!
@@ -49,3 +49,42 @@ Even just a query string is detected as a
 valid relative path:
 
 ![complex relative url parse](docs/difficult%20relative%20parse.jpg)
+
+The parser supports detecting IPv6, but does not
+validate it as it does IPv4.
+
+# HTML Parser
+[Famously a job for a parser](https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454?ref=blog.codinghorror.com#1732454),
+this project aims to support:
+
+*Implemented:*
+- *(empty list)*
+
+*Planned:*
+- Doctype declarations
+- HTML5 standard
+- A rich DOM
+- Comments
+- Self-closing tags
+- Extranenous closing tags for self-closing elements
+- Missing closing tags
+- Attributes
+- `data:xyz` handling
+- `pre` tags
+- `script` tags*
+- `style` tags*2
+- HTML encoding / decoding
+- DOM querying (`document.querySelector[All]`)
+
+*NOT JS parsing. Some very basic parsing so
+that `</script>` inside a string literal
+isn't confused as the closing tag.
+
+*2 Similar to script tags. Only enough to
+not be tricked by a closing `</style>` inside
+a string literal, but this is less of a concern
+for CSS. Why would that be there? Who knows,
+but I bet it does exist somewhere on the web for
+some reason. Maybe in a `content` attribute.
+However, in contrast to JS, I would actually
+like to write a CSS3 parser.
