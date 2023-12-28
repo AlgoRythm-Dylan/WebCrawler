@@ -60,10 +60,12 @@ this project aims to support:
 *Implemented:*
 - *(empty list)*
 
+*Prototype:*
+- A rich DOM
+- HTML5 standard
+
 *Planned:*
 - Doctype declarations
-- HTML5 standard
-- A rich DOM
 - Comments
 - Self-closing tags
 - Extranenous closing tags for self-closing elements
