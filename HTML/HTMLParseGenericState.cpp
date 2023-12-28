@@ -1,6 +1,7 @@
 #include "HTMLParseGenericState.h"
 
 #include <StringToken.h>
+#include <PunctuationToken.h>
 
 #include "HTMLParser.h"
 #include "HTMLNode.h"
@@ -30,7 +31,22 @@ unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
 	}
 	else if(token->type == StdTokenType::punctuation)
 	{
+		auto pToken = (PunctuationToken*)token.get();
+		if (pToken->value == "<")
+		{
+			// Create a new tag on the stack and
+			// transition to tag parsing state
+			auto tag = new HTMLNode();
+			tag->is_tag = true;
 
+			auto parser = ((HTMLParser*)machine);
+			parser->node_stack.push_back(shared_ptr<HTMLNode>(tag));
+		}
+		else
+		{
+			// Emit it as a text node or add it
+			// to the current text node!
+		}
 	}
 	return nullptr;
 }

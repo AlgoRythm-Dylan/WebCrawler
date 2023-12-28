@@ -60,7 +60,7 @@
     <ClInclude Include="HTMLLexStringState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTMLParseNode.h">
+    <ClInclude Include="HTMLParseTagState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -110,7 +110,7 @@
     <ClCompile Include="HTMLLexStringState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HTMLParseNode.cpp">
+    <ClCompile Include="HTMLParseTagState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
