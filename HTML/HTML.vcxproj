@@ -18,6 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HTMLAttribute.h" />
+    <ClInclude Include="HTMLDocument.h" />
+    <ClInclude Include="HTMLElement.h" />
+    <ClInclude Include="HTMLNode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HTMLAttribute.cpp" />
+    <ClCompile Include="HTMLDocument.cpp" />
+    <ClCompile Include="HTMLElement.cpp" />
+    <ClCompile Include="HTMLNode.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
