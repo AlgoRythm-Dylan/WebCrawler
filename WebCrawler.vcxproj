@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>CURL_STATICLIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);USE_ANSI_COLORS;CURL_STATICLIB</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)Url;$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)HTML;$(ProjectDir)Url;$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,7 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CURL_STATICLIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);USE_ANSI_COLORS;CURL_STATICLIB</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Url;$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)HTML;$(ProjectDir)Url;$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -143,6 +143,9 @@
     <ClInclude Include="Helpers.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="HTML\HTML.vcxproj">
+      <Project>{51e6dc4e-e8e2-455f-9de9-f590d1a2e608}</Project>
+    </ProjectReference>
     <ProjectReference Include="HttpClient\HttpClient.vcxproj">
       <Project>{2230e3ef-a3b2-44a6-b4e5-a22dfb6f81a8}</Project>
     </ProjectReference>

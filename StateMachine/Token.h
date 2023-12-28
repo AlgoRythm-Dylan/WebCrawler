@@ -8,6 +8,9 @@ class Token
 {
 public:
 	string type;
+	int line, column;
+
+	Token();
 };
 
 namespace StdTokenType
