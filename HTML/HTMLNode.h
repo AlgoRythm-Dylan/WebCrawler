@@ -1,19 +1,16 @@
 #pragma once
 
 #include <string>
-#include <vector>
-#include <memory>
+
+#include "HTMLNodeParent.h"
 
 using std::string;
-using std::vector;
-using std::shared_ptr;
 
-class HTMLNode
+class HTMLNode : public HTMLNodeParent
 {
 public:
 	bool is_tag;
 	string text_content;
-	vector<shared_ptr<HTMLNode>> children;
 
 	HTMLNode();
 };

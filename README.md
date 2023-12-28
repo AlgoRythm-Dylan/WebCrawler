@@ -63,6 +63,7 @@ this project aims to support:
 *Prototype:*
 - A rich DOM
 - HTML5 standard
+- DOM querying (`document.querySelector[All]`)
 
 *Planned:*
 - Doctype declarations
@@ -76,7 +77,6 @@ this project aims to support:
 - `script` tags*
 - `style` tags*2
 - HTML encoding / decoding
-- DOM querying (`document.querySelector[All]`)
 
 *NOT JS parsing. Some very basic parsing so
 that `</script>` inside a string literal

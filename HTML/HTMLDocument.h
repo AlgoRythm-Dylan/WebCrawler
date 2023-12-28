@@ -2,20 +2,15 @@
 
 #include <string>
 #include <istream>
-#include <vector>
-#include <memory>
 
-#include "HTMLNode.h"
+#include "HTMLNodeParent.h"
 
 using std::string;
 using std::istream;
-using std::vector;
-using std::shared_ptr;
 
-class HTMLDocument
+class HTMLDocument : public HTMLNodeParent
 {
 public:
 	string doctype;
 	void parse(istream&);
-	vector<shared_ptr<HTMLNode>> children;
 };
