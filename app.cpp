@@ -54,8 +54,15 @@ void url_mode()
 void html_mode()
 {
 	// Cheap hack for now: just assume we're in $(ProjectDir)[platform]\[debug or release]
-	ifstream source("..\\..\\HTMLFiles\\simple.html");
-	HTMLDocument doc;
-	doc.parse(source);
-	std::cout << doc.doctype << std::endl;
+	ifstream source("HTMLFiles\\simple.html");
+	if (!source.is_open())
+	{
+		std::cout << "The document is not open" << std::endl;
+	}
+	else
+	{
+		HTMLDocument doc;
+		doc.parse(source);
+		std::cout << doc.doctype << std::endl;
+	}
 }

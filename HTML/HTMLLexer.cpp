@@ -25,7 +25,12 @@ unique_ptr<Token> HTMLLexer::next()
 		LexingScanResult result;
 
 		char to_scan;
+		
 		stream.get(to_scan);
+		if (stream.eof())
+		{
+			to_scan = '\0';
+		}
 
 		result = lexing_state->scan(to_scan);
 		if (!result.consumed)
@@ -33,6 +38,7 @@ unique_ptr<Token> HTMLLexer::next()
 			stream.putback(to_scan);
 		}
 	}
-
-	return unique_ptr<Token>(new EOFToken());
+	auto token = std::move(token_buffer.front());
+	token_buffer.pop();
+	return token;
 }

@@ -4,13 +4,12 @@
 #include <memory>
 #include <string>
 
+class HTMLNode;
+
 using std::vector;
 using std::shared_ptr;
 using std::string;
 
-// Forwards declare HTMLNode because
-// an HTMLNode is an HTMLNodeParent
-class HTMLNode;
 
 // HTMLNodeParent is any HTML object which is
 // a parent to HTMLNodes. This class will cover
@@ -25,3 +24,4 @@ public:
 	vector<shared_ptr<HTMLNode>> querySelectorAll(string);
 };
 
+#include "HTMLNode.h"
