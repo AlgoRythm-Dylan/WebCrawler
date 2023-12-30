@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <HTMLNode.h>
+
 #include "Helpers.h"
 #include "AnsiColors.hpp"
 
@@ -293,5 +295,102 @@ void print_bool_with_label(const string& label, const bool value, bool colors)
 	if (colors)
 	{
 		std::cout << ansicolor::reset;
+	}
+}
+
+void pretty_print_document(const HTMLDocument& document, bool colors)
+{
+	for (auto& node : document.children)
+	{
+		pretty_print_html_node(*node, 0, true, colors);
+	}
+}
+
+void pretty_print_html_node(const HTMLNode& node, int indent, bool recursive, bool colors)
+{
+	if (node.type == HTMLNodeType::Comment)
+	{
+
+	}
+	else if (node.type == HTMLNodeType::Element)
+	{
+		std::cout << string(2 * indent, ' ') << "<";
+		if (colors)
+		{
+			std::cout << ansicolor::bold << ansicolor::blue;
+		}
+		std::cout << node.tag_name;
+		if (colors)
+		{
+			std::cout << ansicolor::reset;
+		}
+		std::cout << ">";
+		if (!node.children.empty() || !recursive)
+		{
+			std::cout << "\n";
+		}
+		if (recursive && !node.is_void_element())
+		{
+			for (auto& child : node.children)
+			{
+				pretty_print_html_node(*child, indent + 1, colors);
+				std::cout << "\n";
+			}
+		}
+		if (!node.is_void_element())
+		{
+			std::cout << string(2 * indent, ' ') << "</";
+			if (colors)
+			{
+				std::cout << ansicolor::bold << ansicolor::blue;
+			}
+			std::cout << node.tag_name;
+			if (colors)
+			{
+				std::cout << ansicolor::reset;
+			}
+			std::cout << ">";
+		}
+	}
+	else
+	{
+		// Simple text node
+		string thisLine = "";
+		for (auto& character : node.text_content)
+		{
+			if (character == '\n' && !thisLine.empty())
+			{
+				if (colors)
+				{
+					std::cout << string(2 * indent, ' ') << ansicolor::yellow << ansicolor::bold;
+				}
+				std::cout << thisLine;
+				if (colors)
+				{
+					std::cout << ansicolor::reset;
+				}
+				std::cout << "\n";
+				thisLine = "";
+			}
+			else
+			{
+				if (character != '\r')
+				{
+					thisLine += character;
+				}
+			}
+		}
+		if (!thisLine.empty())
+		{
+			if (colors)
+			{
+				std::cout << string(2 * indent, ' ') << ansicolor::yellow << ansicolor::bold;
+			}
+			std::cout << thisLine;
+			if (colors)
+			{
+				std::cout << ansicolor::reset;
+			}
+		}
 	}
 }

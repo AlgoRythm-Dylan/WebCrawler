@@ -3,14 +3,16 @@
 #include <string>
 #include <istream>
 
-#include "HTMLNodeParent.h"
+#include "HTMLNode.h"
 
 using std::string;
 using std::istream;
 
-class HTMLDocument : public HTMLNodeParent
+class HTMLDocument : public HTMLNode
 {
 public:
-	string doctype;
+
+	HTMLDocument();
+
 	void parse(istream&);
 };

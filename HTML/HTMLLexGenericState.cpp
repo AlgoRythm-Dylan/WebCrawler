@@ -1,8 +1,10 @@
 #include "HTMLLexGenericState.h"
 
-#include "HTMLLexer.h"
-
 #include <EOFToken.h>
+#include <PunctuationToken.h>
+
+#include "HTMLLexer.h"
+#include "HTMLLexTagState.h"
 
 /*
 
@@ -24,6 +26,11 @@ LexingScanResult HTMLLexGenericState::scan(const char character)
 	if (character == '<')
 	{
 		emit_memory();
+
+		auto tok = new PunctuationToken("<");
+		((HTMLLexer*)machine)->token_buffer.push(unique_ptr<Token>(tok));
+
+		transition(new HTMLLexTagState());
 	}
 	else if (character == '\0')
 	{

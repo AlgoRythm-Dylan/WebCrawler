@@ -13,10 +13,9 @@ class HTMLParser : public Parser
 {
 public:
 	HTMLDocument& document;
-	vector<shared_ptr<HTMLNode>> node_stack;
+	shared_ptr<HTMLNodeParent> current_node;
 
 	HTMLParser(HTMLDocument&);
 	unique_ptr<Token> scan(unique_ptr<Token>) override;
-	shared_ptr<HTMLNode> current_node();
 };
 

@@ -21,12 +21,6 @@
     <ClInclude Include="HTMLNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTMLElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HTMLAttribute.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HTMLLexer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -46,9 +40,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HTMLQueryExecutor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HTMLNodeParent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HTMLStringMemoryState.h">
@@ -71,12 +62,6 @@
     <ClCompile Include="HTMLNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HTMLElement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HTMLAttribute.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HTMLLexer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -96,9 +81,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLQueryExecutor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HTMLNodeParent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLStringMemoryState.cpp">

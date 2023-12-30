@@ -3,6 +3,7 @@
 
 #include <URL.h>
 #include <HTMLDocument.h>
+#include <HTMLElement.h>
 #include "AnsiColors.hpp"
 #include "Helpers.h"
 #include <HttpClient.h>
@@ -53,8 +54,8 @@ void url_mode()
 
 void html_mode()
 {
-	// Cheap hack for now: just assume we're in $(ProjectDir)[platform]\[debug or release]
-	ifstream source("HTMLFiles\\simple.html");
+	//ifstream source("HTMLFiles\\text-node-only.html");
+	ifstream source("HTMLFiles\\doctype-only.html");
 	if (!source.is_open())
 	{
 		std::cout << "The document is not open" << std::endl;
@@ -63,6 +64,17 @@ void html_mode()
 	{
 		HTMLDocument doc;
 		doc.parse(source);
-		std::cout << doc.doctype << std::endl;
+		pretty_print_document(doc);
+
+		std::cout << "\n\n";
+
+		/*HTMLDocument testDoc;
+		auto el = std::make_shared<HTMLElement>();
+		el->tag_name = "div";
+		testDoc.children.push_back(el);
+		auto elTextContent = std::make_shared<HTMLNode>();
+		elTextContent->text_content = "This is the content of the div";
+		el->children.push_back(elTextContent);
+		pretty_print_document(testDoc);*/
 	}
 }

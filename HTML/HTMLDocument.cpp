@@ -3,6 +3,11 @@
 #include "HTMLLexer.h"
 #include "HTMLParser.h"
 
+HTMLDocument::HTMLDocument()
+{
+	type = HTMLNodeType::Document;
+}
+
 void HTMLDocument::parse(istream& stream)
 {
 	HTMLLexer lexer(stream);

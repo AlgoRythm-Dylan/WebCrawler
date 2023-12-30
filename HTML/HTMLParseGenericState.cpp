@@ -5,6 +5,8 @@
 
 #include "HTMLParser.h"
 #include "HTMLNode.h"
+#include "HTMLElement.h"
+#include "HTMLParseTagState.h"
 
 unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
 {
@@ -36,11 +38,13 @@ unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
 		{
 			// Create a new tag on the stack and
 			// transition to tag parsing state
-			auto tag = new HTMLNode();
-			tag->is_tag = true;
+			auto tag = std::make_shared<HTMLNode>(new HTMLElement());
 
 			auto parser = ((HTMLParser*)machine);
-			parser->node_stack.push_back(shared_ptr<HTMLNode>(tag));
+			parser->current_node->append_child(tag);
+			parser->current_node = tag;
+
+			transition(new HTMLParseTagState());
 		}
 		else
 		{

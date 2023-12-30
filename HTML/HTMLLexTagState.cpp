@@ -21,6 +21,8 @@ Tokens include:
 =             Attribute assignment operator
 "             Attribute string start
 '             Attribute string start (alternative)
+!             Start of comment OR doctype
+-             Comment syntax
 
 */
 
@@ -29,7 +31,8 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 	LexingScanResult result;
 	if (character == '<' || character == '>' ||
         character == '/' || character == '=' ||
-		character == '"' || character == '\'')
+		character == '"' || character == '\'' ||
+		character == '!' || character == '-')
 	{
 		emit_memory();
 

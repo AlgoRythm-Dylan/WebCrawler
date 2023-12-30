@@ -64,14 +64,14 @@ this project aims to support:
 - A rich DOM
 - HTML5 standard
 - DOM querying (`document.querySelector[All]`)
+- Doctype declarations
+- Self-closing tags
+- Attributes
 
 *Planned:*
-- Doctype declarations
 - Comments
-- Self-closing tags
 - Extranenous closing tags for self-closing elements
 - Missing closing tags
-- Attributes
 - `data:xyz` handling
 - `pre` tags
 - `script` tags*
