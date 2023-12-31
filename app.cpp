@@ -55,7 +55,7 @@ void url_mode()
 void html_mode()
 {
 	//ifstream source("HTMLFiles\\text-node-only.html");
-	ifstream source("HTMLFiles\\doctype-only.html");
+	ifstream source("HTMLFiles\\simple.html");
 	if (!source.is_open())
 	{
 		std::cout << "The document is not open" << std::endl;
@@ -64,17 +64,24 @@ void html_mode()
 	{
 		HTMLDocument doc;
 		doc.parse(source);
+		pretty_print_document(doc);/*
+
+		auto doctype = shared_ptr<HTMLNode>(HTMLNode::element());
+		doctype->tag_name = "!DOCTYPE";
+		doc.root->append_child(doctype);
+
+		auto head = shared_ptr<HTMLNode>(HTMLNode::element());
+		head->tag_name = "head";
+		doc.root->append_child(head);
+
+		auto title = shared_ptr<HTMLNode>(HTMLNode::element());
+		title->tag_name = "title";
+		head->append_child(title);
+
+		auto titleText = shared_ptr<HTMLNode>(HTMLNode::text());
+		titleText->text_content = "This is the title of the document!";
+		title->append_child(titleText);*/
+		
 		pretty_print_document(doc);
-
-		std::cout << "\n\n";
-
-		/*HTMLDocument testDoc;
-		auto el = std::make_shared<HTMLNode>();
-		el->tag_name = "div";
-		testDoc.children.push_back(el);
-		auto elTextContent = std::make_shared<HTMLNode>();
-		elTextContent->text_content = "This is the content of the div";
-		el->children.push_back(elTextContent);
-		pretty_print_document(testDoc);*/
 	}
 }

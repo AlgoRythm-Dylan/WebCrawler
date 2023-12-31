@@ -339,7 +339,11 @@ void pretty_print_html_node(const HTMLNode& node, int indent, bool recursive, bo
 		}
 		if (!node.is_void_element())
 		{
-			std::cout << string(2 * indent, ' ') << "</";
+			if (!node.children.empty())
+			{
+				std::cout << string(2 * indent, ' ');
+			}
+			std::cout << "</";
 			if (colors)
 			{
 				std::cout << ansicolor::bold << ansicolor::blue;
@@ -351,46 +355,64 @@ void pretty_print_html_node(const HTMLNode& node, int indent, bool recursive, bo
 			}
 			std::cout << ">";
 		}
+		else
+		{
+			std::cout << "\n";
+		}
 	}
 	else
 	{
 		// Simple text node
-		string thisLine = "";
-		for (auto& character : node.text_content)
+		string format;
+		if (colors)
 		{
-			if (character == '\n' && !thisLine.empty())
+			format = ansicolor::yellow + ansicolor::bold;
+		}
+		print_indented_text(node.text_content, format, indent);
+	}
+}
+
+void print_indented_text(const string& text, const string& format, int indent)
+{
+	string currentLine;
+	for (auto& character : text)
+	{
+		if (character == '\n')
+		{
+			if (!currentLine.empty())
 			{
-				if (colors)
+				std::cout << string(2 * indent, ' ');
+				if (!format.empty())
 				{
-					std::cout << string(2 * indent, ' ') << ansicolor::yellow << ansicolor::bold;
+					std::cout << format;
 				}
-				std::cout << thisLine;
-				if (colors)
+				std::cout << currentLine;
+				if (!format.empty())
 				{
 					std::cout << ansicolor::reset;
 				}
-				std::cout << "\n";
-				thisLine = "";
-			}
-			else
-			{
-				if (character != '\r')
-				{
-					thisLine += character;
-				}
+				currentLine = "";
 			}
 		}
-		if (!thisLine.empty())
+		else
 		{
-			if (colors)
+			if (character != '\r' && (character != ' ' || !currentLine.empty()))
 			{
-				std::cout << string(2 * indent, ' ') << ansicolor::yellow << ansicolor::bold;
+				currentLine += character;
 			}
-			std::cout << thisLine;
-			if (colors)
-			{
-				std::cout << ansicolor::reset;
-			}
+		}
+	}
+	if (!currentLine.empty())
+	{
+		std::cout << string(2 * indent, ' ');
+		if (!format.empty())
+		{
+			std::cout << format;
+		}
+		std::cout << currentLine;
+		if (!format.empty())
+		{
+			std::cout << ansicolor::reset;
 		}
 	}
 }

@@ -3,6 +3,7 @@
 #include <PunctuationToken.h>
 
 #include "HTMLParser.h"
+#include "HTMLParseGenericState.h"
 #include "HTMLNode.h"
 
 HTMLParseTagState::HTMLParseTagState()
@@ -40,6 +41,7 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 					parser->current_node = parser->current_node->parent_node;
 				}
 			}
+			transition(new HTMLParseGenericState());
 		}
 	}
 	counter++;

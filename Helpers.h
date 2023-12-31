@@ -10,3 +10,4 @@ void print_bool_with_label(const string& label, const bool value, bool colors = 
 
 void pretty_print_document(const HTMLDocument& document, bool colors = true);
 void pretty_print_html_node(const HTMLNode& node, int indent, bool recursive = true, bool colors = true);
+void print_indented_text(const string& text, const string& format, int indent);
