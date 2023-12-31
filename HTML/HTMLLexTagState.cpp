@@ -53,6 +53,10 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 			transition(nextState);
 		}
 	}
+	else if (character == ' ' || character == '\n')
+	{
+		emit_memory();
+	}
 	else if (character == '\0')
 	{
 		emit_memory();
