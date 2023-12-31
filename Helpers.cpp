@@ -329,12 +329,12 @@ void pretty_print_html_node(const HTMLNode& node, int indent, bool recursive, bo
 		{
 			std::cout << "\n";
 		}
+		bool printedNewline = false;
 		if (recursive && !node.is_void_element())
 		{
 			for (auto& child : node.children)
 			{
 				pretty_print_html_node(*child, indent + 1, colors);
-				std::cout << "\n";
 			}
 		}
 		if (!node.is_void_element())
@@ -355,10 +355,7 @@ void pretty_print_html_node(const HTMLNode& node, int indent, bool recursive, bo
 			}
 			std::cout << ">";
 		}
-		else
-		{
-			std::cout << "\n";
-		}
+		std::cout << "\n";
 	}
 	else
 	{
@@ -414,5 +411,6 @@ void print_indented_text(const string& text, const string& format, int indent)
 		{
 			std::cout << ansicolor::reset;
 		}
+		std::cout << "\n";
 	}
 }
