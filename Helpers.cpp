@@ -300,7 +300,7 @@ void print_bool_with_label(const string& label, const bool value, bool colors)
 
 void pretty_print_document(const HTMLDocument& document, bool colors)
 {
-	for (auto& node : document.children)
+	for (auto& node : document.root->children)
 	{
 		pretty_print_html_node(*node, 0, true, colors);
 	}

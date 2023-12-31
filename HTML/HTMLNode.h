@@ -5,8 +5,8 @@
 #include <vector>
 #include <map>
 
-enum HTMLNodeType : char {
-	Document,
+enum HTMLNodeType : unsigned char {
+	Root,
 	Text,
 	Comment,
 	Element
@@ -34,6 +34,7 @@ public:
 	shared_ptr<HTMLNode> querySelector(string);
 	vector<shared_ptr<HTMLNode>> querySelectorAll(string);
 	bool is_void_element() const;
+	bool is_root() const;
 
 	/* static ctors */
 	static HTMLNode* element();

@@ -5,7 +5,8 @@
 
 HTMLDocument::HTMLDocument()
 {
-	type = HTMLNodeType::Document;
+	root = std::make_shared<HTMLNode>();
+	root->type = HTMLNodeType::Root;
 }
 
 void HTMLDocument::parse(istream& stream)

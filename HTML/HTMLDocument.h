@@ -8,11 +8,12 @@
 using std::string;
 using std::istream;
 
-class HTMLDocument : public HTMLNode
+class HTMLDocument
 {
 public:
 
 	HTMLDocument();
 
+	shared_ptr<HTMLNode> root;
 	void parse(istream&);
 };

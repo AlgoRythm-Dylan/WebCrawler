@@ -38,6 +38,11 @@ bool HTMLNode::is_void_element() const
 		   LexingTools::compare_case_insensitive("wbr", tag_name);
 }
 
+bool HTMLNode::is_root() const
+{
+	return type == HTMLNodeType::Root;
+}
+
 shared_ptr<HTMLNode> HTMLNode::querySelector(string query)
 {
 	return nullptr;
