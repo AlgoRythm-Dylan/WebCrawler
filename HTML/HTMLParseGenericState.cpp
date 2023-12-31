@@ -20,14 +20,7 @@ unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
 
 		auto parser = ((HTMLParser*)machine);
 
-		if (parser->current_node)
-		{
-			parser->current_node->append_child(node);
-		}
-		else
-		{
-			parser->document.append_child(node);
-		}
+		parser->current_node->append_child(node);
 		// This text node can't have children so it doesn't
 		// become the current node
 	}
@@ -41,14 +34,7 @@ unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
 			auto tag = shared_ptr<HTMLNode>(HTMLNode::element());
 
 			auto parser = ((HTMLParser*)machine);
-			if (parser->current_node)
-			{
-				parser->current_node->append_child(tag);
-			}
-			else
-			{
-				parser->document.append_child(tag);
-			}
+			parser->current_node->append_child(tag);
 			parser->current_node = tag;
 
 			transition(new HTMLParseTagState());

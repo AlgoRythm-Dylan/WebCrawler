@@ -6,6 +6,7 @@ HTMLParser::HTMLParser(HTMLDocument& d) : document(d)
 {
 	current_state = unique_ptr<State>(new HTMLParseGenericState());
 	current_state->machine = this;
+	current_node = d.root;
 }
 
 unique_ptr<Token> HTMLParser::scan(unique_ptr<Token> token)
