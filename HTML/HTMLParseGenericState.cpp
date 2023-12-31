@@ -15,28 +15,25 @@ unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
 		// we probably found a text node. So, we create a text node
 		// and then add it to the children of the current node
 
-		auto node = shared_ptr<HTMLNode>(HTMLNode::text());
-		node->text_content = ((StringToken*)token.get())->value;
+		auto sToken = (StringToken*)token.get();
 
-		auto parser = ((HTMLParser*)machine);
+		if (!sToken->is_whitespace_only())
+		{
+			auto node = shared_ptr<HTMLNode>(HTMLNode::text());
+			node->text_content = sToken->value;
 
-		parser->current_node->append_child(node);
-		// This text node can't have children so it doesn't
-		// become the current node
+			auto parser = ((HTMLParser*)machine);
+
+			parser->current_node->append_child(node);
+			// This text node can't have children so it doesn't
+			// become the current node
+		}
 	}
 	else if(token->type == StdTokenType::punctuation)
 	{
 		auto pToken = (PunctuationToken*)token.get();
 		if (pToken->value == "<")
 		{
-			// Create a new tag on the stack and
-			// transition to tag parsing state
-			auto tag = shared_ptr<HTMLNode>(HTMLNode::element());
-
-			auto parser = ((HTMLParser*)machine);
-			parser->current_node->append_child(tag);
-			parser->current_node = tag;
-
 			transition(new HTMLParseTagState());
 		}
 		else

@@ -64,24 +64,6 @@ void html_mode()
 	{
 		HTMLDocument doc;
 		doc.parse(source);
-		pretty_print_document(doc);/*
-
-		auto doctype = shared_ptr<HTMLNode>(HTMLNode::element());
-		doctype->tag_name = "!DOCTYPE";
-		doc.root->append_child(doctype);
-
-		auto head = shared_ptr<HTMLNode>(HTMLNode::element());
-		head->tag_name = "head";
-		doc.root->append_child(head);
-
-		auto title = shared_ptr<HTMLNode>(HTMLNode::element());
-		title->tag_name = "title";
-		head->append_child(title);
-
-		auto titleText = shared_ptr<HTMLNode>(HTMLNode::text());
-		titleText->text_content = "This is the title of the document!";
-		title->append_child(titleText);*/
-		
 		pretty_print_document(doc);
 	}
 }

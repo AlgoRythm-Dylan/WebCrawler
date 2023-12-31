@@ -12,5 +12,7 @@ public:
 
 	StringToken();
 	StringToken(string value);
+
+	bool is_whitespace_only();
 };
 
