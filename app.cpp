@@ -3,7 +3,7 @@
 
 #include <URL.h>
 #include <HTMLDocument.h>
-#include <HTMLElement.h>
+#include <HTMLNode.h>
 #include "AnsiColors.hpp"
 #include "Helpers.h"
 #include <HttpClient.h>
@@ -69,7 +69,7 @@ void html_mode()
 		std::cout << "\n\n";
 
 		/*HTMLDocument testDoc;
-		auto el = std::make_shared<HTMLElement>();
+		auto el = std::make_shared<HTMLNode>();
 		el->tag_name = "div";
 		testDoc.children.push_back(el);
 		auto elTextContent = std::make_shared<HTMLNode>();

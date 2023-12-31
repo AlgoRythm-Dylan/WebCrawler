@@ -5,7 +5,6 @@
 
 #include "HTMLParser.h"
 #include "HTMLNode.h"
-#include "HTMLElement.h"
 #include "HTMLParseTagState.h"
 
 unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
@@ -15,21 +14,15 @@ unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
 		// Encountering a string in a generic state just means
 		// we probably found a text node. So, we create a text node
 		// and then add it to the children of the current node
-		//
-		// If the last node as also a text node (a node where
-		// is_tag is false) then add it to that node!
-		//
-		// If the node stack is currently empty, that means
-		// we're reading ont he current document itself,
-		// so we just add a text node to the document instead
 
-		auto node = std::make_shared<HTMLNode>();
+		auto node = shared_ptr<HTMLNode>(HTMLNode::text());
 		node->text_content = ((StringToken*)token.get())->value;
 
 		auto parser = ((HTMLParser*)machine);
 
-		// Push directly onto document for now...
-		parser->document.children.push_back(node);
+		parser->current_node->append_child(node);
+		// This text node can't have children so it doesn't
+		// become the current node
 	}
 	else if(token->type == StdTokenType::punctuation)
 	{
@@ -38,7 +31,7 @@ unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
 		{
 			// Create a new tag on the stack and
 			// transition to tag parsing state
-			auto tag = std::make_shared<HTMLNode>(new HTMLElement());
+			auto tag = shared_ptr<HTMLNode>(HTMLNode::element());
 
 			auto parser = ((HTMLParser*)machine);
 			parser->current_node->append_child(tag);
