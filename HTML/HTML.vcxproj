@@ -25,6 +25,7 @@
     <ClInclude Include="HTMLLexStringState.h" />
     <ClInclude Include="HTMLLexTagState.h" />
     <ClInclude Include="HTMLNode.h" />
+    <ClInclude Include="HTMLParseCommentState.h" />
     <ClInclude Include="HTMLParseTagState.h" />
     <ClInclude Include="HTMLParser.h" />
     <ClInclude Include="HTMLParseGenericState.h" />
@@ -40,6 +41,7 @@
     <ClCompile Include="HTMLLexStringState.cpp" />
     <ClCompile Include="HTMLLexTagState.cpp" />
     <ClCompile Include="HTMLNode.cpp" />
+    <ClCompile Include="HTMLParseCommentState.cpp" />
     <ClCompile Include="HTMLParseTagState.cpp" />
     <ClCompile Include="HTMLParser.cpp" />
     <ClCompile Include="HTMLParseGenericState.cpp" />

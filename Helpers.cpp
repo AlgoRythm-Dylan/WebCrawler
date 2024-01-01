@@ -310,7 +310,35 @@ void pretty_print_html_node(const HTMLNode& node, int indent, bool recursive, bo
 {
 	if (node.type == HTMLNodeType::Comment)
 	{
-
+		// Comments can't be formatted nicely
+		// because whitespace is preserved.
+		// So, just open the comment on one line,
+		// then new line, then push the comment out,
+		// then end it with closing comment
+		std::cout << string(indent * 2, ' ');
+		if (colors)
+		{
+			std::cout << ansicolor::green << ansicolor::bold;
+		}
+		std::cout << "<!--";
+		string format;
+		if (colors)
+		{
+			format = ansicolor::green + ansicolor::bold;
+		}
+		std::cout << "\n";
+		print_indented_text(node.text_content, format, indent);
+		std::cout << string(indent * 2, ' ');
+		if (colors)
+		{
+			std::cout << ansicolor::green << ansicolor::bold;
+		}
+		std::cout << "-->";
+		if (colors)
+		{
+			std::cout << ansicolor::reset;
+		}
+		std::cout << "\n";
 	}
 	else if (node.type == HTMLNodeType::Element)
 	{

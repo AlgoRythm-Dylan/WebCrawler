@@ -4,6 +4,7 @@
 
 #include "HTMLParser.h"
 #include "HTMLParseGenericState.h"
+#include "HTMLParseCommentState.h"
 #include "HTMLNode.h"
 
 HTMLParseTagState::HTMLParseTagState()
@@ -63,6 +64,21 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 				}
 			}
 			transition(new HTMLParseGenericState());
+		}
+		else if (pToken->value == "-")
+		{
+			if (counter == 1 && parser->current_node->tag_name == "!")
+			{
+				// Is this a comment...?
+				parser->current_node->tag_name += "-";
+			}
+			else if (counter == 2 && parser->current_node->tag_name == "!-")
+			{
+				// This is a comment!
+				parser->current_node->tag_name = "";
+				parser->current_node->type = HTMLNodeType::Comment;
+				transition(new HTMLParseCommentState());
+			}
 		}
 	}
 	counter++;

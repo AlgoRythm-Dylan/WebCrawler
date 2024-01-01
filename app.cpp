@@ -55,7 +55,7 @@ void url_mode()
 void html_mode()
 {
 	//ifstream source("HTMLFiles\\text-node-only.html");
-	ifstream source("HTMLFiles\\simple.html");
+	ifstream source("HTMLFiles\\simple-with-comment.html");
 	if (!source.is_open())
 	{
 		std::cout << "The document is not open" << std::endl;
