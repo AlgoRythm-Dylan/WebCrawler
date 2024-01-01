@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HTMLLexCommentState.h" />
     <ClInclude Include="HTMLLexGenericState.h" />
     <ClInclude Include="HTMLDocument.h" />
     <ClInclude Include="HTMLLexer.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="HTMLStringMemoryState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HTMLLexCommentState.cpp" />
     <ClCompile Include="HTMLLexGenericState.cpp" />
     <ClCompile Include="HTMLDocument.cpp" />
     <ClCompile Include="HTMLLexer.cpp" />

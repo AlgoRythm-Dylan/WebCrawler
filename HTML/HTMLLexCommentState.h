@@ -1,13 +1,13 @@
 #pragma once
+
 #include "HTMLStringMemoryState.h"
 
-class HTMLLexTagState : public HTMLStringMemoryState
+class HTMLLexCommentState : public HTMLStringMemoryState
 {
 protected:
-	int counter;
-	string token_memory;
+	int consecutive_dash_count;
 public:
-	HTMLLexTagState();
+	HTMLLexCommentState();
 
 	LexingScanResult scan(const char) override;
 };

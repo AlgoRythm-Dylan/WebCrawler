@@ -6,6 +6,7 @@
 #include "HTMLLexer.h"
 #include "HTMLLexStringState.h"
 #include "HTMLLexGenericState.h"
+#include "HTMLLexCommentState.h"
 
 /*
 
@@ -26,6 +27,11 @@ Tokens include:
 
 */
 
+HTMLLexTagState::HTMLLexTagState()
+{
+	counter = 0;
+}
+
 LexingScanResult HTMLLexTagState::scan(const char character)
 {
 	LexingScanResult result;
@@ -39,6 +45,11 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 		auto pToken = new PunctuationToken(string(1, character));
 		((HTMLLexer*)machine)->token_buffer.push(unique_ptr<Token>(pToken));
 
+		if (counter <= 2)
+		{
+			token_memory += character;
+		}
+
 		if (character == '>')
 		{
 			transition(new HTMLLexGenericState());
@@ -51,6 +62,14 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 			// We want to use the shared pointer on the machine instead.
 			nextState->return_state = this->machine->current_state;
 			transition(nextState);
+		}
+		// On the third iteration, counter will be 2
+		// ! - -
+		// 0 1 2
+		else if (counter == 2 && character == '-' && token_memory == "!--")
+		{
+			// This is a comment
+			transition(new HTMLLexCommentState());
 		}
 	}
 	else if (character == ' ' || character == '\n')
@@ -67,5 +86,6 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 	{
 		memory += character;
 	}
+	counter++;
 	return result;
 }

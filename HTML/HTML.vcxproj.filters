@@ -57,6 +57,9 @@
     <ClInclude Include="HTMLParseCommentState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HTMLLexCommentState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HTMLDocument.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLParseCommentState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLLexCommentState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

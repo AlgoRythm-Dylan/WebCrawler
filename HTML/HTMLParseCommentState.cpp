@@ -22,12 +22,6 @@ unique_ptr<Token> HTMLParseCommentState::scan(unique_ptr<Token> token)
 		}
 		else
 		{
-			if (consecutive_dash_count > 0)
-			{
-				// Those dashes were not part of the end comment sequence
-				// and therefore need to be added to the node as text content
-				parser->current_node->text_content += string(consecutive_dash_count, '-');
-			}
 			if (pToken->value == ">")
 			{
 				if (consecutive_dash_count >= 2)
