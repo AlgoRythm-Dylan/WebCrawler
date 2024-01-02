@@ -1,10 +1,15 @@
 #pragma once
 
-#include <curl/curl.h>
+#include <string>
+
+using std::string;
 
 class HttpResponse
 {
-protected:
-	CURL* curl;
+public:
+	int status;
+	string content_type;
+
+	HttpResponse();
 };
 
