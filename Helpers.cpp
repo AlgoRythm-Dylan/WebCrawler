@@ -359,6 +359,24 @@ void pretty_print_html_node(const HTMLNode& node, int indent, bool recursive, bo
 		{
 			std::cout << ansicolor::reset;
 		}
+		// Print attributes. Will need to worry about multiline ones later
+		for (auto const& x : node.attributes)
+		{
+			std::cout << " ";
+			if (colors)
+			{
+				std::cout << ansicolor::bold << ansicolor::cyan;
+			}
+			std::cout << x.first;
+			if (colors)
+			{
+				std::cout << ansicolor::reset;
+			}
+			if (!x.second.empty())
+			{
+				std::cout << "=\"" << x.second << "\"";
+			}
+		}
 		std::cout << ">";
 		if (!node.children.empty() || !recursive)
 		{

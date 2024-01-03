@@ -2,11 +2,13 @@
 
 #include <PunctuationToken.h>
 #include <EOFToken.h>
+#include <LexingTools.h>
 
 #include "HTMLLexer.h"
 #include "HTMLLexStringState.h"
 #include "HTMLLexGenericState.h"
 #include "HTMLLexCommentState.h"
+#include "HTMLLexWhitespaceState.h"
 
 /*
 
@@ -75,7 +77,7 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 			transition(new HTMLLexCommentState());
 		}
 	}
-	else if (character == ' ' || character == '\n')
+	else if (LexingTools::is_whitespace(character))
 	{
 		emit_memory();
 	}

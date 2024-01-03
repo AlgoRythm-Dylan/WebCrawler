@@ -10,4 +10,5 @@ class LexingTools
 public:
 	static bool is_numeric(const string&);
 	static bool compare_case_insensitive(string_view lhs, string_view rhs);
+	static bool is_whitespace(const char);
 };
