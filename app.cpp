@@ -25,8 +25,8 @@ int main(int argc, char* argv[])
 	// complete (URL and HTML parsers, http client)
 	
 	//url_mode();
-	html_mode();
-	//crawl_mode();
+	//html_mode();
+	crawl_mode();
 
 	return 0;
 }
@@ -88,4 +88,13 @@ void crawl_mode()
 	}
 	std::cout << job.response->status << ansicolor::reset << "\n";
 	pretty_print_document(job.document);
+	std::cout << "Found " << ansicolor::cyan << ansicolor::bold <<
+		job.links_found.size() << ansicolor::reset << " links\n";
+	for (auto& link : job.links_found)
+	{
+		Url url(link);
+		std::cout << "  ";
+		pretty_print_url(url);
+		std::cout << "\n";
+	}
 }

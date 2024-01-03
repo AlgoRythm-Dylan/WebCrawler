@@ -45,5 +45,39 @@ void CrawlJob::perform()
 			response = res;
 			auto eofTok = unique_ptr<Token>(new EOFToken());
 			parser.scan(std::move(eofTok));
+			find_links();
 		});
+}
+
+void recursive_find_links(shared_ptr<HTMLNode> node, vector<string>& results)
+{
+	if (node->attributes.contains("href"))
+	{
+		string result = node->attributes["href"];
+		if (!result.empty())
+		{
+			results.push_back(result);
+		}
+	}
+	else if (node->attributes.contains("src"))
+	{
+		string result = node->attributes["src"];
+		if (!result.empty())
+		{
+			results.push_back(result);
+		}
+	}
+	for (auto& child : node->children)
+	{
+		if (child->type == HTMLNodeType::Element)
+		{
+			recursive_find_links(child, results);
+		}
+	}
+}
+
+void CrawlJob::find_links()
+{
+	links_found.clear();
+	recursive_find_links(document.root, links_found);
 }
