@@ -33,7 +33,7 @@ public:
 	bool is_valid, is_relative, is_ipv4, is_ipv6;
 
 	Url();
-	Url(string&);
+	Url(const string&);
 
-	void parse(string&);
+	void parse(const string&);
 };

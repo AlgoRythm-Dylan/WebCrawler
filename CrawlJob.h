@@ -1,13 +1,13 @@
 #pragma once
 
 #include <string>
-#include <vector>
+#include <set>
 
 #include <HTMLDocument.h>
 #include <HttpResponse.h>
 
 using std::string;
-using std::vector;
+using std::set;
 
 class CrawlJob
 {
@@ -15,7 +15,7 @@ public:
 	string url;
 	HTMLDocument document;
 	shared_ptr<HttpResponse> response;
-	vector<string> links_found;
+	set<string> links_found;
 	void perform();
 	void find_links();
 };

@@ -49,22 +49,22 @@ void CrawlJob::perform()
 		});
 }
 
-void recursive_find_links(shared_ptr<HTMLNode> node, vector<string>& results)
+void recursive_find_links(shared_ptr<HTMLNode> node, set<string>& results)
 {
 	if (node->attributes.contains("href"))
 	{
 		string result = node->attributes["href"];
-		if (!result.empty())
+		if (!result.empty() && !result.starts_with("#"))
 		{
-			results.push_back(result);
+			results.insert(result);
 		}
 	}
 	else if (node->attributes.contains("src"))
 	{
 		string result = node->attributes["src"];
-		if (!result.empty())
+		if (!result.empty() && !result.starts_with("#"))
 		{
-			results.push_back(result);
+			results.insert(result);
 		}
 	}
 	for (auto& child : node->children)

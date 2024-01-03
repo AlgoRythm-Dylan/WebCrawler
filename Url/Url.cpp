@@ -11,7 +11,7 @@ Url::Url()
 	setup_defaults();
 }
 
-Url::Url(string& source)
+Url::Url(const string& source)
 {
 	setup_defaults();
 	parse(source);
@@ -26,7 +26,7 @@ void Url::setup_defaults()
 	is_ipv6 = false;
 }
 
-void Url::parse(string& source)
+void Url::parse(const string& source)
 {
 	UrlLexer lexer(source);
 	UrlParser parser(*this);

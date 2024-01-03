@@ -2,7 +2,7 @@
 #include "UrlLexer.h"
 #include "UrlLexStartState.h"
 
-UrlLexer::UrlLexer(std::string& input) : source(input) 
+UrlLexer::UrlLexer(const std::string& input) : source(input) 
 {
 	source_caret = 0;
 	auto first_state = std::make_shared<UrlLexStartState>();

@@ -8,10 +8,10 @@ using std::queue;
 class UrlLexer : public Lexer
 {
 protected:
-	string& source;
+	const string& source;
 	int source_caret;
 public:
-	UrlLexer(string&);
+	UrlLexer(const string&);
 	unique_ptr<Token> next() override;
 	queue<unique_ptr<Token>> token_buffer;
 };
