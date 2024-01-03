@@ -4,8 +4,16 @@
 
 #include "HTMLLexGenericState.h"
 
-HTMLLexer::HTMLLexer(istream& s) : stream(s)
+HTMLLexer::HTMLLexer()
 {
+	stream_holder = nullptr;
+	current_state = unique_ptr<State>(new HTMLLexGenericState());
+	current_state->machine = this;
+}
+
+HTMLLexer::HTMLLexer(istream& s)
+{
+	stream_holder = new StreamHolder(s);
 	current_state = unique_ptr<State>(new HTMLLexGenericState());
 	current_state->machine = this;
 }
@@ -26,8 +34,8 @@ unique_ptr<Token> HTMLLexer::next()
 
 		char to_scan;
 		
-		stream.get(to_scan);
-		if (stream.eof())
+		stream_holder->stream.get(to_scan);
+		if (stream_holder->stream.eof())
 		{
 			to_scan = '\0';
 		}
@@ -35,10 +43,25 @@ unique_ptr<Token> HTMLLexer::next()
 		result = lexing_state->scan(to_scan);
 		if (!result.consumed)
 		{
-			stream.putback(to_scan);
+			stream_holder->stream.putback(to_scan);
 		}
 	}
 	auto token = std::move(token_buffer.front());
 	token_buffer.pop();
 	return token;
+}
+
+LexingScanResult HTMLLexer::read(const char character)
+{
+	auto lexing_state = std::static_pointer_cast<LexingState>(current_state);
+
+	return lexing_state->scan(character);
+}
+
+HTMLLexer::~HTMLLexer()
+{
+	if (stream_holder)
+	{
+		delete stream_holder;
+	}
 }

@@ -29,6 +29,7 @@
     <ClCompile Include="PunctuationToken.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="StreamHolder.cpp" />
     <ClCompile Include="StringToken.cpp" />
     <ClCompile Include="Token.cpp" />
   </ItemGroup>
@@ -43,6 +44,7 @@
     <ClInclude Include="PunctuationToken.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="StreamHolder.h" />
     <ClInclude Include="StringToken.h" />
     <ClInclude Include="Token.h" />
   </ItemGroup>

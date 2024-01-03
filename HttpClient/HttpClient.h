@@ -2,6 +2,7 @@
 
 #include <string>
 #include <functional>
+#include <memory>
 
 #include <curl/curl.h>
 
@@ -9,6 +10,7 @@
 
 using std::string;
 using std::function;
+using std::shared_ptr;
 
 /*
 
@@ -28,10 +30,10 @@ using std::function;
 */
 class HttpClient
 {
-protected:
+public:
 	CURL* curl;
 
-	HttpResponse get(const string& url,
+	shared_ptr<HttpResponse> get(const string& url,
 		function<void(char*, size_t)> dataCallback,
-		function<void(const HttpResponse&)> finishCallback);
+		function<void(shared_ptr<HttpResponse>)> finishCallback);
 };

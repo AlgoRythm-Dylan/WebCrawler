@@ -6,12 +6,14 @@
 #include <HTMLNode.h>
 #include "AnsiColors.hpp"
 #include "Helpers.h"
+#include "CrawlJob.h"
 #include <HttpClient.h>
 
 using std::ifstream;
 
 void url_mode();
 void html_mode();
+void crawl_mode();
 
 int main(int argc, char* argv[])
 {
@@ -23,7 +25,8 @@ int main(int argc, char* argv[])
 	// complete (URL and HTML parsers, http client)
 	
 	//url_mode();
-	html_mode();
+	//html_mode();
+	crawl_mode();
 
 	return 0;
 }
@@ -66,4 +69,23 @@ void html_mode()
 		doc.parse(source);
 		pretty_print_document(doc);
 	}
+}
+
+void crawl_mode()
+{
+	CrawlJob job;
+	std::cout << "Input a URL: ";
+	std::cin >> job.url;
+	job.perform();
+	std::cout << "Server responded with code ";
+	if (job.response->status < 400)
+	{
+		std::cout << ansicolor::green;
+	}
+	else
+	{
+		std::cout << ansicolor::red;
+	}
+	std::cout << job.response->status << ansicolor::reset << "\n";
+	pretty_print_document(job.document);
 }

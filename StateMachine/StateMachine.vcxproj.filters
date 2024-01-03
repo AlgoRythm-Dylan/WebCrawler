@@ -51,6 +51,9 @@
     <ClCompile Include="LexingTools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StreamHolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer.h">
@@ -87,6 +90,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LexingTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StreamHolder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

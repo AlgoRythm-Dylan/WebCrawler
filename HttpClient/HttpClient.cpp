@@ -8,11 +8,11 @@ static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* use
 	return size * nmemb;
 }
 
-HttpResponse HttpClient::get(const string& url,
+shared_ptr<HttpResponse> HttpClient::get(const string& url,
 	function<void(char*, size_t)> dataCallback,
-	function<void(const HttpResponse&)> finishCallback)
+	function<void(shared_ptr<HttpResponse>)> finishCallback)
 {
-	HttpResponse response;
+	auto response = std::make_shared<HttpResponse>();
 
 	curl = curl_easy_init();
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
@@ -21,7 +21,9 @@ HttpResponse HttpClient::get(const string& url,
 
 	curl_easy_perform(curl);
 
-	// TODO: read response data
+	long returnCode;
+	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &returnCode);
+	response->status = returnCode;
 
 	finishCallback(response);
 	curl_easy_cleanup(curl);
