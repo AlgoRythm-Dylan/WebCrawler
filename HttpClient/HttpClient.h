@@ -35,4 +35,3 @@ protected:
 		function<void(char*, size_t)> dataCallback,
 		function<void(const HttpResponse&)> finishCallback);
 };
-

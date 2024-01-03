@@ -13,7 +13,7 @@ using std::ifstream;
 void url_mode();
 void html_mode();
 
-int main()
+int main(int argc, char* argv[])
 {
 	ansicolor::setup_ansi_mode();
 	// Simple way to switch between the manual
