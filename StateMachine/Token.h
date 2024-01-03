@@ -18,4 +18,5 @@ namespace StdTokenType
 	const static string end = "EOF";
 	const static string str = "STR";
 	const static string punctuation = "PUNCT";
+	const static string whitespace = "WHTSP";
 }

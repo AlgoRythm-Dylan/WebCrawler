@@ -32,6 +32,7 @@
     <ClCompile Include="StreamHolder.cpp" />
     <ClCompile Include="StringToken.cpp" />
     <ClCompile Include="Token.cpp" />
+    <ClCompile Include="WhitespaceToken.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EOFToken.h" />
@@ -47,6 +48,7 @@
     <ClInclude Include="StreamHolder.h" />
     <ClInclude Include="StringToken.h" />
     <ClInclude Include="Token.h" />
+    <ClInclude Include="WhitespaceToken.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
