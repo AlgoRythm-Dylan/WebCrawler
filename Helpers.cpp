@@ -416,6 +416,7 @@ void print_indented_text(const string& text, const string& format, int indent)
 				{
 					std::cout << ansicolor::reset;
 				}
+				std::cout << "\n";
 				currentLine = "";
 			}
 		}
