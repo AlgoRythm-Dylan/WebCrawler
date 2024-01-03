@@ -326,12 +326,19 @@ void pretty_print_html_node(const HTMLNode& node, int indent, bool recursive, bo
 		{
 			format = ansicolor::green + ansicolor::bold;
 		}
-		std::cout << "\n";
-		print_indented_text(node.text_content, format, indent);
-		std::cout << string(indent * 2, ' ');
-		if (colors)
+		if (is_single_line(node.text_content))
 		{
-			std::cout << ansicolor::green << ansicolor::bold;
+			std::cout << node.text_content;
+		}
+		else
+		{
+			std::cout << "\n";
+			print_indented_text(node.text_content, format, indent);
+			std::cout << string(indent * 2, ' ');
+			if (colors)
+			{
+				std::cout << ansicolor::green << ansicolor::bold;
+			}
 		}
 		std::cout << "-->";
 		if (colors)
@@ -442,4 +449,16 @@ void print_indented_text(const string& text, const string& format, int indent)
 		}
 		std::cout << "\n";
 	}
+}
+
+bool is_single_line(const string& text)
+{
+	for (auto& character : text)
+	{
+		if (character == '\n' || character == '\r')
+		{
+			return false;
+		}
+	}
+	return true;
 }
