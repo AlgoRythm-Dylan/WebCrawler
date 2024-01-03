@@ -42,8 +42,11 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 	{
 		emit_memory();
 
-		auto pToken = new PunctuationToken(string(1, character));
-		((HTMLLexer*)machine)->token_buffer.push(unique_ptr<Token>(pToken));
+		if (character != '"' && character != '\'')
+		{
+			auto pToken = new PunctuationToken(string(1, character));
+			((HTMLLexer*)machine)->token_buffer.push(unique_ptr<Token>(pToken));
+		}
 
 		if (counter <= 2)
 		{

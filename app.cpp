@@ -25,8 +25,8 @@ int main(int argc, char* argv[])
 	// complete (URL and HTML parsers, http client)
 	
 	//url_mode();
-	//html_mode();
-	crawl_mode();
+	html_mode();
+	//crawl_mode();
 
 	return 0;
 }
@@ -58,7 +58,7 @@ void url_mode()
 void html_mode()
 {
 	//ifstream source("HTMLFiles\\text-node-only.html");
-	ifstream source("HTMLFiles\\simple-with-comment.html");
+	ifstream source("HTMLFiles\\simple-with-meta.html");
 	if (!source.is_open())
 	{
 		std::cout << "The document is not open" << std::endl;

@@ -40,7 +40,8 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 	{
 		if (parser->current_node->tag_name.empty() || parser->current_node->tag_name == "!")
 		{
-			parser->current_node->tag_name += ((StringToken*)token.get())->value;
+			auto sToken = (StringToken*)token.get();
+			parser->current_node->tag_name += sToken->value;
 		}
 	}
 	else if (token->type == StdTokenType::punctuation)

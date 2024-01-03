@@ -4,6 +4,7 @@
 #include <EOFToken.h>
 
 #include "HTMLLexer.h"
+#include "HTMLLexGenericState.h"
 
 HTMLLexStringState::HTMLLexStringState()
 {
@@ -23,8 +24,16 @@ LexingScanResult HTMLLexStringState::scan(const char character)
 	if (character == opening_quote && !escape_flag)
 	{
 		emit_memory();
-		auto pToken = new PunctuationToken(string(1, opening_quote));
-		((HTMLLexer*)machine)->token_buffer.push(unique_ptr<Token>(pToken));
+		/*auto pToken = new PunctuationToken(string(1, opening_quote));
+		((HTMLLexer*)machine)->token_buffer.push(unique_ptr<Token>(pToken));*/
+		if (return_state)
+		{
+			machine->current_state = return_state;
+		}
+		else
+		{
+			transition(new HTMLLexGenericState());
+		}
 	}
 	else if (character == '\\' && !escape_flag)
 	{
