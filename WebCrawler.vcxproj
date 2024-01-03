@@ -136,10 +136,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="CrawlJob.cpp" />
     <ClCompile Include="Helpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnsiColors.hpp" />
+    <ClInclude Include="CrawlJob.h" />
     <ClInclude Include="Helpers.h" />
   </ItemGroup>
   <ItemGroup>
