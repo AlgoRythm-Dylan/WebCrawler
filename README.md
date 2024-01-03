@@ -58,18 +58,16 @@ validate it as it does IPv4.
 this project aims to support:
 
 *Implemented:*
-- *(empty list)*
+- Attributes
+- Self-closing tags
+- Doctype declarations
+- A rich DOM
+- Comments
 
 *Prototype:*
-- A rich DOM
-- HTML5 standard
 - DOM querying (`document.querySelector[All]`)
-- Doctype declarations
-- Self-closing tags
-- Attributes
 
 *Planned:*
-- Comments
 - Extranenous closing tags for self-closing elements
 - Missing closing tags
 - `data:xyz` handling
