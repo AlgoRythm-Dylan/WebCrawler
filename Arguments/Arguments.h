@@ -2,11 +2,15 @@
 
 #include <string>
 #include <vector>
-
-#include "Argument.h"
+#include <memory>
+#include <set>
+#include <map>
 
 using std::string;
 using std::vector;
+using std::shared_ptr;
+using std::set;
+using std::map;
 
 /*
 
@@ -19,10 +23,9 @@ ignored        key    value    positional index 0        flags k=v
 class Arguments
 {
 public:
-	vector<Argument> args;
-	void parse(int argc, char* argv[]);
-	string get(const string&);
-	string get(int);
-	bool is_flag_set();
+	void parse(int argc, const char* argv[]);
+	set<string> flags;
+	map<string, string> kv_args;
+	vector<string> positionals;
 };
 

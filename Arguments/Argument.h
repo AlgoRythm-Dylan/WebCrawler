@@ -1,26 +1,32 @@
 #pragma once
 
-#include <map>
 #include <string>
+#include <set>
+#include <vector>
+#include <memory>
 
-enum ArgumentType
-{
-	Positional,
-	Flag,
-	KeyValue
-};
-
-using std::map;
 using std::string;
+using std::set;
+using std::shared_ptr;
 
-union ArgumentData
+enum ArgumentType : unsigned char
 {
-	map<string, string> data_map;
-	string data_string;
+	Flag,
+	KeyValue,
+	Positional
 };
 
-struct Argument
+class Argument
 {
+public:
+	bool required, value_required;
+	set<string> flags;
 	ArgumentType type;
-	ArgumentData value;
+	string name, description;
+	string default_value;
+
+	Argument();
+
+	static shared_ptr<Argument> flag();
+	static shared_ptr<Argument> key_value();
 };
