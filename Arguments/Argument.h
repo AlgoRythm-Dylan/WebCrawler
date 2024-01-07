@@ -20,7 +20,8 @@ class Argument
 {
 public:
 	bool required, value_required;
-	set<string> flags;
+	set<char> short_flags;
+	set<string> long_flags;
 	ArgumentType type;
 	string name, description;
 	string default_value;
