@@ -29,6 +29,8 @@ protected:
 	set<string> flags;
 	map<string, string> kv_args;
 	vector<shared_ptr<Argument>> args;
+	shared_ptr<Argument> find_flag(string_view);
+	shared_ptr<Argument> find_kv(string_view);
 public:
 	void parse(int argc, const char* argv[]);
 	vector<string> positionals;
