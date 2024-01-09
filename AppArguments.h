@@ -9,7 +9,7 @@ using std::shared_ptr;
 class AppArguments
 {
 public:
-	shared_ptr<Argument> url, same_site_flag;
+	shared_ptr<Argument> url, same_site_flag, no_banner_flag, no_summary_flag;
 	Arguments args;
 
 	AppArguments();

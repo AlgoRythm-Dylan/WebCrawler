@@ -13,6 +13,11 @@ int main(int argc, const char* argv[])
 	AppArguments args;
 	args.parse(argc, argv);
 
+	if (!args.no_banner_flag->is_set)
+	{
+		std::cout << "WebCrawler by Dylan\n";
+	}
+
 	if (args.url->value.empty())
 	{
 		std::cout << "URL to scan: ";
