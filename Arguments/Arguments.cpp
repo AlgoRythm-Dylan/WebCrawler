@@ -88,6 +88,8 @@ void Arguments::parse(int argc, const char* argv[])
 			{
 				nextArg->values.push_back(sarg);
 			}
+			nextIsValue = false;
+			continue;
 		}
 
 		if (sarg.starts_with("--"))
@@ -110,6 +112,7 @@ void Arguments::parse(int argc, const char* argv[])
 				}
 				else
 				{
+					nextArg = arg;
 					nextIsValue = true;
 				}
 			}
@@ -130,6 +133,7 @@ void Arguments::parse(int argc, const char* argv[])
 				}
 			}
 		}
+		// TODO: handle short flags for kv, kv_list types
 		else if (sarg.starts_with("-"))
 		{
 			// Short flags
@@ -149,9 +153,18 @@ void Arguments::parse(int argc, const char* argv[])
 				}
 				else
 				{
-					if (fail_on_unknown_flag)
+					arg = find_kv(flag);
+					if (arg)
 					{
-						throw "Unknown flag: \"" + flag + "\" in argument \"" + sarg + "\"";
+						nextIsValue = true;
+						nextArg = arg;
+					}
+					else
+					{
+						if (fail_on_unknown_flag)
+						{
+							throw "Unknown flag: \"" + flag + "\" in argument \"" + sarg + "\"";
+						}
 					}
 				}
 			}

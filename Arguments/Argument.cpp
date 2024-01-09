@@ -38,6 +38,14 @@ shared_ptr<Argument> Argument::key_value()
 	return arg;
 }
 
+shared_ptr<Argument> Argument::key_value(string_view key)
+{
+	auto arg = std::make_shared<Argument>();
+	arg->type = ArgumentType::KeyValue;
+	arg->long_flags.insert(string(key));
+	return arg;
+}
+
 shared_ptr<Argument> Argument::key_value_list()
 {
 	auto arg = std::make_shared<Argument>();
