@@ -14,18 +14,27 @@ namespace TestSuite
 	public:
 		TEST_METHOD(ArgumentsWork)
 		{
-			int argc = 6;
-			const char* argv[6] = {
+			int argc = 2;
+			const char* argv[2] = {
 				"WebCrawler.exe",
-				"-test",
-				"--key=value",
-				"--long-flag",
-				"positionals",
-				"suck"
+				"-te"
 			};
+
 			Arguments args;
+
+			auto shortFlagT = shared_ptr<Argument>(Argument::flag('t'));
+			auto shortFlagE = shared_ptr<Argument>(Argument::flag('e'));
+			auto shortFlagS = shared_ptr<Argument>(Argument::flag('s'));
+
+			args.add_argument(shortFlagT);
+			args.add_argument(shortFlagE);
+			args.add_argument(shortFlagS);
+
 			args.parse(argc, argv);
-			Assert::IsTrue(args.flags.contains('t'));
+
+			Assert::IsTrue(shortFlagT->is_set);
+			Assert::IsTrue(shortFlagE->is_set);
+			Assert::IsFalse(shortFlagS->is_set);
 		}
 	};
 }
