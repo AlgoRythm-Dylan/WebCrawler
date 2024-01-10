@@ -3,8 +3,7 @@
 #include <URL.h>
 #include <Ansicolors.h>
 
-#include "CrawlJob.h"
-#include "AppArguments.h"
+#include "WebCrawler.h"
 
 int main(int argc, const char* argv[])
 {
@@ -15,19 +14,10 @@ int main(int argc, const char* argv[])
 		<< " BUILD! Performance may be subpar compared to a release build.\n\n";
 #endif
 
-	AppArguments args;
-	args.parse(argc, argv);
+	WebCrawler app;
+	app.args.parse(argc, argv);
 
-	if (!args.no_banner_flag->is_set)
-	{
-		std::cout << "WebCrawler by Dylan\n";
-	}
-
-	if (args.url->value.empty())
-	{
-		std::cout << "URL to scan: ";
-		std::cin >> args.url->value;
-	}
+	app.start();
 
 	return 0;
 }

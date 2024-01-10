@@ -135,7 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="app.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="AppArguments.cpp" />
     <ClCompile Include="CrawlJob.cpp" />
     <ClCompile Include="WebCrawler.cpp" />
@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="AppArguments.h" />
     <ClInclude Include="CrawlJob.h" />
+    <ClInclude Include="Info.h" />
     <ClInclude Include="WebCrawler.h" />
   </ItemGroup>
   <ItemGroup>
