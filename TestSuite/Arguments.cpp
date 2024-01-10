@@ -14,11 +14,18 @@ namespace TestSuite
 	public:
 		TEST_METHOD(ArgumentsWork)
 		{
-			constexpr int argc = 3;
+			constexpr int argc = 10;
 			const char* argv[argc] = {
 				"WebCrawler.exe",
 				"-te",
-				"--long-flag"
+				"--long-flag",
+				"--inline-kv=value",
+				"--key-value",
+				"pair",
+				"--header",
+				"Content-Type: application/json",
+				"--header",
+				"User-Agent: real-browser-i-swear"
 			};
 
 			Arguments args;
@@ -27,18 +34,28 @@ namespace TestSuite
 			auto shortFlagE = shared_ptr<Argument>(Argument::flag('e'));
 			auto shortFlagS = shared_ptr<Argument>(Argument::flag('s'));
 			auto longFlag = shared_ptr<Argument>(Argument::flag("long-flag"));
+			auto inlineKV = shared_ptr<Argument>(Argument::key_value("inline-kv"));
+			auto kvp = shared_ptr<Argument>(Argument::key_value("key-value"));
+			auto kvl = shared_ptr<Argument>(Argument::key_value_list("header"));
 
 			args.add_argument(shortFlagT);
 			args.add_argument(shortFlagE);
 			args.add_argument(shortFlagS);
 			args.add_argument(longFlag);
+			args.add_argument(inlineKV);
+			args.add_argument(kvp);
+			args.add_argument(kvl);
 
 			args.parse(argc, argv);
 
 			Assert::IsTrue(shortFlagT->is_set);
 			Assert::IsTrue(shortFlagE->is_set);
 			Assert::IsFalse(shortFlagS->is_set);
-			Assert::IsTrue(longFlag->is_set);
+			Assert::AreEqual(string("value"), inlineKV->value);
+			Assert::AreEqual(string("pair"), kvp->value);
+			Assert::AreEqual((size_t)2, kvl->values.size());
+			Assert::AreEqual(string("Content-Type: application/json"), kvl->values[0]);
+			Assert::AreEqual(string("User-Agent: real-browser-i-swear"), kvl->values[1]);
 		}
 	};
 }

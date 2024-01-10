@@ -44,4 +44,5 @@ public:
 	static shared_ptr<Argument> key_value();
 	static shared_ptr<Argument> key_value(string_view);
 	static shared_ptr<Argument> key_value_list();
+	static shared_ptr<Argument> key_value_list(string_view);
 };

@@ -94,31 +94,52 @@ void Arguments::parse(int argc, const char* argv[])
 
 		if (sarg.starts_with("--"))
 		{
-			string key_name = sarg.substr(2);
-			if (key_name.empty())
+			string keyName = sarg.substr(2);
+			if (keyName.empty())
 			{
 				// Empty "--" will just be treated as positional arg
 				positionals.push_back(sarg);
 				continue;
 			}
 			// KV or long flag
-			auto arg = find_kv(key_name);
+			auto equalIndex = keyName.find("=");
+			string value;
+			if (equalIndex != -1)
+			{
+				value = keyName.substr(equalIndex + 1);
+				keyName = keyName.substr(0, equalIndex);
+			}
+			auto arg = find_kv(keyName);
 			if (arg)
 			{
 				// KV
 				if (fail_on_duplicate_value && !arg->value.empty())
 				{
-					throw "Duplicate key/value: \"" + key_name + "\"";
+					throw "Duplicate key/value: \"" + keyName + "\"";
 				}
 				else
 				{
-					nextArg = arg;
-					nextIsValue = true;
+					if (equalIndex != -1)
+					{
+						if (arg->type == ArgumentType::KeyValue)
+						{
+							arg->value = value;
+						}
+						else
+						{
+							arg->values.push_back(value);
+						}
+					}
+					else
+					{
+						nextArg = arg;
+						nextIsValue = true;
+					}
 				}
 			}
 			else
 			{
-				arg = find_flag(key_name);
+				arg = find_flag(keyName);
 				// long flag, if not null
 				if (arg)
 				{
