@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{bedc98ec-9a94-46ec-865e-e2ede2a356a7}</ProjectGuid>
-    <RootNamespace>WebCrawler</RootNamespace>
+    <ProjectGuid>{6fb232c5-e288-4f8e-9217-9ad83e276bd9}</ProjectGuid>
+    <RootNamespace>Output</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -40,13 +40,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -102,16 +102,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>CURL_STATICLIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);USE_ANSI_COLORS;CURL_STATICLIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)Output;$(ProjectDir)Arguments;$(ProjectDir)StateMachine;$(ProjectDir)HTML;$(ProjectDir)Url;$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)HTML;$(SolutionDir)URL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libcurl_a.lib;ws2_32.lib;wldap32.lib;advapi32.lib;kernel32.lib;comdlg32.lib;crypt32.lib;normaliz.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir)libcurl\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -120,48 +118,32 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>CURL_STATICLIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);USE_ANSI_COLORS;CURL_STATICLIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)Output;$(ProjectDir)Arguments;$(ProjectDir)StateMachine;$(ProjectDir)HTML;$(ProjectDir)Url;$(ProjectDir)HttpClient;$(ProjectDir)libcurl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)HTML;$(SolutionDir)URL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir)libcurl\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcurl_a.lib;ws2_32.lib;wldap32.lib;advapi32.lib;kernel32.lib;comdlg32.lib;crypt32.lib;normaliz.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="app.cpp" />
-    <ClCompile Include="AppArguments.cpp" />
-    <ClCompile Include="CrawlJob.cpp" />
+    <ClInclude Include="AnsiColors.h" />
+    <ClInclude Include="PrettyPrinting.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AppArguments.h" />
-    <ClInclude Include="CrawlJob.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Arguments\Arguments.vcxproj">
-      <Project>{2c2aad93-0627-42ce-b06f-04dd5f4ec4df}</Project>
-    </ProjectReference>
-    <ProjectReference Include="HTML\HTML.vcxproj">
+    <ProjectReference Include="..\HTML\HTML.vcxproj">
       <Project>{51e6dc4e-e8e2-455f-9de9-f590d1a2e608}</Project>
     </ProjectReference>
-    <ProjectReference Include="HttpClient\HttpClient.vcxproj">
-      <Project>{2230e3ef-a3b2-44a6-b4e5-a22dfb6f81a8}</Project>
-    </ProjectReference>
-    <ProjectReference Include="Output\Output.vcxproj">
-      <Project>{6fb232c5-e288-4f8e-9217-9ad83e276bd9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="StateMachine\StateMachine.vcxproj">
-      <Project>{040c1d69-a889-46e2-928f-35af91f41fba}</Project>
-    </ProjectReference>
-    <ProjectReference Include="Url\Url.vcxproj">
+    <ProjectReference Include="..\Url\Url.vcxproj">
       <Project>{4b4b2fe3-354d-4c7d-affd-016f38a44464}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PrettyPrinting.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

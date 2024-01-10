@@ -1,10 +1,10 @@
 #include <iostream>
 
 #include <URL.h>
-#include "Helpers.h"
+#include <Ansicolors.h>
+
 #include "CrawlJob.h"
 #include "AppArguments.h"
-#include "AnsiColors.hpp"
 
 int main(int argc, const char* argv[])
 {

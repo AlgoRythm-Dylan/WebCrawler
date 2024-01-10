@@ -6,8 +6,6 @@
 #include <HTMLParser.h>
 #include <EOFToken.h>
 
-#include "AnsiColors.hpp"
-
 void CrawlJob::perform()
 {
 	HttpClient client;

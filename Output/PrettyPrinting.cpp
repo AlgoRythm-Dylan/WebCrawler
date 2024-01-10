@@ -2,8 +2,8 @@
 
 #include <HTMLNode.h>
 
-#include "Helpers.h"
-#include "AnsiColors.hpp"
+#include "PrettyPrinting.h"
+#include "AnsiColors.h"
 
 void pretty_print_url(const Url& url, bool colors)
 {
@@ -250,7 +250,7 @@ void print_url_details(const Url& url, bool colors)
 void print_str_with_label(const string& label, const string& text, bool colors)
 {
 	std::cout << label;
-	
+
 	if (text.empty())
 	{
 		if (colors)
