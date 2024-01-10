@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>This is the title of the document!</title>
+</head>
+<body>
+    <h1>This is a heading!</h1>
+    <p>This is a paragraph!</p>
+    <script>
+        var i = 0;
+        var script = -1;
+        if(i<script)
+        {
+            // Neither of these should be parsed
+            // as closing tags
+            console.log("</ script>");
+            console.log("</body>");
+        }
+    </script>
+</body>
+</html>

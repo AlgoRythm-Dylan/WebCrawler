@@ -28,6 +28,11 @@ bool LexingTools::compare_case_insensitive(string_view lhs, string_view rhs)
 	return std::ranges::equal(lhs, rhs, ichar_equals);
 }
 
+bool LexingTools::compare_case_insensitive(const char lhs, const char rhs)
+{
+	return ichar_equals(lhs, rhs);
+}
+
 bool LexingTools::is_whitespace(const char character)
 {
 	return character == '\t' || character == ' ' ||

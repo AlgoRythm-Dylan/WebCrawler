@@ -57,6 +57,9 @@
     <ClCompile Include="WhitespaceToken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StringTracker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lexer.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WhitespaceToken.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StringTracker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

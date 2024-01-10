@@ -138,10 +138,12 @@
     <ClCompile Include="app.cpp" />
     <ClCompile Include="AppArguments.cpp" />
     <ClCompile Include="CrawlJob.cpp" />
+    <ClCompile Include="WebCrawler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppArguments.h" />
     <ClInclude Include="CrawlJob.h" />
+    <ClInclude Include="WebCrawler.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Arguments\Arguments.vcxproj">

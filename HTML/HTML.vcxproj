@@ -23,6 +23,7 @@
     <ClInclude Include="HTMLLexGenericState.h" />
     <ClInclude Include="HTMLDocument.h" />
     <ClInclude Include="HTMLLexer.h" />
+    <ClInclude Include="HTMLLexScriptTagState.h" />
     <ClInclude Include="HTMLLexStringState.h" />
     <ClInclude Include="HTMLLexTagState.h" />
     <ClInclude Include="HTMLLexWhitespaceState.h" />
@@ -41,6 +42,7 @@
     <ClCompile Include="HTMLLexGenericState.cpp" />
     <ClCompile Include="HTMLDocument.cpp" />
     <ClCompile Include="HTMLLexer.cpp" />
+    <ClCompile Include="HTMLLexScriptTagState.cpp" />
     <ClCompile Include="HTMLLexStringState.cpp" />
     <ClCompile Include="HTMLLexTagState.cpp" />
     <ClCompile Include="HTMLLexWhitespaceState.cpp" />
