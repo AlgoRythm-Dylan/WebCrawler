@@ -21,13 +21,44 @@ in under 100ms.
 ## What do you have to show?
 
 ```
-Working: ANSI terminal colors library, URL parser
-In development: state machine framework
-Prototype: HTML parser
+Working: ANSI terminal colors library, URL parser, argument parser
+In development: HTML parser, state machine framework
+Prototype: WebCrawler client
 Planned: JSON parser, XML parser
 ```
 
 Plus, a unit testing project!
+
+## WebCrawler client
+This project includes the source code for an executable
+which is intended to be an all-purpose web crawling/
+scraping tool. The client application will have features
+that are designed to work interactively with the user,
+or to run as part of an automated/ scheduled job.
+
+### Rules
+Rules are set by the `--rule` command line argument and
+dictate how the crawler behaves. This argument is a `list`
+type, so you supply mulple values to it by passing it
+to the program multiple times.
+
+```sh
+WebCrawlwer --rule SECURE-ONLY --rule IGNORE-NO-INDEX
+```
+
+The above command sets two rules: `SECURE-ONLY` and `IGNORE-NO-INDEX`
+
+Current available rules:
+- *(There are no currently implemented rules)*
+
+### Options
+```
+[flag]    --no-banner: don't display banner on startup
+[flag]    --no-color: don't use colors on output
+[flag]    --no-summary: don't summarize the params of a job before it's executed
+[key/val] --url: the (initial) URL to crawl
+[list]    --rule: set a crawling rule
+```
 
 ## URL parser
 The URL parser is pretty robust at this point
@@ -88,3 +119,5 @@ but I bet it does exist somewhere on the web for
 some reason. Maybe in a `content` attribute.
 However, in contrast to JS, I would actually
 like to write a CSS3 parser.
+
+## Argument Parser
