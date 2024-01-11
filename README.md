@@ -113,6 +113,7 @@ this project aims to support:
 - Doctype declarations
 - A rich DOM
 - Comments
+- `script` tags*
 
 *Prototype:*
 - DOM querying (`document.querySelector[All]`)
@@ -122,7 +123,6 @@ this project aims to support:
 - Missing closing tags
 - `data:xyz` handling
 - `pre` tags
-- `script` tags*
 - `style` tags*2
 - HTML encoding / decoding
 
@@ -184,4 +184,12 @@ to a list
 
 ```sh
 WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
+```
+
+## WebCrawler client changelog
+```
+0.0.2
+- <script> tags are now handled properly
+0.0.1
+- Initial release!
 ```
