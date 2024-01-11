@@ -60,6 +60,25 @@ Current available rules:
 [list]    --rule: set a crawling rule
 ```
 
+### Status:
+
+*Implemented*:
+- Argument parsing
+
+*Prototype*:
+- Single-page inspect mode
+
+*Planned*:
+- Database connection (+ in-memory and on-disk options)
+- Automatic modes
+- Multi-threaded modes
+- Download-site mode
+- Search modes
+- HTML validation (missing closing tag, mismatched closing tag, etc)
+
+*Ideas:*
+- Lua scripting integration
+
 ## URL parser
 The URL parser is pretty robust at this point
 and of course supports relative paths like you might
