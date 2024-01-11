@@ -121,3 +121,48 @@ However, in contrast to JS, I would actually
 like to write a CSS3 parser.
 
 ## Argument Parser
+The argument parser is not extremely robust, but
+certainly gets the job done. It supports four types
+of argument:
+
+- Positional
+- Flag
+- Key/Value
+- Key/Value List
+
+`Positional` arguments are areguments that start with
+neither "--" nor "-". They are placed into a list in the
+order  that the shell gives them to the program.
+
+```sh
+WebCrawler positional1 positional2
+```
+
+`Flag` arguments are arguments that start with "--" or
+"-" and are not given any value. Their presence or absence
+is the only important factor. Flags starting with "-" are
+"short flags" - one character each. Short flags can be passed
+more than one at a time in the format `-abc` (this sets the
+flags `a`, `b`, and `c` all at once). Long flags are more
+human-readable and are only sets one at a time such as
+`--abc`, which sets the single `abc` flag.
+
+```sh
+WebCrawler --set-flag -flags
+```
+
+`Key/Value` arguments are similar to flags, but expect a
+value. This value can either be the next argument, or
+can be set using the format `--key=value`.
+
+```sh
+WebCrawler --url=https://www.google.com/search --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+```
+
+`Key/Value List` arguments are similar to key/value arguments,
+but they can be set multiple times and their values are added
+to a list
+
+```sh
+WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
+```
