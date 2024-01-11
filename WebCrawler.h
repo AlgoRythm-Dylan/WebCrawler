@@ -12,4 +12,5 @@ public:
 	AppArguments args;
 
 	void start();
+	void inspect_interactive();
 };
