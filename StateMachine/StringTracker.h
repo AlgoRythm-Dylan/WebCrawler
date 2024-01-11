@@ -9,7 +9,8 @@ using std::string_view;
 class StringTracker
 {
 public:
-	string to_match, memory;
+	string to_match;
+	int match_position;
 	bool is_case_insensitive = false;
 
 	StringTracker();
