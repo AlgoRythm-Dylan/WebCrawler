@@ -8,6 +8,7 @@
 #include "HTMLLexStringState.h"
 #include "HTMLLexGenericState.h"
 #include "HTMLLexCommentState.h"
+#include "HTMLLexScriptTagState.h"
 #include "HTMLLexWhitespaceState.h"
 
 /*
@@ -32,6 +33,7 @@ Tokens include:
 HTMLLexTagState::HTMLLexTagState()
 {
 	counter = 0;
+	encountered_whitespace = false;
 }
 
 LexingScanResult HTMLLexTagState::scan(const char character)
@@ -57,7 +59,14 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 
 		if (character == '>')
 		{
-			transition(new HTMLLexGenericState());
+			if (LexingTools::compare_case_insensitive(tag_name_memory, "script"))
+			{
+				transition(new HTMLLexScriptTagState());
+			}
+			else
+			{
+				transition(new HTMLLexGenericState());
+			}
 		}
 		else if (character == '"' || character == '\'')
 		{
@@ -79,6 +88,7 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 	}
 	else if (LexingTools::is_whitespace(character))
 	{
+		encountered_whitespace = true;
 		emit_memory();
 	}
 	else if (character == '\0')
@@ -89,6 +99,10 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 	}
 	else
 	{
+		if (!encountered_whitespace)
+		{
+			tag_name_memory += character;
+		}
 		memory += character;
 	}
 	counter++;
