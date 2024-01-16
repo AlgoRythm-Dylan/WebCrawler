@@ -6,7 +6,7 @@
 void HTMLStringMemoryState::emit_memory()
 {
 	auto lexer_pointer = (HTMLLexer*)machine;
-	if (memory.length() != 0)
+	if (!memory.empty())
 	{
 		auto new_token = new StringToken(memory);
 		lexer_pointer->token_buffer.push(unique_ptr<Token>(new_token));

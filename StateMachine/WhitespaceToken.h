@@ -2,4 +2,8 @@
 
 #include "StringToken.h"
 
-class WhitespaceToken : public StringToken { };
+class WhitespaceToken : public StringToken
+{
+public:
+	WhitespaceToken();
+};

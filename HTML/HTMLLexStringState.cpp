@@ -58,3 +58,11 @@ LexingScanResult HTMLLexStringState::scan(const char character)
 
 	return result;
 }
+
+void HTMLLexStringState::emit_memory()
+{
+	auto lexer_pointer = (HTMLLexer*)machine;
+	auto new_token = new StringToken(memory);
+	lexer_pointer->token_buffer.push(unique_ptr<Token>(new_token));
+	memory = "";
+}

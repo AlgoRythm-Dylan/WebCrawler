@@ -11,6 +11,6 @@ class HTMLStringMemoryState : public LexingState
 protected:
 	string memory;
 
-	void emit_memory();
+	virtual void emit_memory();
 };
 

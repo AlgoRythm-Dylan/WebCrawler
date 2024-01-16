@@ -90,6 +90,12 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 	{
 		encountered_whitespace = true;
 		emit_memory();
+		// Transition to whitespace lexing state, which
+		// will return to this state after lexing the
+		// whitesapce
+		auto whitespaceState = new HTMLLexWhitespaceState();
+		whitespaceState->return_state = machine->current_state; // this
+		transition(whitespaceState);
 	}
 	else if (character == '\0')
 	{

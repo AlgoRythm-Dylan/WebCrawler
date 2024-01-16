@@ -14,5 +14,8 @@ public:
 	HTMLLexStringState();
 	HTMLLexStringState(const char open);
 	LexingScanResult scan(const char) override;
+
+	// An empty string is still a string
+	void emit_memory() override;
 };
 

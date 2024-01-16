@@ -188,6 +188,10 @@ WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
 
 ## WebCrawler client changelog
 ```
+0.0.3
+- attributes are parsed with more accuracy.
+  (No longer tricked by a dash in the name)
++ added unit tests for HTML attributes
 0.0.2
 - <script> tags are now handled properly
 0.0.1

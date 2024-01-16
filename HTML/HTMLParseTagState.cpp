@@ -12,6 +12,7 @@ HTMLParseTagState::HTMLParseTagState()
 	counter = 0;
 	is_closing_tag = false;
 	parsing_attribute_value = false;
+	parsing_attribute_name = false;
 }
 
 unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
@@ -52,14 +53,28 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 				{
 					parser->current_node->attributes[attribute_name] = sToken->value;
 					parsing_attribute_value = false;
-					attribute_name.clear();
+					apply_attribute_name();
 				}
 				else
 				{
-					parser->current_node->attributes[sToken->value] = "";
-					attribute_name = sToken->value;
+					// This should be the left hand side of an attribute,
+					// but there could be more to the attribute name.
+					// Example: data-name
+					// = string token, punctuation token, string token
+					attribute_name += sToken->value;
+					parsing_attribute_name = true;
 				}
 			}
+		}
+	}
+	else if (token->type == StdTokenType::whitespace)
+	{
+		// In the case we have something such as
+		// data- day="123"
+		// it should be parsed as two attributes
+		if (parsing_attribute_name)
+		{
+			parsing_attribute_name = false;
 		}
 	}
 	else if (token->type == StdTokenType::punctuation)
@@ -75,6 +90,7 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 		}
 		else if (pToken->value == ">")
 		{
+			apply_attribute_name();
 			if (parser->current_node->is_void_element() || is_closing_tag)
 			{
 				if (parser->current_node->parent_node)
@@ -98,6 +114,13 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 				parser->current_node->type = HTMLNodeType::Comment;
 				transition(new HTMLParseCommentState());
 			}
+			else
+			{
+				if (parsing_attribute_name)
+				{
+					attribute_name += "-";
+				}
+			}
 		}
 		else if (pToken->value == "=")
 		{
@@ -105,6 +128,9 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 			{
 				if (!attribute_name.empty())
 				{
+					// We are no longer parsing the lhs of the attribute
+					// syntax
+					parsing_attribute_name = false;
 					if (parsing_attribute_value)
 					{
 						// Double equals sign will be interpreted as the value of this
@@ -115,7 +141,9 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 					}
 					else
 					{
-						// Waiting on right hand side of the equals sign
+						// We have an attribute_name in the chamber,
+						// now we have seen an "=",
+						// so the next thing should be the value
 						parsing_attribute_value = true;
 					}
 				}
@@ -124,4 +152,18 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 	}
 	counter++;
 	return nullptr;
+}
+
+void HTMLParseTagState::apply_attribute_name()
+{
+	if (!attribute_name.empty())
+	{
+		auto parser = (HTMLParser*)machine;
+		if (!parser->current_node->attributes.contains(attribute_name))
+		{
+			parser->current_node->attributes[attribute_name] = "";
+		}
+		attribute_name.clear();
+		parsing_attribute_name = false;
+	}
 }
