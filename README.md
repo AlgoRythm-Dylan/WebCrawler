@@ -188,6 +188,8 @@ WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
 
 ## WebCrawler client changelog
 ```
+0.0.4
+- Crawler now downloads and parses headers
 0.0.3
 - attributes are parsed with more accuracy.
   (No longer tricked by a dash in the name)
