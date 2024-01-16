@@ -57,6 +57,8 @@ Current available rules:
 [flag]    --no-color: don't use colors on output
 [flag]    --no-summary: don't summarize the params of a job before it's executed
 [key/val] --url: the (initial) URL to crawl
+[key/val] --user-agent: User agent to use. Default is:
+              WebCrawler by Dylan (https://github.com/AlgoRythm-Dylan/WebCrawler)
 [list]    --rule: set a crawling rule
 ```
 
@@ -188,6 +190,8 @@ WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
 
 ## WebCrawler client changelog
 ```
+0.0.5
+- Support for setting user agent. Default value provided
 0.0.4
 - Crawler now downloads and parses headers
 0.0.3

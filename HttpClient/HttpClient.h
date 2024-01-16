@@ -32,6 +32,7 @@ class HttpClient
 {
 public:
 	CURL* curl;
+	string user_agent;
 
 	shared_ptr<HttpResponse> get(const string& url,
 		function<void(char*, size_t)> dataCallback,

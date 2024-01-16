@@ -65,6 +65,14 @@ void WebCrawler::inspect_interactive()
 	{
 		job.url = args.url->value;
 	}
+	if (!args.user_agent->value.empty())
+	{
+		job.user_agent = args.user_agent->value;
+	}
+	else
+	{
+		job.user_agent = args.user_agent->default_value;
+	}
 	job.perform();
 	std::cout << "Return code: ";
 	if (colors())

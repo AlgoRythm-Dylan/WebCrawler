@@ -10,7 +10,7 @@ class AppArguments
 {
 public:
 	shared_ptr<Argument> url, no_banner_flag, no_summary_flag, rules_list,
-		no_color_flag;
+		no_color_flag, user_agent;
 	Arguments args;
 
 	AppArguments();

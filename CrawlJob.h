@@ -12,7 +12,7 @@ using std::set;
 class CrawlJob
 {
 public:
-	string url;
+	string url, user_agent;
 	HTMLDocument document;
 	shared_ptr<HttpResponse> response;
 	set<string> links_found;

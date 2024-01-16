@@ -9,6 +9,10 @@
 void CrawlJob::perform()
 {
 	HttpClient client;
+	if (!user_agent.empty())
+	{
+		client.user_agent = user_agent;
+	}
 
 	HTMLParser parser(document);
 	HTMLLexer lexer;

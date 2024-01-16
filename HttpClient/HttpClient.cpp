@@ -45,6 +45,10 @@ shared_ptr<HttpResponse> HttpClient::get(const string& url,
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &dataCallback);
 	curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, HeaderCallback);
 	curl_easy_setopt(curl, CURLOPT_HEADERDATA, response.get());
+	if (!user_agent.empty())
+	{
+		curl_easy_setopt(curl, CURLOPT_USERAGENT, user_agent.c_str());
+	}
 
 	curl_easy_perform(curl);
 
