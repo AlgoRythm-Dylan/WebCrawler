@@ -16,15 +16,6 @@ namespace TestSuite
 	TEST_CLASS(TestHTML)
 	{
 	public:
-		TEST_METHOD(TextNodeOnly)
-		{
-			ifstream file("..\\..\\HTMLFiles\\text-node-only.html");
-			Assert::IsTrue(file.is_open());
-			HTMLDocument doc;
-			doc.parse(file);
-			Assert::AreEqual((size_t)1, doc.root->children.size());
-			Assert::AreEqual(string("this is text DIRECTLY on the document\nand it is multiline!"), doc.root->children[0]->text_content);
-		}
 		TEST_METHOD(PositiveSelfClosingTag)
 		{
 			HTMLNode element;
@@ -36,6 +27,37 @@ namespace TestSuite
 			HTMLNode element;
 			element.tag_name = "p";
 			Assert::IsFalse(element.is_void_element());
+		}
+		TEST_METHOD(TextNodeOnly)
+		{
+			ifstream file("..\\..\\HTMLFiles\\text-node-only.html");
+			Assert::IsTrue(file.is_open());
+			HTMLDocument doc;
+			doc.parse(file);
+			Assert::AreEqual((size_t)1, doc.root->children.size());
+			Assert::AreEqual(string("this is text DIRECTLY on the document\nand it is multiline!"), doc.root->children[0]->text_content);
+		}
+		TEST_METHOD(SimpleDocument)
+		{
+			ifstream file("..\\..\\HTMLFiles\\simple.html");
+			Assert::IsTrue(file.is_open());
+			HTMLDocument doc;
+			doc.parse(file);
+			Assert::AreEqual(string("!DOCTYPE"), doc.root->children[0]->tag_name);
+			Assert::AreEqual(string("html"), doc.root->children[1]->tag_name);
+			Assert::AreEqual(string("head"), doc.root->children[1]->children[0]->tag_name);
+			Assert::AreEqual(string("title"), doc.root->children[1]->children[0]->children[0]->tag_name);
+			
+			auto bodyTag = doc.root->children[1]->children[1];
+			auto h1Tag = bodyTag->children[0];
+			auto pTag = bodyTag->children[1];
+			
+			Assert::AreEqual(string("body"), bodyTag->tag_name);
+			Assert::AreEqual(string("h1"), h1Tag->tag_name);
+			Assert::AreEqual(string("p"), pTag->tag_name);
+
+			Assert::AreEqual(string("This is a heading!"), h1Tag->children[0]->text_content);
+			Assert::AreEqual(string("This is a paragraph!"), pTag->children[0]->text_content);
 		}
 		TEST_METHOD(HTMLAttributes)
 		{
