@@ -76,17 +76,35 @@ void WebCrawler::inspect_interactive()
 	{
 		std::cout << ansicolor::reset;
 	}
-	std::cout << "Headers (" << job.response->headers.size() << "):\n";
-	for (const auto& header : job.response->headers)
+	if (!job.response->headers.empty())
 	{
-		if (header.second.empty())
+		std::cout << "Headers (" << job.response->headers.size() << "):\n";
+		for (const auto& header : job.response->headers)
 		{
-			std::cout << "\t" << header.first << "\n";
+
+			std::cout << "\t";
+			if (colors())
+			{
+				std::cout << ansicolor::bold << ansicolor::green;
+			}
+			std::cout << header.first;
+			if (colors())
+			{
+				std::cout << ansicolor::reset;
+			}
+			if (header.second.empty())
+			{
+				std::cout << "\n";
+			}
+			else
+			{
+				std::cout << ": " << header.second << "\n";
+			}
 		}
-		else
-		{
-			std::cout << "\t" << header.first << ": " << header.second << "\n";
-		}
+	}
+	else
+	{
+		std::cout << "No headers from server\n";
 	}
 	if (job.response->status < 299)
 	{
