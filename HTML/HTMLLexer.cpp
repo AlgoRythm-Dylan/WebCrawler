@@ -45,6 +45,10 @@ unique_ptr<Token> HTMLLexer::next()
 		{
 			stream_holder->stream.putback(to_scan);
 		}
+		else
+		{
+			update_position(to_scan);
+		}
 	}
 	auto token = std::move(token_buffer.front());
 	token_buffer.pop();
@@ -55,7 +59,12 @@ LexingScanResult HTMLLexer::read(const char character)
 {
 	auto lexing_state = std::static_pointer_cast<LexingState>(current_state);
 
-	return lexing_state->scan(character);
+	auto result = lexing_state->scan(character);
+	if (result.consumed)
+	{
+		update_position(character);
+	}
+	return result;
 }
 
 HTMLLexer::~HTMLLexer()
