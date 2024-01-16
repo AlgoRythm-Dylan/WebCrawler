@@ -76,6 +76,18 @@ void WebCrawler::inspect_interactive()
 	{
 		std::cout << ansicolor::reset;
 	}
+	std::cout << "Headers (" << job.response->headers.size() << "):\n";
+	for (const auto& header : job.response->headers)
+	{
+		if (header.second.empty())
+		{
+			std::cout << "\t" << header.first << "\n";
+		}
+		else
+		{
+			std::cout << "\t" << header.first << ": " << header.second << "\n";
+		}
+	}
 	if (job.response->status < 299)
 	{
 		pretty_print_document(job.document);

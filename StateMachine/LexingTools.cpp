@@ -38,3 +38,23 @@ bool LexingTools::is_whitespace(const char character)
 	return character == '\t' || character == ' ' ||
 		character == '\n' || character == '\r';
 }
+
+void LexingTools::ltrim(string& str)
+{
+	str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](unsigned char ch) {
+		return !is_whitespace(ch);
+	}));
+}
+
+void LexingTools::rtrim(string& str)
+{
+	str.erase(std::find_if(str.rbegin(), str.rend(), [](unsigned char ch) {
+		return !is_whitespace(ch);
+	}).base(), str.end());
+}
+
+void LexingTools::trim(string& str)
+{
+	ltrim(str);
+	rtrim(str);
+}
