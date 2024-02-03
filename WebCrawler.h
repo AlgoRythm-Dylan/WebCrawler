@@ -1,8 +1,10 @@
 #pragma once
 
+#include <memory>
+
 #include "AppArguments.h"
 
-class WebCrawler
+class WebCrawler : std::enable_shared_from_this<WebCrawler>
 {
 protected:
 	void show_banner();
