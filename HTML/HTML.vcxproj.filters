@@ -33,13 +33,13 @@
     <ClInclude Include="HTMLParseGenericState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTMLQuery.h">
+    <ClInclude Include="HTMLSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTMLQueryRule.h">
+    <ClInclude Include="HTMLSelectorRule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTMLQueryExecutor.h">
+    <ClInclude Include="HTMLSelectorExecutor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HTMLStringMemoryState.h">
@@ -86,13 +86,13 @@
     <ClCompile Include="HTMLParseGenericState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HTMLQuery.cpp">
+    <ClCompile Include="HTMLSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HTMLQueryRule.cpp">
+    <ClCompile Include="HTMLSelectorRule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HTMLQueryExecutor.cpp">
+    <ClCompile Include="HTMLSelectorExecutor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HTMLStringMemoryState.cpp">

@@ -32,9 +32,9 @@
     <ClInclude Include="HTMLParseTagState.h" />
     <ClInclude Include="HTMLParser.h" />
     <ClInclude Include="HTMLParseGenericState.h" />
-    <ClInclude Include="HTMLQuery.h" />
-    <ClInclude Include="HTMLQueryExecutor.h" />
-    <ClInclude Include="HTMLQueryRule.h" />
+    <ClInclude Include="HTMLSelector.h" />
+    <ClInclude Include="HTMLSelectorExecutor.h" />
+    <ClInclude Include="HTMLSelectorRule.h" />
     <ClInclude Include="HTMLStringMemoryState.h" />
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +51,9 @@
     <ClCompile Include="HTMLParseTagState.cpp" />
     <ClCompile Include="HTMLParser.cpp" />
     <ClCompile Include="HTMLParseGenericState.cpp" />
-    <ClCompile Include="HTMLQuery.cpp" />
-    <ClCompile Include="HTMLQueryExecutor.cpp" />
-    <ClCompile Include="HTMLQueryRule.cpp" />
+    <ClCompile Include="HTMLSelector.cpp" />
+    <ClCompile Include="HTMLSelectorExecutor.cpp" />
+    <ClCompile Include="HTMLSelectorRule.cpp" />
     <ClCompile Include="HTMLStringMemoryState.cpp" />
   </ItemGroup>
   <ItemGroup>
