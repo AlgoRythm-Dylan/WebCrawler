@@ -14,10 +14,10 @@ int main(int argc, const char* argv[])
 		<< " BUILD! Performance may be subpar compared to a release build.\n\n";
 #endif
 
-	WebCrawler app;
-	app.args.parse(argc, argv);
+	auto app = std::make_shared<WebCrawler>();
+	app->args.parse(argc, argv);
 
-	app.start();
+	app->start();
 
 	return 0;
 }
