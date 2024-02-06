@@ -18,7 +18,7 @@ void WebCrawler::start()
 	{
 		show_summary();
 	}
-	inspect_interactive();
+	//inspect_interactive();
 }
 
 void WebCrawler::show_banner()
@@ -53,7 +53,7 @@ bool WebCrawler::colors()
 	return !args.no_color_flag->is_set;
 }
 
-void WebCrawler::inspect_interactive()
+/*void WebCrawler::inspect_interactive()
 {
 	CrawlJob job;
 	if (args.url->value.empty())
@@ -118,4 +118,4 @@ void WebCrawler::inspect_interactive()
 	{
 		pretty_print_document(job.document);
 	}
-}
+}*/

@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InteractiveCrawl.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AppArguments.cpp" />
     <ClCompile Include="CrawlJob.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="AppArguments.h" />
     <ClInclude Include="CrawlJob.h" />
     <ClInclude Include="Info.h" />
+    <ClInclude Include="InteractiveCrawl.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="StatisticCollector.h" />
     <ClInclude Include="WebCrawler.h" />
