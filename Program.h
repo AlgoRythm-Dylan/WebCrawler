@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 
-#include "WebCrawler.h"
+class WebCrawler;
 
 using std::string;
 using std::shared_ptr;
@@ -14,3 +14,5 @@ struct Program
 	shared_ptr<WebCrawler> app;
 	virtual void execute() = 0;
 };
+
+#include "WebCrawler.h"

@@ -7,6 +7,7 @@
 
 #include "Info.h"
 #include "CrawlJob.h"
+#include "InteractiveCrawl.h"
 
 void WebCrawler::start()
 {
@@ -18,7 +19,11 @@ void WebCrawler::start()
 	{
 		show_summary();
 	}
-	//inspect_interactive();
+	// For now. In future, find a way to wire up the correct program
+	// based on the "mode" argument.
+	auto interactiveCrawl = std::make_shared<InteractiveCrawl>();
+	interactiveCrawl->app = shared_from_this();
+	interactiveCrawl->execute();
 }
 
 void WebCrawler::show_banner()

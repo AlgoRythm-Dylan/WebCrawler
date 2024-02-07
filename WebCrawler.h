@@ -3,8 +3,9 @@
 #include <memory>
 
 #include "AppArguments.h"
+#include "Program.h"
 
-class WebCrawler : std::enable_shared_from_this<WebCrawler>
+class WebCrawler : public std::enable_shared_from_this<WebCrawler>
 {
 protected:
 	void show_banner();
@@ -12,7 +13,7 @@ protected:
 	bool colors();
 public:
 	AppArguments args;
+	shared_ptr<Program> current_program;
 
 	void start();
-	//void inspect_interactive();
 };

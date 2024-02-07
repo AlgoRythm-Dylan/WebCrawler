@@ -13,6 +13,7 @@ class HttpResponse
 public:
 	int status;
 	string content_type;
+	size_t response_size;
 	vector<pair<string, string>> headers;
 
 	HttpResponse();

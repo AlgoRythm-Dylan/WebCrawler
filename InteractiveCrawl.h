@@ -4,6 +4,7 @@
 
 class InteractiveCrawl : public Program
 {
+public:
 	void execute();
 };
 
