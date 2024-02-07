@@ -17,5 +17,7 @@ public:
 	vector<pair<string, string>> headers;
 
 	HttpResponse();
+
+	bool is_success_status_code();
 };
 

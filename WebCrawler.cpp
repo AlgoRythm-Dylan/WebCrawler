@@ -3,10 +3,8 @@
 #include <iostream>
 
 #include <AnsiColors.h>
-#include <PrettyPrinting.h>
 
 #include "Info.h"
-#include "CrawlJob.h"
 #include "InteractiveCrawl.h"
 
 void WebCrawler::start()
@@ -19,6 +17,21 @@ void WebCrawler::start()
 	{
 		show_summary();
 	}
+	// Read from args into app variables
+	if (args.url->is_set)
+	{
+		url = args.url->value;
+	}
+	if (args.user_agent->is_set)
+	{
+		user_agent = args.user_agent->value;
+	}
+	else
+	{
+		user_agent = args.user_agent->default_value;
+	}
+	colors = !args.no_color_flag->is_set;
+
 	// For now. In future, find a way to wire up the correct program
 	// based on the "mode" argument.
 	auto interactiveCrawl = std::make_shared<InteractiveCrawl>();
@@ -28,12 +41,12 @@ void WebCrawler::start()
 
 void WebCrawler::show_banner()
 {
-	if (colors())
+	if (colors)
 	{
 		std::cout << ansicolor::cyan;
 	}
 	std::cout << "\n\tWebCrawler";
-	if (colors())
+	if (colors)
 	{
 		std::cout << ansicolor::reset;
 	}
@@ -52,75 +65,3 @@ void WebCrawler::show_summary()
 		}
 	}
 }
-
-bool WebCrawler::colors()
-{
-	return !args.no_color_flag->is_set;
-}
-
-/*void WebCrawler::inspect_interactive()
-{
-	CrawlJob job;
-	if (args.url->value.empty())
-	{
-		std::cout << "Enter URL: ";
-		std::cin >> job.url;
-	}
-	else
-	{
-		job.url = args.url->value;
-	}
-	if (!args.user_agent->value.empty())
-	{
-		job.user_agent = args.user_agent->value;
-	}
-	else
-	{
-		job.user_agent = args.user_agent->default_value;
-	}
-	job.perform();
-	std::cout << "Return code: ";
-	if (colors())
-	{
-		std::cout << ansicolor::magenta;
-	}
-	std::cout << job.response->status << "\n";
-	if (colors())
-	{
-		std::cout << ansicolor::reset;
-	}
-	if (!job.response->headers.empty())
-	{
-		std::cout << "Headers (" << job.response->headers.size() << "):\n";
-		for (const auto& header : job.response->headers)
-		{
-
-			std::cout << "\t";
-			if (colors())
-			{
-				std::cout << ansicolor::bold << ansicolor::green;
-			}
-			std::cout << header.first;
-			if (colors())
-			{
-				std::cout << ansicolor::reset;
-			}
-			if (header.second.empty())
-			{
-				std::cout << "\n";
-			}
-			else
-			{
-				std::cout << ": " << header.second << "\n";
-			}
-		}
-	}
-	else
-	{
-		std::cout << "No headers from server\n";
-	}
-	if (job.response->status < 299)
-	{
-		pretty_print_document(job.document);
-	}
-}*/
