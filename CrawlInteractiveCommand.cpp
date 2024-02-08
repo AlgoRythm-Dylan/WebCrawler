@@ -6,9 +6,11 @@
 
 void CrawlInteractiveCommand::execute()
 {
-	program->start_job();
+	auto programPtr = program.lock();
+
+	programPtr->start_job();
 	std::cout << "Please enter a URL: ";
-	std::cin >> program->current_job->url;
+	std::cin >> programPtr->current_job->url;
 	std::cout << "Performing job...\n";
-	program->do_job();
+	programPtr->do_job();
 }

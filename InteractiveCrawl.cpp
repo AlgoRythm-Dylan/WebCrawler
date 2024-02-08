@@ -47,12 +47,15 @@ void InteractiveCrawl::execute()
 
 void InteractiveCrawl::query_url()
 {
-	if (app->url.has_value())
+
+	auto appPtr = app.lock();
+
+	if (appPtr->url.has_value())
 	{
-		current_job->url = app->url.value();
+		current_job->url = appPtr->url.value();
 		std::cout << "Using URL " << current_job->url << "\n";
 		// Consume the app URL so it doesn't get used next time
-		app->url.reset();
+		appPtr->url.reset();
 	}
 	else
 	{
@@ -63,20 +66,24 @@ void InteractiveCrawl::query_url()
 
 void InteractiveCrawl::start_job()
 {
+	auto appPtr = app.lock();
+
 	current_job = std::make_unique<CrawlJob>();
-	current_job->user_agent = app->user_agent.value();
+	current_job->user_agent = appPtr->user_agent.value();
 }
 
 void InteractiveCrawl::do_job()
 {
+	auto appPtr = app.lock();
+
 	current_job->perform();
 	std::cout << "Job complete. Return code: ";
-	if (app->colors)
+	if (appPtr->colors)
 	{
 		std::cout << ansicolor::magenta;
 	}
 	std::cout << current_job->response->status;
-	if (app->colors)
+	if (appPtr->colors)
 	{
 		std::cout << ansicolor::reset;
 	}
@@ -87,12 +94,12 @@ void InteractiveCrawl::do_job()
 		if (!locationHeaderSearch.empty()) {
 			string location = locationHeaderSearch[0].second;
 			std::cout << "Redirect code returned pointing to location: ";
-			if (app->colors)
+			if (appPtr->colors)
 			{
 				std::cout << ansicolor::yellow;
 			}
 			std::cout << location;
-			if (app->colors)
+			if (appPtr->colors)
 			{
 				std::cout << ansicolor::reset;
 			}

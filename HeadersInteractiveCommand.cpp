@@ -8,8 +8,11 @@
 
 void HeadersInteractiveCommand::execute()
 {
-	auto& headers = program->current_job->response->headers;
-	auto colors = program->app->colors;
+	auto programPtr = program.lock();
+	auto appPtr = programPtr->app.lock();
+
+	auto& headers = programPtr->current_job->response->headers;
+	auto colors = appPtr->colors;
 	if (headers.empty())
 	{
 		std::cout << "Server did not return any headers\n";

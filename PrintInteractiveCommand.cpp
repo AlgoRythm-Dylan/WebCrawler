@@ -6,5 +6,7 @@
 
 void PrintInteractiveCommand::execute()
 {
-	pretty_print_document(program->current_job->document);
+	auto programPtr = program.lock();
+
+	pretty_print_document(programPtr->current_job->document);
 }

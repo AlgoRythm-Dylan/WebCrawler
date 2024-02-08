@@ -6,12 +6,12 @@
 
 class InteractiveCrawl;
 
-using std::shared_ptr;
+using std::weak_ptr;
 
 class InteractiveCommand
 {
 public:
-	std::shared_ptr<InteractiveCrawl> program;
+	std::weak_ptr<InteractiveCrawl> program;
 	Arguments args;
 	virtual void execute() = 0;
 };
