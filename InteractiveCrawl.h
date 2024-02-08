@@ -10,8 +10,6 @@ class InteractiveCrawl : public Program, public std::enable_shared_from_this<Int
 {
 protected:
 	void query_url();
-	void start_job();
-	void do_job();
 	void start_interactive_prompt();
 	vector<shared_ptr<InteractiveCommandCreator>> commands;
 	shared_ptr<InteractiveCommandCreator> find_command(string_view);
@@ -21,5 +19,7 @@ public:
 	InteractiveCrawl();
 
 	void execute() override;
+	void start_job();
+	void do_job();
 };
 

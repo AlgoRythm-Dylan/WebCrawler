@@ -39,6 +39,9 @@
     <ClCompile Include="HeadersInteractiveCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CrawlInteractiveCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrawlJob.h">
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HeadersInteractiveCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrawlInteractiveCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

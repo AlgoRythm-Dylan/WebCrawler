@@ -7,6 +7,7 @@
 
 #include "CrawlJob.h"
 #include "HeadersInteractiveCommand.h"
+#include "CrawlInteractiveCommand.h"
 
 InteractiveCrawl::InteractiveCrawl()
 {
@@ -17,13 +18,20 @@ InteractiveCrawl::InteractiveCrawl()
 		return shared_ptr<InteractiveCommand>(new HeadersInteractiveCommand());
 	};
 	commands.push_back(headersCommand);
+
+	auto crawlCommand = std::make_shared<InteractiveCommandCreator>();
+	crawlCommand->name = "crawl";
+	crawlCommand->description = "Set the currently crawling page";
+	crawlCommand->creator = []() -> shared_ptr<InteractiveCommand> {
+		return shared_ptr<InteractiveCommand>(new CrawlInteractiveCommand());
+	};
+	commands.push_back(crawlCommand);
 }
 
 void InteractiveCrawl::execute()
 {
 	start_job();
 	query_url();
-	current_job->user_agent = app->user_agent.value();
 	do_job();
 	start_interactive_prompt();
 }
@@ -47,6 +55,7 @@ void InteractiveCrawl::query_url()
 void InteractiveCrawl::start_job()
 {
 	current_job = std::make_unique<CrawlJob>();
+	current_job->user_agent = app->user_agent.value();
 }
 
 void InteractiveCrawl::do_job()
@@ -63,6 +72,37 @@ void InteractiveCrawl::do_job()
 		std::cout << ansicolor::reset;
 	}
 	std::cout << "\n";
+	if (current_job->response->status == 301 || current_job->response->status == 302)
+	{
+		auto locationHeaderSearch = current_job->response->search_headers("Location");
+		if (!locationHeaderSearch.empty()) {
+			string location = locationHeaderSearch[0].second;
+			std::cout << "Redirect code returned pointing to location: ";
+			if (app->colors)
+			{
+				std::cout << ansicolor::yellow;
+			}
+			std::cout << location;
+			if (app->colors)
+			{
+				std::cout << ansicolor::reset;
+			}
+			std::cout << "\nFollow redirect? [y/n]: ";
+			char response;
+			std::cin >> response;
+			if (response == 'y' || response == 'Y')
+			{
+				start_job();
+				current_job->url = location;
+				do_job();
+			}
+		}
+		else
+		{
+			std::cout << "Redirect code returned - but no location"
+				<< " header provided.Check headers.\n";
+		}
+	}
 }
 
 shared_ptr<InteractiveCommandCreator> InteractiveCrawl::find_command(string_view name)

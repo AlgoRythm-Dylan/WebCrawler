@@ -3,8 +3,10 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <string_view>
 
 using std::string;
+using std::string_view;
 using std::vector;
 using std::pair;
 
@@ -19,5 +21,6 @@ public:
 	HttpResponse();
 
 	bool is_success_status_code();
+	vector<pair<string, string>> search_headers(string_view);
 };
 
