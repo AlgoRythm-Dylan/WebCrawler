@@ -21,12 +21,18 @@
     <ClInclude Include="Argument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SysArgStruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Arguments.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Argument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SysArgStruct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

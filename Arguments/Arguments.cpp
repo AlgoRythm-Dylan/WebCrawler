@@ -197,3 +197,54 @@ void Arguments::parse(int argc, const char* argv[])
 		}
 	}
 }
+
+unique_ptr<SysArgStruct> Arguments::parse_from_string(string_view input)
+{
+	auto args = std::make_unique<SysArgStruct>();
+	args->argc = 0;
+
+	vector<string> argv;
+	bool inString = false;
+	string currentArg = "";
+	for (size_t i = 0; i < input.size(); i++)
+	{
+		if (input[i] == ' ')
+		{
+			if (inString)
+			{
+				currentArg += input[i];
+			}
+			else
+			{
+				argv.push_back(currentArg);
+				currentArg = "";
+			}
+		}
+		else
+		{
+			if (input[i] == '"')
+			{
+				inString = !inString;
+			}
+			else
+			{
+				currentArg += input[i];
+			}
+		}
+	}
+
+	if (!currentArg.empty())
+	{
+		argv.push_back(currentArg);
+	}
+
+	args->argc = argv.size();
+	args->argv = new char*[args->argc];
+
+	for (auto i = 0; i < args->argc; i++)
+	{
+		args->argv[i] = _strdup(argv[i].c_str());
+	}
+
+	return args;
+}

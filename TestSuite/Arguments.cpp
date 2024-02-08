@@ -57,5 +57,16 @@ namespace TestSuite
 			Assert::AreEqual(string("Content-Type: application/json"), kvl->values[0]);
 			Assert::AreEqual(string("User-Agent: real-browser-i-swear"), kvl->values[1]);
 		}
+		TEST_METHOD(ArgsFromString)
+		{
+			string source = "WebCrawler.exe abc 123 \"hello world\"";
+			auto parsed = Arguments::parse_from_string(source);
+
+			Assert::AreEqual(4, parsed->argc);
+			Assert::AreEqual("WebCrawler.exe", parsed->argv[0]);
+			Assert::AreEqual("abc", parsed->argv[1]);
+			Assert::AreEqual("123", parsed->argv[2]);
+			Assert::AreEqual("hello world", parsed->argv[3]);
+		}
 	};
 }

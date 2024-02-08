@@ -131,10 +131,12 @@
   <ItemGroup>
     <ClInclude Include="Argument.h" />
     <ClInclude Include="Arguments.h" />
+    <ClInclude Include="SysArgStruct.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Argument.cpp" />
     <ClCompile Include="Arguments.cpp" />
+    <ClCompile Include="SysArgStruct.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

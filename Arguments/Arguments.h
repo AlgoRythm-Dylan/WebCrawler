@@ -6,10 +6,12 @@
 #include <string_view>
 
 #include "Argument.h"
+#include "SysArgStruct.h"
 
 using std::string;
 using std::vector;
 using std::shared_ptr;
+using std::unique_ptr;
 using std::string_view;
 
 /*
@@ -33,4 +35,5 @@ public:
 	Arguments();
 
 	void add_argument(shared_ptr<Argument>);
+	static unique_ptr<SysArgStruct> parse_from_string(string_view);
 };
