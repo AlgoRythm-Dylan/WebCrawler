@@ -62,6 +62,24 @@ Current available rules:
 [list]    --rule: set a crawling rule
 ```
 
+### Modes
+
+Interactive mode (single-page inspect mode) puts you in
+the driver's seat, crawling pages one-at-a-time.
+
+Currently this is the only available mode, but in the
+future this mode will need to be invoked with flag
+`--mode=interactive`.
+
+In this mode, you have a few commands you can interact
+with.
+
+```
+crawl        Change the current page URL and re-crawl
+headers      View headers from the most recent crawl
+print        Display the content of the current page
+```
+
 ### Status:
 
 *Implemented*:
@@ -190,6 +208,10 @@ WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
 
 ## WebCrawler client changelog
 ```
+0.1.0
+- You can now use the program as an interactive crawler!
+- Interactive mode asks to redirect when 3xx status returned
+- Added crawl, print, and headers command
 0.0.5
 - Support for setting user agent. Default value provided
 0.0.4
