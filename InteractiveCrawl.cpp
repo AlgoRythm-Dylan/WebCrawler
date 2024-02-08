@@ -8,6 +8,7 @@
 #include "CrawlJob.h"
 #include "HeadersInteractiveCommand.h"
 #include "CrawlInteractiveCommand.h"
+#include "PrintInteractiveCommand.h"
 
 InteractiveCrawl::InteractiveCrawl()
 {
@@ -26,6 +27,14 @@ InteractiveCrawl::InteractiveCrawl()
 		return shared_ptr<InteractiveCommand>(new CrawlInteractiveCommand());
 	};
 	commands.push_back(crawlCommand);
+
+	auto printCommand = std::make_shared<InteractiveCommandCreator>();
+	printCommand->name = "print";
+	printCommand->description = "Display the content of the crawled page";
+	printCommand->creator = []() -> shared_ptr<InteractiveCommand> {
+		return shared_ptr<InteractiveCommand>(new PrintInteractiveCommand());
+	};
+	commands.push_back(printCommand);
 }
 
 void InteractiveCrawl::execute()
