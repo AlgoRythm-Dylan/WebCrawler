@@ -13,7 +13,7 @@ using std::string;
 class InteractiveCommandCreator
 {
 public:
-	function<shared_ptr<InteractiveCommand>> creator;
+	function<shared_ptr<InteractiveCommand>()> creator;
 	string name;
 	string description;
 };
