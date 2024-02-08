@@ -15,5 +15,3 @@ public:
 	Arguments args;
 	virtual void execute() = 0;
 };
-
-#include "InteractiveCrawl.h"

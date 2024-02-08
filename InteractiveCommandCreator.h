@@ -14,7 +14,7 @@ class InteractiveCommandCreator
 {
 public:
 	function<shared_ptr<InteractiveCommand>()> creator;
-	string name;
-	string description;
+	string name, description;
+	vector<string> aliases;
 };
 
