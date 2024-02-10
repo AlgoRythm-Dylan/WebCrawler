@@ -16,12 +16,10 @@ void CrawlJob::perform()
 
 	HTMLParser parser(document);
 	HTMLLexer lexer;
-	size_t byteCount = 0;
 
 	client.get(url,
-		[&lexer, &parser, &byteCount](char* buffer, size_t count)
+		[&lexer, &parser](char* buffer, size_t count)
 		{
-			byteCount += count;
 			// On data get
 			for (size_t i = 0; i < count; i++)
 			{
@@ -43,11 +41,10 @@ void CrawlJob::perform()
 				}
 			}
 		},
-		[this, &parser, &byteCount](shared_ptr<HttpResponse> res)
+		[this, &parser](shared_ptr<HttpResponse> res)
 		{
 			// On data finish
 			response = res;
-			response->response_size = byteCount;
 			auto eofTok = unique_ptr<Token>(new EOFToken());
 			parser.scan(std::move(eofTok));
 			find_links();

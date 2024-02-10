@@ -23,6 +23,7 @@
     <ClCompile Include="HttpResponse.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientUserPointer.h" />
     <ClInclude Include="HttpClient.h" />
     <ClInclude Include="HttpResponse.h" />
   </ItemGroup>

@@ -2,11 +2,14 @@
 
 #include <LexingTools.h>
 
+#include "ClientUserPointer.h"
+
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
 {
 	// Re-interpret the user pointer as our data callback
-	auto dataCallback = *reinterpret_cast<function<void(char*, size_t)>*>(userp);
-	dataCallback((char*)contents, size*nmemb);
+	auto pointer = *reinterpret_cast<ClientUserPointer*>(userp);
+	pointer.function((char*)contents, size*nmemb);
+	pointer.response.response_size += size * nmemb;
 	return size * nmemb;
 }
 
@@ -39,10 +42,14 @@ shared_ptr<HttpResponse> HttpClient::get(const string& url,
 {
 	auto response = std::make_shared<HttpResponse>();
 
+	ClientUserPointer pointer = {
+		dataCallback, *response
+	};
+
 	curl = curl_easy_init();
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &dataCallback);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &pointer);
 	curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, HeaderCallback);
 	curl_easy_setopt(curl, CURLOPT_HEADERDATA, response.get());
 	if (!user_agent.empty())

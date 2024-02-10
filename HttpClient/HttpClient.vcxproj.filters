@@ -29,5 +29,8 @@
     <ClInclude Include="HttpResponse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClientUserPointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
