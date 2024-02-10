@@ -9,6 +9,7 @@
 #include "HeadersInteractiveCommand.h"
 #include "CrawlInteractiveCommand.h"
 #include "PrintInteractiveCommand.h"
+#include "StatsInteractiveCommand.h"
 
 InteractiveCrawl::InteractiveCrawl()
 {
@@ -35,6 +36,14 @@ InteractiveCrawl::InteractiveCrawl()
 		return shared_ptr<InteractiveCommand>(new PrintInteractiveCommand());
 	};
 	commands.push_back(printCommand);
+
+	auto statsCommand = std::make_shared<InteractiveCommandCreator>();
+	statsCommand->name = "stats";
+	statsCommand->description = "Display the stats of the crawled page";
+	statsCommand->creator = []() -> shared_ptr<InteractiveCommand> {
+		return shared_ptr<InteractiveCommand>(new StatsInteractiveCommand());
+	};
+	commands.push_back(statsCommand);
 }
 
 void InteractiveCrawl::execute()

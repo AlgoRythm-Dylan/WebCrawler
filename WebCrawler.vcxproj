@@ -144,6 +144,7 @@
     <ClCompile Include="CrawlJob.cpp" />
     <ClCompile Include="CrawlInteractiveCommand.cpp" />
     <ClCompile Include="PrintInteractiveCommand.cpp" />
+    <ClCompile Include="StatsInteractiveCommand.cpp" />
     <ClCompile Include="WebCrawler.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="Program.h" />
     <ClInclude Include="StatisticCollector.h" />
     <ClInclude Include="CrawlInteractiveCommand.h" />
+    <ClInclude Include="StatsInteractiveCommand.h" />
     <ClInclude Include="WebCrawler.h" />
   </ItemGroup>
   <ItemGroup>

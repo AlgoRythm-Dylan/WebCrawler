@@ -78,6 +78,7 @@ with.
 crawl        Change the current page URL and re-crawl
 headers      View headers from the most recent crawl
 print        Display the content of the current page
+stats        Display the stats of the current page
 ```
 
 ### Status:
@@ -208,6 +209,8 @@ WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
 
 ## WebCrawler client changelog
 ```
+0.1.1
+- Added stats interactive command
 0.1.0
 - You can now use the program as an interactive crawler!
 - Interactive mode asks to redirect when 3xx status returned
