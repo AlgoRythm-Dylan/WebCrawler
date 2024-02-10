@@ -17,7 +17,6 @@ static size_t HeaderCallback(char* buffer, size_t size, size_t nitems, void* use
 {
 	auto response = (HttpResponse*)userp;
 	string completeHeader(buffer, size * nitems);
-	completeHeader = completeHeader;
 	int colonIndex = completeHeader.find(":");
 	if (colonIndex != -1)
 	{
