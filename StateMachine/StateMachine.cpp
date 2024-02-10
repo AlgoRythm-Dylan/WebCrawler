@@ -10,3 +10,5 @@ void StateMachine::transition(shared_ptr<State> new_state)
 	current_state = new_state;
 	current_state->machine = this;
 }
+
+StateMachine::~StateMachine() {}

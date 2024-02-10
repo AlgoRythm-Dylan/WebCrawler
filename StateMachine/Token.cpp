@@ -5,3 +5,5 @@ Token::Token()
 	line = 0;
 	column = 0;
 }
+
+Token::~Token() { }

@@ -209,6 +209,8 @@ WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
 
 ## WebCrawler client changelog
 ```
+0.1.2
+- Fix massive memory leak regarding Token class without virtual destructor
 0.1.1
 - Added stats interactive command
 0.1.0

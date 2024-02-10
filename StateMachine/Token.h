@@ -11,6 +11,7 @@ public:
 	int line, column;
 
 	Token();
+	virtual ~Token();
 };
 
 namespace StdTokenType

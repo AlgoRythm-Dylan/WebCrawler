@@ -12,5 +12,6 @@ public:
 	virtual void transition(shared_ptr<State>);
 
 	StateMachine();
+	virtual ~StateMachine();
 };
 
