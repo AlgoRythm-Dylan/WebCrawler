@@ -14,6 +14,7 @@ enum HTMLNodeType : unsigned char {
 
 using std::string;
 using std::shared_ptr;
+using std::weak_ptr;
 using std::vector;
 using std::map;
 
@@ -22,7 +23,7 @@ class HTMLNode : public std::enable_shared_from_this<HTMLNode>
 public:
 	HTMLNodeType type;
 	string text_content, tag_name;
-	shared_ptr<HTMLNode> parent_node;
+	weak_ptr<HTMLNode> parent_node;
 	vector<shared_ptr<HTMLNode>> children;
 	map<string, string> attributes;
 

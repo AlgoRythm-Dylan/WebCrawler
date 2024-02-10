@@ -23,8 +23,9 @@ unique_ptr<Token> HTMLParseGenericState::scan(unique_ptr<Token> token)
 			node->text_content = sToken->value;
 
 			auto parser = ((HTMLParser*)machine);
+			auto currentNodePtr = parser->current_node.lock();
 
-			parser->current_node->append_child(node);
+			currentNodePtr->append_child(node);
 			// This text node can't have children so it doesn't
 			// become the current node
 		}

@@ -18,6 +18,7 @@ HTMLParseTagState::HTMLParseTagState()
 unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 {
 	auto parser = (HTMLParser*)machine;
+	auto currentNodePtr = parser->current_node.lock();
 	// On the first run, we determine if this is a closing
 	// or an opening tag
 	if (counter == 0)
@@ -34,16 +35,16 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 		{
 			// Create a new element
 			auto el = shared_ptr<HTMLNode>(HTMLNode::element());
-			parser->current_node->append_child(el);
+			currentNodePtr->append_child(el);
 			parser->current_node = el;
 		}
 	}
 	if (token->type == StdTokenType::str)
 	{
 		auto sToken = (StringToken*)token.get();
-		if (parser->current_node->tag_name.empty() || parser->current_node->tag_name == "!")
+		if (currentNodePtr->tag_name.empty() || currentNodePtr->tag_name == "!")
 		{
-			parser->current_node->tag_name += sToken->value;
+			currentNodePtr->tag_name += sToken->value;
 		}
 		else
 		{
@@ -51,7 +52,7 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 			{
 				if (parsing_attribute_value)
 				{
-					parser->current_node->attributes[attribute_name] = sToken->value;
+					currentNodePtr->attributes[attribute_name] = sToken->value;
 					parsing_attribute_value = false;
 					apply_attribute_name();
 				}
@@ -85,33 +86,34 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 			// Maybe !DOCTYPE
 			if (counter == 0)
 			{
-				parser->current_node->tag_name = "!";
+				currentNodePtr->tag_name = "!";
 			}
 		}
 		else if (pToken->value == ">")
 		{
 			apply_attribute_name();
-			if (parser->current_node->is_void_element() || is_closing_tag)
+			if (currentNodePtr->is_void_element() || is_closing_tag)
 			{
-				if (parser->current_node->parent_node)
+				auto parentNodePtr = currentNodePtr->parent_node.lock();
+				if (parentNodePtr)
 				{
-					parser->current_node = parser->current_node->parent_node;
+					parser->current_node = parentNodePtr;
 				}
 			}
 			transition(new HTMLParseGenericState());
 		}
 		else if (pToken->value == "-")
 		{
-			if (counter == 1 && parser->current_node->tag_name == "!")
+			if (counter == 1 && currentNodePtr->tag_name == "!")
 			{
 				// Is this a comment...?
-				parser->current_node->tag_name += "-";
+				currentNodePtr->tag_name += "-";
 			}
-			else if (counter == 2 && parser->current_node->tag_name == "!-")
+			else if (counter == 2 && currentNodePtr->tag_name == "!-")
 			{
 				// This is a comment!
-				parser->current_node->tag_name = "";
-				parser->current_node->type = HTMLNodeType::Comment;
+				currentNodePtr->tag_name = "";
+				currentNodePtr->type = HTMLNodeType::Comment;
 				transition(new HTMLParseCommentState());
 			}
 			else
@@ -135,7 +137,7 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 					{
 						// Double equals sign will be interpreted as the value of this
 						// attribute is literally an equals sign.
-						parser->current_node->attributes[attribute_name] = "=";
+						currentNodePtr->attributes[attribute_name] = "=";
 						parsing_attribute_value = false;
 						attribute_name.clear();
 					}
@@ -159,9 +161,10 @@ void HTMLParseTagState::apply_attribute_name()
 	if (!attribute_name.empty())
 	{
 		auto parser = (HTMLParser*)machine;
-		if (!parser->current_node->attributes.contains(attribute_name))
+		auto currentNodePtr = parser->current_node.lock();
+		if (!currentNodePtr->attributes.contains(attribute_name))
 		{
-			parser->current_node->attributes[attribute_name] = "";
+			currentNodePtr->attributes[attribute_name] = "";
 		}
 		attribute_name.clear();
 		parsing_attribute_name = false;

@@ -33,15 +33,19 @@ unique_ptr<Token> HTMLParseCommentState::scan(unique_ptr<Token> token)
 					// of this node
 					if (consecutive_dash_count > 2)
 					{
-						parser->current_node->text_content += string(consecutive_dash_count - 2, '-');
+						auto currentNodePtr = parser->current_node.lock();
+						currentNodePtr->text_content += string(consecutive_dash_count - 2, '-');
 					}
-					parser->current_node = parser->current_node->parent_node;
+					auto currentNodePtr = parser->current_node.lock();
+					auto currentNodeParentPtr = currentNodePtr->parent_node.lock();
+					parser->current_node = currentNodeParentPtr;
 					transition(new HTMLParseGenericState());
 				}
 			}
 			else
 			{
-				parser->current_node->text_content += pToken->value;
+				auto currentNodePtr = parser->current_node.lock();
+				currentNodePtr->text_content += pToken->value;
 			}
 			consecutive_dash_count = 0;
 		}
@@ -53,7 +57,8 @@ unique_ptr<Token> HTMLParseCommentState::scan(unique_ptr<Token> token)
 
 	if (token->type == StdTokenType::str)
 	{
-		parser->current_node->text_content += ((StringToken*)token.get())->value;
+		auto currentNodePtr = parser->current_node.lock();
+		currentNodePtr->text_content += ((StringToken*)token.get())->value;
 	}
 	return nullptr;
 }
