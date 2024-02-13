@@ -37,6 +37,7 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 			auto el = shared_ptr<HTMLNode>(HTMLNode::element());
 			currentNodePtr->append_child(el);
 			parser->current_node = el;
+			currentNodePtr = parser->current_node.lock();
 		}
 	}
 	if (token->type == StdTokenType::str)
