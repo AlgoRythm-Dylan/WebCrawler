@@ -11,8 +11,6 @@ HTMLNode::HTMLNode()
 void HTMLNode::append_child(shared_ptr<HTMLNode> node)
 {
 	children.push_back(node);
-	// BUGBUG: precondition of shared_from_this is that an existing shared pointer of
-	// the object must already exist. This is not true for the document type.
 	node->parent_node = shared_from_this();
 }
 
