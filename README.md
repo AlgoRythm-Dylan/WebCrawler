@@ -209,6 +209,9 @@ WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
 
 ## WebCrawler client changelog
 ```
+0.1.4
+- Add curl error handling, error message reporting, and interactive
+  commands that require success from the previous crawl job
 0.1.3
 - Fix issue caused by wrong pointer to current node in HTML parser
 0.1.2

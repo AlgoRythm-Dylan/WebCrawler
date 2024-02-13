@@ -13,5 +13,6 @@ class InteractiveCommand
 public:
 	std::weak_ptr<InteractiveCrawl> program;
 	Arguments args;
+
 	virtual void execute() = 0;
 };

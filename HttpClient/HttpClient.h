@@ -33,6 +33,9 @@ class HttpClient
 public:
 	CURL* curl;
 	string user_agent;
+	long timeout_ms;
+
+	HttpClient();
 
 	shared_ptr<HttpResponse> get(const string& url,
 		function<void(char*, size_t)> dataCallback,

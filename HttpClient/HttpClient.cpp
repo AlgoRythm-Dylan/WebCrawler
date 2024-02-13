@@ -4,6 +4,12 @@
 
 #include "ClientUserPointer.h"
 
+HttpClient::HttpClient()
+{
+	timeout_ms = 30000;
+	curl = nullptr;
+}
+
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
 {
 	// Re-interpret the user pointer as our data callback
@@ -45,22 +51,33 @@ shared_ptr<HttpResponse> HttpClient::get(const string& url,
 		dataCallback, *response
 	};
 
+	char errbuf[CURL_ERROR_SIZE];
+
 	curl = curl_easy_init();
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &pointer);
 	curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, HeaderCallback);
 	curl_easy_setopt(curl, CURLOPT_HEADERDATA, response.get());
+	curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, errbuf);
+	curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, timeout_ms);
 	if (!user_agent.empty())
 	{
 		curl_easy_setopt(curl, CURLOPT_USERAGENT, user_agent.c_str());
 	}
 
-	curl_easy_perform(curl);
+	response->curl_code = curl_easy_perform(curl);
 
-	long returnCode;
-	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &returnCode);
-	response->status = returnCode;
+	if (response->curl_code == CURLE_OK)
+	{
+		long returnCode;
+		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &returnCode);
+		response->status = returnCode;
+	}
+	else
+	{
+		response->error_message = string(errbuf);
+	}
 
 	finishCallback(response);
 	curl_easy_cleanup(curl);

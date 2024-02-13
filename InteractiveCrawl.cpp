@@ -23,6 +23,7 @@ InteractiveCrawl::InteractiveCrawl()
 
 	auto crawlCommand = std::make_shared<InteractiveCommandCreator>();
 	crawlCommand->name = "crawl";
+	crawlCommand->requires_valid_response = false;
 	crawlCommand->description = "Set the currently crawling page";
 	crawlCommand->creator = []() -> shared_ptr<InteractiveCommand> {
 		return shared_ptr<InteractiveCommand>(new CrawlInteractiveCommand());
@@ -86,46 +87,63 @@ void InteractiveCrawl::do_job()
 	auto appPtr = app.lock();
 
 	current_job->perform();
-	std::cout << "Job complete. Return code: ";
-	if (appPtr->colors)
+
+	if (current_job->response->has_curl_error())
 	{
-		std::cout << ansicolor::magenta;
-	}
-	std::cout << current_job->response->status;
-	if (appPtr->colors)
-	{
-		std::cout << ansicolor::reset;
-	}
-	std::cout << "\n";
-	if (current_job->response->status == 301 || current_job->response->status == 302)
-	{
-		auto locationHeaderSearch = current_job->response->search_headers("Location");
-		if (!locationHeaderSearch.empty()) {
-			string location = locationHeaderSearch[0].second;
-			std::cout << "Redirect code returned pointing to location: ";
-			if (appPtr->colors)
-			{
-				std::cout << ansicolor::yellow;
-			}
-			std::cout << location;
-			if (appPtr->colors)
-			{
-				std::cout << ansicolor::reset;
-			}
-			std::cout << "\nFollow redirect? [y/n]: ";
-			char response;
-			std::cin >> response;
-			if (response == 'y' || response == 'Y')
-			{
-				start_job();
-				current_job->url = location;
-				do_job();
-			}
+		std::cout << "Unable to complete request: ";
+		if (!current_job->response->error_message.empty())
+		{
+			std::cout << current_job->response->error_message << "\n";
 		}
 		else
 		{
-			std::cout << "Redirect code returned - but no location"
-				<< " header provided.Check headers.\n";
+			std::cout << "Unknown Error.\n";
+		}
+		return;
+	}
+	else
+	{
+		std::cout << "Job complete. Return code: ";
+		if (appPtr->colors)
+		{
+			std::cout << ansicolor::magenta;
+		}
+		std::cout << current_job->response->status;
+		if (appPtr->colors)
+		{
+			std::cout << ansicolor::reset;
+		}
+		std::cout << "\n";
+		if (current_job->response->status == 301 || current_job->response->status == 302)
+		{
+			auto locationHeaderSearch = current_job->response->search_headers("Location");
+			if (!locationHeaderSearch.empty()) {
+				string location = locationHeaderSearch[0].second;
+				std::cout << "Redirect code returned pointing to location: ";
+				if (appPtr->colors)
+				{
+					std::cout << ansicolor::yellow;
+				}
+				std::cout << location;
+				if (appPtr->colors)
+				{
+					std::cout << ansicolor::reset;
+				}
+				std::cout << "\nFollow redirect? [y/n]: ";
+				char response;
+				std::cin >> response;
+				if (response == 'y' || response == 'Y')
+				{
+					start_job();
+					current_job->url = location;
+					do_job();
+				}
+			}
+			else
+			{
+				std::cout << "Redirect code returned - but no location"
+					<< " header provided.Check headers.\n";
+			}
 		}
 	}
 }
@@ -157,6 +175,13 @@ void InteractiveCrawl::start_interactive_prompt()
 		auto commandCreator = find_command(sysargs->argv[0]);
 		if (commandCreator)
 		{
+			if (commandCreator->requires_valid_response)
+			{
+				if (!current_job->response->was_success())
+				{
+					std::cout << "This command will not execute because the HTTP request was not successful.\n";
+				}
+			}
 			auto command = commandCreator->creator();
 			command->program = shared_from_this();
 			command->execute();
