@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <map>
+#include <optional>
 
 enum HTMLNodeType : unsigned char {
 	Root,
@@ -17,6 +18,7 @@ using std::shared_ptr;
 using std::weak_ptr;
 using std::vector;
 using std::map;
+using std::optional;
 
 class HTMLNode : public std::enable_shared_from_this<HTMLNode>
 {
@@ -41,6 +43,7 @@ public:
 	bool is_root() const;
 	shared_ptr<HTMLNode> next_sibling();
 	shared_ptr<HTMLNode> prev_sibling();
+	optional<string> id();
 
 	/* static ctors */
 	static HTMLNode* element();

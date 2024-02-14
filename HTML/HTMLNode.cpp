@@ -132,3 +132,13 @@ shared_ptr<HTMLNode> HTMLNode::prev_sibling()
 	}
 	return nullptr;
 }
+
+optional<string> HTMLNode::id()
+{
+	optional<string> result;
+	if (attributes.contains("id"))
+	{
+		result = attributes["id"];
+	}
+	return result;
+}
