@@ -198,5 +198,12 @@ namespace TestSuite
 			// Second time, it is not
 			Assert::AreEqual(string("abc123"), node.id().value());
 		}
+		TEST_METHOD(IdIsInsensitive)
+		{
+			HTMLNode node;
+			node.attributes.insert({ "iD", "abc123" });
+
+			Assert::AreEqual(string("abc123"), node.id().value());
+		}
 	};
 }

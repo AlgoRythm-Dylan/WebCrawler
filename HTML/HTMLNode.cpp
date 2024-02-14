@@ -1,6 +1,20 @@
 #include "HTMLNode.h"
 
+#include <algorithm>
+
 #include <LexingTools.h>
+
+bool InsensitiveCompare::operator() (const string& a, const string& b) const
+{
+	// Convert both strings to lowercase for case-insensitive comparison
+	std::string a_lower = a;
+	std::transform(a_lower.begin(), a_lower.end(), a_lower.begin(), ::tolower);
+
+	std::string b_lower = b;
+	std::transform(b_lower.begin(), b_lower.end(), b_lower.begin(), ::tolower);
+
+	return a_lower < b_lower;
+}
 
 HTMLNode::HTMLNode()
 {

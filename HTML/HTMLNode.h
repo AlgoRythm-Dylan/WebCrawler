@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <optional>
+#include <set>
 
 #include "CachedItem.h"
 
@@ -21,6 +22,15 @@ using std::weak_ptr;
 using std::vector;
 using std::map;
 using std::optional;
+using std::set;
+
+
+struct InsensitiveCompare {
+	bool operator() (const string& a, const string& b) const;
+};
+
+using CaseInsensitiveMap = map<string, string, InsensitiveCompare>;
+using CaseInsensitiveSet = set<string, InsensitiveCompare>;
 
 class HTMLNode : public std::enable_shared_from_this<HTMLNode>
 {
@@ -32,7 +42,7 @@ public:
 	string text_content, tag_name;
 	weak_ptr<HTMLNode> parent_node;
 	vector<shared_ptr<HTMLNode>> children;
-	map<string, string> attributes;
+	CaseInsensitiveMap attributes;
 	bool closing_tag_found;
 
 	/* ctor */
