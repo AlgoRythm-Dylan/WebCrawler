@@ -1,11 +1,11 @@
 #include "HTMLParseTagState.h"
 
 #include <PunctuationToken.h>
+#include <LexingTools.h>
 
 #include "HTMLParser.h"
 #include "HTMLParseGenericState.h"
 #include "HTMLParseCommentState.h"
-#include "HTMLNode.h"
 
 HTMLParseTagState::HTMLParseTagState()
 {
@@ -46,6 +46,10 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 		if (currentNodePtr->tag_name.empty() || currentNodePtr->tag_name == "!")
 		{
 			currentNodePtr->tag_name += sToken->value;
+		}
+		else if (is_closing_tag && closing_tag_name.empty())
+		{
+			closing_tag_name += sToken->value;
 		}
 		else
 		{
@@ -93,12 +97,26 @@ unique_ptr<Token> HTMLParseTagState::scan(unique_ptr<Token> token)
 		else if (pToken->value == ">")
 		{
 			apply_attribute_name();
-			if (currentNodePtr->is_void_element() || is_closing_tag)
+			if (currentNodePtr->is_void_element())
 			{
+				// Void elements just make the current node the parent node again
 				auto parentNodePtr = currentNodePtr->parent_node.lock();
 				if (parentNodePtr)
 				{
 					parser->current_node = parentNodePtr;
+				}
+			}
+			else if (is_closing_tag)
+			{
+				// what tag name was the closing tag actually for?
+				// Traverse the tree upwards, looking for a matching tag
+				// name with end_tag_found set to false. If not found,
+				// Do absolutely nothing (mismatched tag!)
+				auto openingTagPtr = find_opening_tag(closing_tag_name);
+				if (openingTagPtr)
+				{
+					openingTagPtr->closing_tag_found = true;
+					parser->current_node = openingTagPtr->parent_node.lock();
 				}
 			}
 			transition(new HTMLParseGenericState());
@@ -170,4 +188,24 @@ void HTMLParseTagState::apply_attribute_name()
 		attribute_name.clear();
 		parsing_attribute_name = false;
 	}
+}
+
+shared_ptr<HTMLNode> HTMLParseTagState::find_opening_tag(string_view tag_name)
+{
+	auto parser = (HTMLParser*)machine;
+	auto currentSearchNode = parser->current_node.lock();
+
+	while (currentSearchNode)
+	{
+		//                             Don't scan root element
+		if (currentSearchNode->type == HTMLNodeType::Element &&
+			!currentSearchNode->closing_tag_found &&
+			LexingTools::compare_case_insensitive(tag_name, currentSearchNode->tag_name))
+		{
+			return currentSearchNode;
+		}
+		currentSearchNode = currentSearchNode->parent_node.lock();
+	}
+
+	return nullptr;
 }

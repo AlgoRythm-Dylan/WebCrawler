@@ -135,13 +135,13 @@ this project aims to support:
 - A rich DOM
 - Comments
 - `script` tags*
+- Extranenous closing tags for self-closing elements
+- Missing closing tags
 
 *Prototype:*
 - DOM querying (`document.querySelector[All]`)
 
 *Planned:*
-- Extranenous closing tags for self-closing elements
-- Missing closing tags
 - `data:xyz` handling
 - `pre` tags
 - `style` tags*2
@@ -209,6 +209,8 @@ WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
 
 ## WebCrawler client changelog
 ```
+0.1.5
+- Parser predictably handles mismatched end tags
 0.1.4
 - Add curl error handling, error message reporting, and interactive
   commands that require success from the previous crawl job
