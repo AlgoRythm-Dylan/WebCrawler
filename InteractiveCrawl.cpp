@@ -70,7 +70,7 @@ void InteractiveCrawl::query_url()
 	else
 	{
 		std::cout << "Please enter an initial URL: ";
-		std::cin >> current_job->url;
+		std::getline(std::cin, current_job->url);
 	}
 }
 
@@ -130,9 +130,9 @@ void InteractiveCrawl::do_job()
 					std::cout << ansicolor::reset;
 				}
 				std::cout << "\nFollow redirect? [y/n]: ";
-				char response;
-				std::cin >> response;
-				if (response == 'y' || response == 'Y')
+				string response;
+				std::getline(std::cin, response);
+				if (response == "y" || response == "Y")
 				{
 					start_job();
 					current_job->url = location;
@@ -166,7 +166,11 @@ void InteractiveCrawl::start_interactive_prompt()
 	{
 		string input;
 		std::cout << "interactive> ";
-		std::cin >> input;
+		std::getline(std::cin, input);
+		if (input.empty())
+		{
+			continue;
+		}
 		auto sysargs = Arguments::parse_from_string(input);
 		if (sysargs->argv[0] == string("exit"))
 		{
@@ -184,6 +188,7 @@ void InteractiveCrawl::start_interactive_prompt()
 			}
 			auto command = commandCreator->creator();
 			command->program = shared_from_this();
+			command->args.parse(sysargs->argc, sysargs->argv);
 			command->execute();
 		}
 		else

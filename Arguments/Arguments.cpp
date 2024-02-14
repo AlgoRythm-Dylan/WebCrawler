@@ -239,7 +239,7 @@ unique_ptr<SysArgStruct> Arguments::parse_from_string(string_view input)
 	}
 
 	args->argc = argv.size();
-	args->argv = new char*[args->argc];
+	args->argv = new const char*[argv.size()];
 
 	for (auto i = 0; i < args->argc; i++)
 	{

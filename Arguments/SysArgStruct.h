@@ -4,7 +4,7 @@ class SysArgStruct
 {
 public:
 	int argc;
-	char** argv;
+	const char** argv;
 
 	~SysArgStruct();
 };
