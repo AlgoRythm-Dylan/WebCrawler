@@ -114,5 +114,41 @@ namespace TestSuite
 			Assert::AreEqual(string("test-id"), pTag->attributes["id"]);
 			Assert::AreEqual(string("amazing text"), pTag->attributes["class"]);
 		}
+		TEST_METHOD(MismatchedEndTags)
+		{
+			ifstream file("..\\..\\HTMLFiles\\mismatched-end-tags.html");
+			Assert::IsTrue(file.is_open());
+			HTMLDocument doc;
+			doc.parse(file);
+
+			/*
+			
+				The malformed HTML here should be interpreted as
+				<!DOCTYPE html>[0]
+				<html>[1]
+					<head>[1][0]
+						<title></title>[1][0][0]
+					</head>
+					<body>[1][1]
+						<div>[1][1][0]
+							<span>Hello world!</span>[1][1][0][0]
+							<p>This is a paragraph!</p>[1][1][0][1]
+						</div>
+						<h1>This is a heading!</h1>[1][1][1]
+					</body>
+				</html>
+				<!-- (comment explaining this) -->
+			*/
+
+			auto htmlTag = doc.root->children[1];
+			auto bodyTag = htmlTag->children[1];
+			auto divTag = bodyTag->children[0];
+
+			// I've found it's actually sort of difficult to come up with
+			// a test case for validating invalid input. Maybe revisit this
+			// in the future?
+			Assert::AreEqual((size_t)2, bodyTag->children.size());
+			Assert::AreEqual((size_t)2, divTag->children.size());
+		}
 	};
 }

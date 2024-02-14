@@ -26,6 +26,7 @@ public:
 	weak_ptr<HTMLNode> parent_node;
 	vector<shared_ptr<HTMLNode>> children;
 	map<string, string> attributes;
+	bool closing_tag_found;
 
 	/* ctor */
 	HTMLNode();

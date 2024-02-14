@@ -6,6 +6,7 @@ HTMLNode::HTMLNode()
 {
 	// Just default to text node type
 	type = HTMLNodeType::Text;
+	closing_tag_found = false;
 }
 
 void HTMLNode::append_child(shared_ptr<HTMLNode> node)
