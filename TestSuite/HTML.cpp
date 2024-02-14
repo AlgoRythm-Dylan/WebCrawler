@@ -150,5 +150,43 @@ namespace TestSuite
 			Assert::AreEqual((size_t)2, bodyTag->children.size());
 			Assert::AreEqual((size_t)2, divTag->children.size());
 		}
+		TEST_METHOD(SiblingMethods)
+		{
+			HTMLDocument doc;
+			
+			auto firstElement = shared_ptr<HTMLNode>(HTMLNode::element());
+			auto secondElement = shared_ptr<HTMLNode>(HTMLNode::element());
+
+			firstElement->tag_name = "title";
+			secondElement->tag_name = "body";
+
+			doc.root->append_child(firstElement);
+			doc.root->append_child(secondElement);
+
+			// shared_ptr doesn't like being put into a temp object :(
+			auto result = firstElement->prev_sibling();
+			Assert::IsFalse((bool)result);
+			result = secondElement->next_sibling();
+			Assert::IsFalse((bool)result);
+
+			result = secondElement->prev_sibling();
+			Assert::IsTrue(firstElement == result);
+			result = firstElement->next_sibling();
+			Assert::IsTrue(secondElement == result);
+
+			auto thirdElement = shared_ptr<HTMLNode>(HTMLNode::comment());
+			doc.root->append_child(thirdElement);
+
+			result = secondElement->next_sibling();
+			Assert::IsFalse((bool)result);
+
+			auto fourthElement = shared_ptr<HTMLNode>(HTMLNode::element());
+			fourthElement->tag_name = "h2";
+			doc.root->append_child(fourthElement);
+
+			result = secondElement->next_sibling();
+			Assert::IsTrue((bool)result);
+			Assert::AreEqual(string("h2"), result->tag_name);
+		}
 	};
 }

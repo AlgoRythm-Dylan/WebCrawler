@@ -20,6 +20,8 @@ using std::map;
 
 class HTMLNode : public std::enable_shared_from_this<HTMLNode>
 {
+protected:
+	int my_index();
 public:
 	HTMLNodeType type;
 	string text_content, tag_name;
@@ -37,6 +39,8 @@ public:
 	vector<shared_ptr<HTMLNode>> querySelectorAll(string);
 	bool is_void_element() const;
 	bool is_root() const;
+	shared_ptr<HTMLNode> next_sibling();
+	shared_ptr<HTMLNode> prev_sibling();
 
 	/* static ctors */
 	static HTMLNode* element();

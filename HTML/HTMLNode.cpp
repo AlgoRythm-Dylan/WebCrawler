@@ -75,3 +75,60 @@ HTMLNode* HTMLNode::text()
 	node->type = HTMLNodeType::Text;
 	return node;
 }
+
+int HTMLNode::my_index()
+{
+	auto parentPtr = parent_node.lock();
+	if (!parentPtr)
+	{
+		return -1;
+	}
+	int myIndex = -1;
+	for (const auto& node : parentPtr->children)
+	{
+		myIndex++;
+		if (node.get() == this)
+		{
+			break;
+		}
+	}
+	return myIndex;
+}
+
+shared_ptr<HTMLNode> HTMLNode::next_sibling()
+{
+	auto parentPtr = parent_node.lock();
+	if (!parentPtr)
+	{
+		return nullptr;
+	}
+	
+	for (int cursor = my_index() + 1; cursor < parentPtr->children.size(); cursor++)
+	{
+		auto sibling = parentPtr->children[cursor];
+		if (sibling->type == HTMLNodeType::Element)
+		{
+			return sibling;
+		}
+	}
+	return nullptr;
+}
+
+shared_ptr<HTMLNode> HTMLNode::prev_sibling()
+{
+	auto parentPtr = parent_node.lock();
+	if (!parentPtr)
+	{
+		return nullptr;
+	}
+
+	for (int cursor = my_index() - 1; cursor >= 0; cursor--)
+	{
+		auto sibling = parentPtr->children[cursor];
+		if (sibling->type == HTMLNodeType::Element)
+		{
+			return sibling;
+		}
+	}
+	return nullptr;
+}
