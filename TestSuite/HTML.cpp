@@ -188,5 +188,15 @@ namespace TestSuite
 			Assert::IsTrue((bool)result);
 			Assert::AreEqual(string("h2"), result->tag_name);
 		}
+		TEST_METHOD(CachedValueId)
+		{
+			HTMLNode node;
+			node.attributes.insert({ "id", "abc123" });
+
+			// First time, it is read from attribtutes array
+			Assert::AreEqual(string("abc123"), node.id().value());
+			// Second time, it is not
+			Assert::AreEqual(string("abc123"), node.id().value());
+		}
 	};
 }

@@ -135,10 +135,18 @@ shared_ptr<HTMLNode> HTMLNode::prev_sibling()
 
 optional<string> HTMLNode::id()
 {
-	optional<string> result;
-	if (attributes.contains("id"))
+	if (m_id.was_fetched())
 	{
-		result = attributes["id"];
+		return m_id.value();
 	}
-	return result;
+	else
+	{
+		optional<string> id;
+		if (attributes.contains("id"))
+		{
+			id = attributes["id"];
+		}
+		m_id.set_value(id);
+		return id;
+	}
 }
