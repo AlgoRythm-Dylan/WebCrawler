@@ -21,12 +21,8 @@
   <ItemGroup>
     <ClCompile Include="EOFToken.cpp" />
     <ClCompile Include="Lexer.cpp" />
-    <ClCompile Include="LexingScanResult.cpp" />
-    <ClCompile Include="LexingState.cpp" />
     <ClCompile Include="LexingTools.cpp" />
-    <ClCompile Include="Parser.cpp" />
     <ClCompile Include="ParserMessage.cpp" />
-    <ClCompile Include="ParsingState.cpp" />
     <ClCompile Include="PunctuationToken.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -39,7 +35,6 @@
   <ItemGroup>
     <ClInclude Include="EOFToken.h" />
     <ClInclude Include="Lexer.h" />
-    <ClInclude Include="LexingScanResult.h" />
     <ClInclude Include="LexingState.h" />
     <ClInclude Include="LexingTools.h" />
     <ClInclude Include="Parser.h" />

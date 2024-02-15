@@ -10,9 +10,8 @@ HTMLLexCommentState::HTMLLexCommentState()
 	consecutive_dash_count = 0;
 }
 
-LexingScanResult HTMLLexCommentState::scan(const char character)
+bool HTMLLexCommentState::scan(const char character)
 {
-	LexingScanResult result;
 	if (character == '-')
 	{
 		consecutive_dash_count++;
@@ -56,5 +55,5 @@ LexingScanResult HTMLLexCommentState::scan(const char character)
 			memory += character;
 		}
 	}
-	return result;
+	return true;
 }

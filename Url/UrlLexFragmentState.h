@@ -2,5 +2,5 @@
 #include "UrlStringMemoryState.h"
 class UrlLexFragmentState : public UrlStringMemoryState
 {
-	LexingScanResult scan(const char) override;
+	bool scan(const char) override;
 };

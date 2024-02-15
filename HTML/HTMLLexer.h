@@ -4,7 +4,6 @@
 #include <queue>
 
 #include <Lexer.h>
-#include <LexingScanResult.h>
 #include <StreamHolder.h>
 
 using std::istream;
@@ -21,5 +20,5 @@ public:
 	HTMLLexer(istream&);
 	~HTMLLexer();
 	unique_ptr<Token> next();
-	LexingScanResult read(const char);
+	bool read(const char);
 };

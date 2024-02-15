@@ -9,6 +9,6 @@ protected:
 public:
 	HTMLLexCommentState();
 
-	LexingScanResult scan(const char) override;
+	bool scan(const char) override;
 };
 

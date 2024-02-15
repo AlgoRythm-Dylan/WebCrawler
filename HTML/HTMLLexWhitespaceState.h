@@ -5,6 +5,6 @@ class HTMLLexWhitespaceState : public HTMLStringMemoryState
 public:
 	shared_ptr<State> return_state;
 
-	LexingScanResult scan(const char) override;
+	bool scan(const char) override;
 };
 

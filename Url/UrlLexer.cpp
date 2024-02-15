@@ -21,7 +21,7 @@ unique_ptr<Token> UrlLexer::next()
 	while (token_buffer.size() == 0)
 	{
 		auto lexing_state = std::static_pointer_cast<LexingState>(current_state);
-		LexingScanResult result;
+		bool consumed;
 
 		char to_scan;
 		if (source_caret >= source.length())
@@ -33,8 +33,8 @@ unique_ptr<Token> UrlLexer::next()
 			to_scan = source[source_caret];
 		}
 
-		result = lexing_state->scan(to_scan);
-		if (result.consumed)
+		consumed = lexing_state->scan(to_scan);
+		if (consumed)
 		{
 			source_caret++;
 		}

@@ -5,9 +5,8 @@
 #include "UrlLexFragmentState.h"
 #include "UrlLexer.h"
 
-LexingScanResult UrlLexQueryState::scan(const char character)
+bool UrlLexQueryState::scan(const char character)
 {
-	LexingScanResult result;
 	if (character == '?' || character == '=' || character == '&')
 	{
 		emit_memory();
@@ -33,5 +32,5 @@ LexingScanResult UrlLexQueryState::scan(const char character)
 	{
 		memory += character;
 	}
-	return result;
+	return true;
 }

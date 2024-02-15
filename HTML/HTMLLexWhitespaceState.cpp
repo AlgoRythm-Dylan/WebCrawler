@@ -8,9 +8,9 @@
 #include "HTMLLexGenericState.h"
 #include "HTMLLexer.h"
 
-LexingScanResult HTMLLexWhitespaceState::scan(const char character)
+bool HTMLLexWhitespaceState::scan(const char character)
 {
-	LexingScanResult result;
+	bool consumed = true;
 	if (LexingTools::is_whitespace(character))
 	{
 		memory += character;
@@ -21,7 +21,7 @@ LexingScanResult HTMLLexWhitespaceState::scan(const char character)
 		token->value = memory;
 		auto lexer = (HTMLLexer*)machine;
 		lexer->token_buffer.push(unique_ptr<Token>(token));
-		result.consumed = false;
+		consumed = false;
 		if (return_state)
 		{
 			machine->current_state = return_state;
@@ -31,5 +31,5 @@ LexingScanResult HTMLLexWhitespaceState::scan(const char character)
 			transition(new HTMLLexGenericState());
 		}
 	}
-	return result;
+	return consumed;
 }

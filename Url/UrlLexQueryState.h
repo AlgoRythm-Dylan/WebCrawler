@@ -6,5 +6,5 @@
 class UrlLexQueryState : public UrlStringMemoryState
 {
 public:
-	LexingScanResult scan(const char) override;
+	bool scan(const char) override;
 };

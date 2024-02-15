@@ -36,9 +36,8 @@ HTMLLexTagState::HTMLLexTagState()
 	encountered_whitespace = false;
 }
 
-LexingScanResult HTMLLexTagState::scan(const char character)
+bool HTMLLexTagState::scan(const char character)
 {
-	LexingScanResult result;
 	if (character == '<' || character == '>' ||
         character == '/' || character == '=' ||
 		character == '"' || character == '\'' ||
@@ -112,5 +111,5 @@ LexingScanResult HTMLLexTagState::scan(const char character)
 		memory += character;
 	}
 	counter++;
-	return result;
+	return true;
 }

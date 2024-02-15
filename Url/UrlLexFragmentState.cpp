@@ -4,9 +4,8 @@
 
 #include <EOFToken.h>
 
-LexingScanResult UrlLexFragmentState::scan(const char character)
+bool UrlLexFragmentState::scan(const char character)
 {
-	LexingScanResult result;
 	if (character == '\0')
 	{
 		emit_memory();
@@ -17,5 +16,5 @@ LexingScanResult UrlLexFragmentState::scan(const char character)
 	{
 		memory += character;
 	}
-	return result;
+	return true;
 }

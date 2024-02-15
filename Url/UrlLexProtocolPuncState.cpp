@@ -5,9 +5,9 @@
 #include "UrlLexer.h"
 #include "UrlLexAuthorityState.h"
 
-LexingScanResult UrlLexProtocolPuncState::scan(const char character)
+bool UrlLexProtocolPuncState::scan(const char character)
 {
-	LexingScanResult result;
+	bool consumed = true;
 	if (character == ':' || character == '/')
 	{
 		// Push punctuation token onto queue
@@ -21,9 +21,9 @@ LexingScanResult UrlLexProtocolPuncState::scan(const char character)
 	else
 	{
 		// Transition to next state
-		result.consumed = false;
+		consumed = false;
 		auto nextState = new UrlLexAuthorityState();
 		transition(shared_ptr<State>(nextState));
 	}
-	return result;
+	return consumed;
 }

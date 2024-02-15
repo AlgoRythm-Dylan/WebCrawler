@@ -20,9 +20,8 @@ Tokens include:
 */
 
 
-LexingScanResult HTMLLexGenericState::scan(const char character)
+bool HTMLLexGenericState::scan(const char character)
 {
-	LexingScanResult result;
 	if (character == '<')
 	{
 		emit_memory();
@@ -42,5 +41,5 @@ LexingScanResult HTMLLexGenericState::scan(const char character)
 	{
 		memory += character;
 	}
-	return result;
+	return true;
 }

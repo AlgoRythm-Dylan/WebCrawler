@@ -5,6 +5,6 @@
 class HTMLLexGenericState : public HTMLStringMemoryState
 {
 public:
-	LexingScanResult scan(const char) override;
+	bool scan(const char) override;
 };
 

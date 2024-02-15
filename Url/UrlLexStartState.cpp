@@ -12,9 +12,9 @@
 
 using std::unique_ptr;
 
-LexingScanResult UrlLexStartState::scan(const char character)
+bool UrlLexStartState::scan(const char character)
 {
-	LexingScanResult result;
+	bool consumed = true;
 	if (character == ' ')
 	{
 		if (memory.length() != 0)
@@ -37,7 +37,7 @@ LexingScanResult UrlLexStartState::scan(const char character)
 	{
 		// Transition to path parsing state
 		emit_memory();
-		result.consumed = false;
+		consumed = false;
 		auto next_state = std::make_shared<UrlLexPathState>();
 		transition(next_state);
 	}
@@ -66,5 +66,5 @@ LexingScanResult UrlLexStartState::scan(const char character)
 		// Nothing to do here except remember what we're being told
 		memory += character;
 	}
-	return result;
+	return consumed;
 }

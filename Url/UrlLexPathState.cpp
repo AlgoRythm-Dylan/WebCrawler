@@ -8,9 +8,9 @@
 #include "UrlLexQueryState.h"
 #include "UrlLexFragmentState.h"
 
-LexingScanResult UrlLexPathState::scan(const char character)
+bool UrlLexPathState::scan(const char character)
 {
-	LexingScanResult result;
+	bool consumed = true;
 	if (character == '/')
 	{
 		emit_memory();
@@ -21,7 +21,7 @@ LexingScanResult UrlLexPathState::scan(const char character)
 	else if (character == '?' || character == '&')
 	{
 		emit_memory();
-		result.consumed = false;
+		consumed = false;
 		auto nextState = new UrlLexQueryState();
 		transition(shared_ptr<State>(nextState));
 	}
@@ -44,5 +44,5 @@ LexingScanResult UrlLexPathState::scan(const char character)
 	{
 		memory += character;
 	}
-	return result;
+	return consumed;
 }

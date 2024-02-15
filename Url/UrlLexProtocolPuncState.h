@@ -4,5 +4,5 @@
 
 class UrlLexProtocolPuncState : public LexingState
 {
-	LexingScanResult scan(const char) override;
+	bool scan(const char) override;
 };

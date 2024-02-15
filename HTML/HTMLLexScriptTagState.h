@@ -10,5 +10,5 @@ protected:
 public:
 	HTMLLexScriptTagState();
 
-	LexingScanResult scan(const char) override;
+	bool scan(const char) override;
 };

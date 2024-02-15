@@ -5,13 +5,13 @@
 #include "UrlLexPathState.h"
 #include "UrlLexer.h"
 
-LexingScanResult UrlLexAuthorityState::scan(const char character)
+bool UrlLexAuthorityState::scan(const char character)
 {
-	LexingScanResult result;
+	bool consumed = true;
 	if (character == '/')
 	{
 		emit_memory();
-		result.consumed = false;
+		consumed = false;
 		// Transition to path parsing state
 		auto pathParsingState = std::make_shared<UrlLexPathState>();
 		transition(pathParsingState);
@@ -34,5 +34,5 @@ LexingScanResult UrlLexAuthorityState::scan(const char character)
 	{
 		memory += character;
 	}
-	return result;
+	return consumed;
 }

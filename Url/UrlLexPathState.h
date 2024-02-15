@@ -5,5 +5,5 @@
 class UrlLexPathState : public UrlStringMemoryState
 {
 public:
-	LexingScanResult scan(const char) override;
+	bool scan(const char) override;
 };

@@ -23,7 +23,7 @@ void CrawlJob::perform()
 			// On data get
 			for (size_t i = 0; i < count; i++)
 			{
-				auto result = lexer.read(buffer[i]);
+				bool consumed = lexer.read(buffer[i]);
 				while (!lexer.token_buffer.empty())
 				{
 					auto tok = std::move(lexer.token_buffer.front());
@@ -35,7 +35,7 @@ void CrawlJob::perform()
 					}
 				}
 				// "putback" if not consumed
-				if (!result.consumed)
+				if (consumed)
 				{
 					i--;
 				}

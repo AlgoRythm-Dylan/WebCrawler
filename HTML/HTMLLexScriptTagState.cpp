@@ -10,9 +10,8 @@ HTMLLexScriptTagState::HTMLLexScriptTagState() : end_tag_tracker("</script>")
 	end_tag_tracker.is_case_insensitive = true;
 }
 
-LexingScanResult HTMLLexScriptTagState::scan(const char character)
+bool HTMLLexScriptTagState::scan(const char character)
 {
-	LexingScanResult result;
 	memory += character;
 	end_tag_tracker.add(character);
 	if (character == '>')
@@ -39,5 +38,5 @@ LexingScanResult HTMLLexScriptTagState::scan(const char character)
 			transition(new HTMLLexGenericState());
 		}
 	}
-	return result;
+	return true;
 }

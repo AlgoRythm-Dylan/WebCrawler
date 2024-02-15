@@ -18,9 +18,8 @@ HTMLLexStringState::HTMLLexStringState(const char open)
 	escape_flag = false;
 }
 
-LexingScanResult HTMLLexStringState::scan(const char character)
+bool HTMLLexStringState::scan(const char character)
 {
-	LexingScanResult result;
 	if (character == opening_quote && !escape_flag)
 	{
 		emit_memory();
@@ -56,7 +55,7 @@ LexingScanResult HTMLLexStringState::scan(const char character)
 		escape_flag = false;
 	}
 
-	return result;
+	return true;
 }
 
 void HTMLLexStringState::emit_memory()
