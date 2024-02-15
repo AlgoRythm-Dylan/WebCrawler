@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttributeRequirement.h" />
     <ClInclude Include="Cached.h" />
     <ClInclude Include="HTMLLexCommentState.h" />
     <ClInclude Include="HTMLLexGenericState.h" />

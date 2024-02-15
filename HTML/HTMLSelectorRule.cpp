@@ -28,13 +28,37 @@ bool HTMLSelectorRule::is_satisfied_by(const shared_ptr<HTMLNode> node) const
 			return false;
 		}
 	}
-	if (!class_names.empty())
+	for (const auto& name : class_names)
 	{
-		for (const auto& name : class_names)
+		if (!node->classes()->contains(name))
 		{
-			if (!node->classes()->contains(name))
+			return false;
+		}
+	}
+	for (const auto& attribute : attributes)
+	{
+		if (!node->attributes.contains(attribute.first))
+		{
+			// Attribute is not even present
+			return false;
+		}
+		if (attribute.second.value.has_value())
+		{
+			if (attribute.second.value_case_sensitive)
 			{
-				return false;
+				if (attribute.second.value.value() != node->attributes[attribute.first])
+				{
+					// Attribute is present, but value does not match or does not match case
+					return false;
+				}
+			}
+			else
+			{
+				if (!LexingTools::compare_case_insensitive(attribute.second.value.value(), node->attributes[attribute.first]))
+				{
+					// Attribute is present, but value does not match
+					return false;
+				}
 			}
 		}
 	}
