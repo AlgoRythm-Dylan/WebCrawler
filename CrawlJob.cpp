@@ -35,7 +35,7 @@ void CrawlJob::perform()
 					}
 				}
 				// "putback" if not consumed
-				if (consumed)
+				if (!consumed)
 				{
 					i--;
 				}
