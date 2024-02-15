@@ -38,6 +38,9 @@
     <ClInclude Include="HTMLSelectorExecutor.h" />
     <ClInclude Include="HTMLSelectorRule.h" />
     <ClInclude Include="HTMLStringMemoryState.h" />
+    <ClInclude Include="SelectorLexer.h" />
+    <ClInclude Include="SelectorLexGenericState.h" />
+    <ClInclude Include="SelectorStringMemoryState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HTMLLexCommentState.cpp" />
@@ -57,6 +60,9 @@
     <ClCompile Include="HTMLSelectorExecutor.cpp" />
     <ClCompile Include="HTMLSelectorRule.cpp" />
     <ClCompile Include="HTMLStringMemoryState.cpp" />
+    <ClCompile Include="SelectorLexer.cpp" />
+    <ClCompile Include="SelectorLexGenericState.cpp" />
+    <ClCompile Include="SelectorStringMemoryState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StateMachine\StateMachine.vcxproj">

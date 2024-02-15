@@ -19,6 +19,6 @@ public:
 	HTMLLexer();
 	HTMLLexer(istream&);
 	~HTMLLexer();
-	unique_ptr<Token> next();
+	unique_ptr<Token> next() override;
 	bool read(const char);
 };

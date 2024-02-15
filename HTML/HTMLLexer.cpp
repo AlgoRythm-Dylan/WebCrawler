@@ -29,25 +29,25 @@ unique_ptr<Token> HTMLLexer::next()
 
 	while (token_buffer.empty())
 	{
-		auto lexing_state = std::static_pointer_cast<LexingState>(current_state);
+		auto lexingState = std::static_pointer_cast<LexingState>(current_state);
 		bool consumed;
 
-		char to_scan;
+		char toScan;
 		
-		stream_holder->stream.get(to_scan);
+		stream_holder->stream.get(toScan);
 		if (stream_holder->stream.eof())
 		{
-			to_scan = '\0';
+			toScan = '\0';
 		}
 
-		consumed = lexing_state->scan(to_scan);
+		consumed = lexingState->scan(toScan);
 		if (!consumed)
 		{
-			stream_holder->stream.putback(to_scan);
+			stream_holder->stream.putback(toScan);
 		}
 		else
 		{
-			update_position(to_scan);
+			update_position(toScan);
 		}
 	}
 	auto token = std::move(token_buffer.front());
@@ -57,9 +57,9 @@ unique_ptr<Token> HTMLLexer::next()
 
 bool HTMLLexer::read(const char character)
 {
-	auto lexing_state = std::static_pointer_cast<LexingState>(current_state);
+	auto lexingState = std::static_pointer_cast<LexingState>(current_state);
 
-	auto consumed = lexing_state->scan(character);
+	auto consumed = lexingState->scan(character);
 	if (consumed)
 	{
 		update_position(character);
