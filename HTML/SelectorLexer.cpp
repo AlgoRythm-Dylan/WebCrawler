@@ -23,7 +23,6 @@ unique_ptr<Token> SelectorLexer::next()
 	while (token_buffer.empty())
 	{
 		auto lexingState = std::static_pointer_cast<LexingState>(current_state);
-		bool consumed;
 		char toScan;
 
 		if (cursor == source.size())

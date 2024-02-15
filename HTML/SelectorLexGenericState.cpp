@@ -17,14 +17,14 @@ bool SelectorLexGenericState::scan(const char character)
 	{
 		auto token = unique_ptr<Token>(new PunctuationToken("#"));
 		auto lexer = (SelectorLexer*)machine;
-		lexer->token_buffer.push(token);
+		lexer->token_buffer.push(std::move(token));
 		transition(new SelectorLexIdState());
 	}
 	else if (character == '.')
 	{
 		auto token = unique_ptr<Token>(new PunctuationToken("."));
 		auto lexer = (SelectorLexer*)machine;
-		lexer->token_buffer.push(token);
+		lexer->token_buffer.push(std::move(token));
 		transition(new SelectorLexClassState());
 	}
 	else if (character == '[')

@@ -25,7 +25,7 @@ bool SelectorLexIdState::scan(const char character)
 		emit_memory();
 		auto token = unique_ptr<Token>(new PunctuationToken("."));
 		auto lexer = (SelectorLexer*)machine;
-		lexer->token_buffer.push(token);
+		lexer->token_buffer.push(std::move(token));
 		transition(new SelectorLexClassState());
 	}
 	else if (character == ' ')
@@ -37,10 +37,11 @@ bool SelectorLexIdState::scan(const char character)
 		emit_memory();
 		auto token = unique_ptr<Token>(new EOFToken());
 		auto lexer = (SelectorLexer*)machine;
-		lexer->token_buffer.push(token);
+		lexer->token_buffer.push(std::move(token));
 	}
 	else
 	{
 		memory += character;
 	}
+	return true;
 }
