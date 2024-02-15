@@ -31,5 +31,5 @@ public:
 	set<string> class_names;
 	map<string, AttributeRequirement, InsensitiveCompare> attributes;
 	RelativeRelationship relative_relationship;
-	bool is_satisfied_by(const shared_ptr<HTMLNode>) const;
+	bool is_satisfied_by(const shared_ptr<HTMLNode>, const shared_ptr<HTMLNode> = nullptr) const;
 };
