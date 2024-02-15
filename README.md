@@ -209,6 +209,8 @@ WebCrawler --header "User-Agent: xyz" --header "Accept: application/json"
 
 ## WebCrawler client changelog
 ```
+0.1.7
+- InteractiveCrawl now looks for both "location" and "Location"
 0.1.6
 - InteractiveCommand now parses command line arguments
 - crawl command now properly accepts a url as its first
