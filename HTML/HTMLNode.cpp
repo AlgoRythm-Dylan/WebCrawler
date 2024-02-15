@@ -164,3 +164,8 @@ optional<string> HTMLNode::id()
 		return id;
 	}
 }
+
+shared_ptr<CaseInsensitiveSet> HTMLNode::classes()
+{
+	return nullptr;
+}

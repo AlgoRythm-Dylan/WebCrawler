@@ -37,6 +37,7 @@ class HTMLNode : public std::enable_shared_from_this<HTMLNode>
 protected:
 	int my_index();
 	Cached<optional<string>> m_id;
+	Cached<shared_ptr<CaseInsensitiveSet>> m_classes;
 public:
 	HTMLNodeType type;
 	string text_content, tag_name;
@@ -57,6 +58,7 @@ public:
 	shared_ptr<HTMLNode> next_sibling();
 	shared_ptr<HTMLNode> prev_sibling();
 	optional<string> id();
+	shared_ptr<CaseInsensitiveSet> classes();
 
 	/* static ctors */
 	static HTMLNode* element();
