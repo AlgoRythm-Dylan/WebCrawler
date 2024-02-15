@@ -167,5 +167,45 @@ optional<string> HTMLNode::id()
 
 shared_ptr<CaseInsensitiveSet> HTMLNode::classes()
 {
-	return nullptr;
+	if (m_classes.was_fetched())
+	{
+		return m_classes.value();
+	}
+	else
+	{
+		auto value = std::make_shared<CaseInsensitiveSet>();
+		m_classes.set_value(value);
+		parse_classes();
+		return value;
+	}
+}
+
+void HTMLNode::parse_classes()
+{
+	auto set = m_classes.value();
+	set->clear();
+	if (attributes.contains("class"))
+	{
+		string classString = attributes["class"];
+		string currentClassValue = "";
+		for (size_t i = 0; i < classString.size(); i++)
+		{
+			if (classString[i] == ' ')
+			{
+				if (!currentClassValue.empty())
+				{
+					set->insert(currentClassValue);
+					currentClassValue = "";
+				}
+			}
+			else
+			{
+				currentClassValue += classString[i];
+			}
+		}
+		if (!currentClassValue.empty())
+		{
+			set->insert(currentClassValue);
+		}
+	}
 }

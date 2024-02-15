@@ -38,6 +38,7 @@ protected:
 	int my_index();
 	Cached<optional<string>> m_id;
 	Cached<shared_ptr<CaseInsensitiveSet>> m_classes;
+	void parse_classes();
 public:
 	HTMLNodeType type;
 	string text_content, tag_name;

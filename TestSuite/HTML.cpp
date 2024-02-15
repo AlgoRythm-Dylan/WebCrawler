@@ -205,5 +205,18 @@ namespace TestSuite
 
 			Assert::AreEqual(string("abc123"), node.id().value());
 		}
+		TEST_METHOD(ClassList)
+		{
+			HTMLNode node;
+			node.attributes.insert({ "class", "m-0 p-3 text-warning" });
+
+			Assert::IsTrue(node.classes()->contains("m-0"));
+			Assert::IsTrue(node.classes()->contains("p-3"));
+			Assert::IsTrue(node.classes()->contains("text-warning"));
+			// Case-insensitive?
+			Assert::IsTrue(node.classes()->contains("text-WArning"));
+			// You're not just saying yes to everything, are you?
+			Assert::IsFalse(node.classes()->contains("text-"));
+		}
 	};
 }
