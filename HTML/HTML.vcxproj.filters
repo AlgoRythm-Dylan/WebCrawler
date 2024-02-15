@@ -66,7 +66,7 @@
     <ClInclude Include="HTMLLexScriptTagState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CachedItem.h">
+    <ClInclude Include="Cached.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

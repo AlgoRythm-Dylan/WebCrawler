@@ -7,7 +7,7 @@
 #include <optional>
 #include <set>
 
-#include "CachedItem.h"
+#include "Cached.h"
 
 enum HTMLNodeType : unsigned char {
 	Root,
@@ -36,7 +36,7 @@ class HTMLNode : public std::enable_shared_from_this<HTMLNode>
 {
 protected:
 	int my_index();
-	CachedItem<optional<string>> m_id;
+	Cached<optional<string>> m_id;
 public:
 	HTMLNodeType type;
 	string text_content, tag_name;
