@@ -25,6 +25,7 @@ class HTMLSelectorRule
 public:
 	optional<string> tag_name, id;
 	optional<shared_ptr<HTMLSelectorRule>> relative;
+	set<string> class_names;
 	RelativeRelationship relative_relationship;
 	bool is_satisfied_by(const shared_ptr<HTMLNode>) const;
 };
