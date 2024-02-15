@@ -116,12 +116,7 @@ void InteractiveCrawl::do_job()
 		std::cout << "\n";
 		if (current_job->response->status == 301 || current_job->response->status == 302)
 		{
-			auto locationHeaderSearch = current_job->response->search_headers("Location");
-			if (locationHeaderSearch.empty())
-			{
-				// Some servers return lowercase l
-				locationHeaderSearch = current_job->response->search_headers("location");
-			}
+			auto locationHeaderSearch = current_job->response->search_headers_insensitive("Location");
 			if (!locationHeaderSearch.empty()) {
 				string location = locationHeaderSearch[0].second;
 				std::cout << "Redirect code returned pointing to location: ";

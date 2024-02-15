@@ -1,6 +1,7 @@
 #include "HttpResponse.h"
 
 #include <curl/curl.h>
+#include <LexingTools.h>
 
 HttpResponse::HttpResponse()
 {
@@ -29,6 +30,19 @@ vector<pair<string, string>> HttpResponse::search_headers(string_view search)
 	for (auto const& header : headers)
 	{
 		if (search == header.first)
+		{
+			results.push_back(header);
+		}
+	}
+	return results;
+}
+
+vector<pair<string, string>> HttpResponse::search_headers_insensitive(string_view search)
+{
+	vector<pair<string, string>> results;
+	for (auto const& header : headers)
+	{
+		if (LexingTools::compare_case_insensitive(search, header.first))
 		{
 			results.push_back(header);
 		}

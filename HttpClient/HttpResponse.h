@@ -27,5 +27,6 @@ public:
 	bool is_success_status_code();
 	bool was_success();
 	vector<pair<string, string>> search_headers(string_view);
+	vector<pair<string, string>> search_headers_insensitive(string_view);
 };
 
