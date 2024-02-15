@@ -4,6 +4,33 @@ I am keeping a journal here to document what I've learned.
 This is an unstructured document where I may reflect on
 anything I determine to be of value.
 
+## Organizing Visual Studio projects
+Visual Studio groups up C(++) projects into header and 
+implementation files. These files, no matter where they
+are on the actual file tree, are all shown next to each
+other in a list.
+
+This is actually really nice, in my opinion, but can
+become a horrendous, unhelpful infinity-scroll for
+larger projects.
+
+Visual studio offers the ability to change the tree
+to a filesystem representation, but it's just not
+the same. It's just not as nice. So what's the best
+of both worlds?
+
+Static libraries.
+
+For each logical "module" of your solution - for example,
+the HttpClient - create a new project in visual studio
+that compiles to a static library. Then, add that
+library's folder path to your pain project's "additional
+include directories" option, and add the project reference.
+
+Now your solution explorer tree is grouped up by
+project and you get to keep the nice .h/.cpp sorting
+which is default in VS.
+
 ## std::optional
 c++ is not like the other girls. A string can't point to
 null, because in other languages, objects aren't objects:
