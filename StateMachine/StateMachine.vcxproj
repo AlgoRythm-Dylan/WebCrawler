@@ -47,6 +47,7 @@
     <ClInclude Include="StringToken.h" />
     <ClInclude Include="StringTracker.h" />
     <ClInclude Include="Token.h" />
+    <ClInclude Include="TokenBufferedLexer.h" />
     <ClInclude Include="WhitespaceToken.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
