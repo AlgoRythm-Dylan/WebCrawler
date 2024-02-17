@@ -71,9 +71,6 @@
     <ClInclude Include="SelectorLexer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SelectorStringMemoryState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SelectorLexGenericState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -137,9 +134,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SelectorLexer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectorStringMemoryState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SelectorLexGenericState.cpp">

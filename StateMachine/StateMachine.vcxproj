@@ -27,6 +27,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="StreamHolder.cpp" />
+    <ClCompile Include="StringMemoryLexingState.cpp" />
     <ClCompile Include="StringToken.cpp" />
     <ClCompile Include="StringTracker.cpp" />
     <ClCompile Include="Token.cpp" />
@@ -44,6 +45,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StreamHolder.h" />
+    <ClInclude Include="StringMemoryLexingState.h" />
     <ClInclude Include="StringToken.h" />
     <ClInclude Include="StringTracker.h" />
     <ClInclude Include="Token.h" />

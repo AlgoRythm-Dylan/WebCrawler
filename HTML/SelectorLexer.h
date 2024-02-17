@@ -2,20 +2,16 @@
 
 #include <queue>
 
-#include <Lexer.h>
+#include <TokenBufferedLexer.h>
 
 using std::queue;
 
-class SelectorLexer : public Lexer
+class SelectorLexer : public TokenBufferedLexer
 {
 protected:
 	string& source;
 	int cursor;
 public:
-	queue<unique_ptr<Token>> token_buffer;
-
-	SelectorLexer();
-
 	SelectorLexer(string&);
 	unique_ptr<Token> next() override;
 };
