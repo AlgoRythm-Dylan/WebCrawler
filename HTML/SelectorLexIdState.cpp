@@ -14,6 +14,7 @@ bool SelectorLexIdState::scan(const char character)
 {
 	// If find [, transition to attribute parsing state
 	// If find ., transition to class parsing state
+	// If find comma, emit and transition to generic state
 	// if find whitespace, transition to generic state
 	// else, add to memory (it's the tag name!)
 	if (character == '[')
@@ -24,7 +25,7 @@ bool SelectorLexIdState::scan(const char character)
 	{
 		emit_memory();
 		auto lexer = (SelectorLexer*)machine;
-		lexer->add_token<PunctuationToken>(".");
+		lexer->punct(".");
 		transition(new SelectorLexClassState());
 	}
 	else if (character == ' ')
@@ -35,7 +36,7 @@ bool SelectorLexIdState::scan(const char character)
 	{
 		emit_memory();
 		auto lexer = (SelectorLexer*)machine;
-		lexer->add_token<EOFToken>();
+		lexer->eof();
 	}
 	else
 	{

@@ -18,6 +18,10 @@ public:
 	void add_token(Args&&... args)
 	{
 		static_assert(std::is_base_of<Token, T>::value, "Argument must be Token");
-		token_buffer.push(unique_ptr<Token>(new T(std::forward<Args>(args)...));
+		token_buffer.push(unique_ptr<Token>(new T(std::forward<Args>(args)...)));
 	}
+
+	void punct(string_view);
+	void str(string_view);
+	void eof();
 };
