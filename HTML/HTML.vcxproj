@@ -38,8 +38,11 @@
     <ClInclude Include="HTMLSelectorExecutor.h" />
     <ClInclude Include="HTMLSelectorRule.h" />
     <ClInclude Include="HTMLStringMemoryState.h" />
+    <ClInclude Include="SelectorLexAttributeState.h" />
     <ClInclude Include="SelectorLexer.h" />
     <ClInclude Include="SelectorLexGenericState.h" />
+    <ClInclude Include="SelectorLexStringState.h" />
+    <ClInclude Include="SelectorParseGenericState.h" />
     <ClInclude Include="SelectorParser.h" />
   </ItemGroup>
   <ItemGroup>
@@ -60,8 +63,11 @@
     <ClCompile Include="HTMLSelectorExecutor.cpp" />
     <ClCompile Include="HTMLSelectorRule.cpp" />
     <ClCompile Include="HTMLStringMemoryState.cpp" />
+    <ClCompile Include="SelectorLexAttributeState.cpp" />
     <ClCompile Include="SelectorLexer.cpp" />
     <ClCompile Include="SelectorLexGenericState.cpp" />
+    <ClCompile Include="SelectorLexStringState.cpp" />
+    <ClCompile Include="SelectorParseGenericState.cpp" />
     <ClCompile Include="SelectorParser.cpp" />
   </ItemGroup>
   <ItemGroup>

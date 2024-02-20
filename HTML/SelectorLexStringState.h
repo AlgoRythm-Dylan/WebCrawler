@@ -1,8 +1,8 @@
 #pragma once
 
-#include "HTMLStringMemoryState.h"
+#include <StringMemoryLexingState.h>
 
-class HTMLLexStringState : public HTMLStringMemoryState
+class SelectorLexStringState : public StringMemoryLexingState
 {
 public:
 	// This state will likely return to a previous
@@ -11,11 +11,13 @@ public:
 	char opening_quote;
 	bool escape_flag;
 
-	HTMLLexStringState();
-	HTMLLexStringState(const char);
+	SelectorLexStringState();
+	SelectorLexStringState(const char open);
+
 	bool scan(const char) override;
 
-	// An empty string is still a string
+
+	// Need to override default behavior and emit
+	// empty string tokens
 	void emit_memory() override;
 };
-

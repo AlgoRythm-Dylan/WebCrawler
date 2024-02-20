@@ -1,8 +1,14 @@
 #include "SelectorLexGenericState.h"
 
 #include <PunctuationToken.h>
+#include <LexingTools.h>
 
 #include "SelectorLexer.h"
+
+SelectorLexGenericState::SelectorLexGenericState()
+{
+	last_char_was_whitespace = false;
+}
 
 bool SelectorLexGenericState::scan(const char character)
 {
@@ -19,16 +25,23 @@ bool SelectorLexGenericState::scan(const char character)
 	}*/
 	else
 	{
-		if (character == ' ')
+		if (LexingTools::is_whitespace(character))
 		{
-			emit_memory();
-			auto lexer = (SelectorLexer*)machine;
-			lexer->wsp();
+			if (!last_char_was_whitespace)
+			{
+				emit_memory();
+				auto lexer = (SelectorLexer*)machine;
+				lexer->wsp();
+			}
 		}
 		else
 		{
 			memory += character;
 		}
+	}
+	if (LexingTools::is_whitespace(character))
+	{
+		last_char_was_whitespace = true;
 	}
 	return true;
 }

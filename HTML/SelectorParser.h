@@ -7,7 +7,7 @@
 class SelectorParser : public Parser
 {
 public:
-	shared_ptr<HTMLSelectorRule> current_rule;
+	weak_ptr<HTMLSelectorRule> current_rule;
 	HTMLSelector& selector;
 
 	SelectorParser(HTMLSelector&);
