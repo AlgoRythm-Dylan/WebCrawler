@@ -35,4 +35,5 @@ bool SelectorLexAttributeState::scan(const char character)
 	{
 		memory += character;
 	}
+	return true;
 }

@@ -4,7 +4,7 @@
 
 SelectorParser::SelectorParser(HTMLSelector& s) : selector(s)
 {
-	current_rule = nullptr;
+
 }
 
 unique_ptr<Token> SelectorParser::scan(unique_ptr<Token> token)

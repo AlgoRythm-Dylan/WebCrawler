@@ -228,41 +228,41 @@ namespace TestSuite
 
 			HTMLSelector selector;
 
-			HTMLSelectorRule idRule;
-			idRule.id = "abc123";
+			auto idRule = std::make_shared<HTMLSelectorRule>();
+			idRule->id = "abc123";
 			selector.rules.push_back(idRule);
 
-			HTMLSelectorRule classRule;
-			classRule.class_names.insert("text-warning");
-			classRule.class_names.insert("mb-0");
+			auto classRule = std::make_shared<HTMLSelectorRule>();
+			classRule->class_names.insert("text-warning");
+			classRule->class_names.insert("mb-0");
 			selector.rules.push_back(classRule);
 
-			HTMLSelectorRule classRuleNoMatch;
-			classRuleNoMatch.class_names.insert("does-not-exist");
+			auto classRuleNoMatch = std::make_shared<HTMLSelectorRule>();
+			classRuleNoMatch->class_names.insert("does-not-exist");
 
-			HTMLSelectorRule attributeNameOnly;
+			auto attributeNameOnly = std::make_shared<HTMLSelectorRule>();
 			AttributeRequirement attributeNameOnlyReq;
-			attributeNameOnly.attributes.insert({ "data-title", attributeNameOnlyReq });
+			attributeNameOnly->attributes.insert({ "data-title", attributeNameOnlyReq });
 			selector.rules.push_back(attributeNameOnly);
 
-			HTMLSelectorRule attributeIns;
+			auto attributeIns = std::make_shared<HTMLSelectorRule>();
 			AttributeRequirement attributeInsReq;
 			attributeInsReq.value = "hello WORLD";
 			attributeInsReq.value_case_sensitive = false;
-			attributeIns.attributes.insert({ "data-title", attributeInsReq });
+			attributeIns->attributes.insert({ "data-title", attributeInsReq });
 			selector.rules.push_back(attributeIns);
 
-			HTMLSelectorRule attributeNoMatch;
+			auto attributeNoMatch = std::make_shared<HTMLSelectorRule>();
 			AttributeRequirement attributeNoMatchReq;
 			attributeNoMatchReq.value = "hello WORLD";
-			attributeNoMatch.attributes.insert({ "data-title", attributeNoMatchReq });
+			attributeNoMatch->attributes.insert({ "data-title", attributeNoMatchReq });
 
-			Assert::IsTrue(idRule.is_satisfied_by(node));
-			Assert::IsTrue(classRule.is_satisfied_by(node));
-			Assert::IsFalse(classRuleNoMatch.is_satisfied_by(node));
-			Assert::IsTrue(attributeNameOnly.is_satisfied_by(node));
-			Assert::IsTrue(attributeIns.is_satisfied_by(node));
-			Assert::IsFalse(attributeNoMatch.is_satisfied_by(node));
+			Assert::IsTrue(idRule->is_satisfied_by(node));
+			Assert::IsTrue(classRule->is_satisfied_by(node));
+			Assert::IsFalse(classRuleNoMatch->is_satisfied_by(node));
+			Assert::IsTrue(attributeNameOnly->is_satisfied_by(node));
+			Assert::IsTrue(attributeIns->is_satisfied_by(node));
+			Assert::IsFalse(attributeNoMatch->is_satisfied_by(node));
 
 			Assert::IsTrue(selector.is_satisfied_by(node));
 			// Now invalidate it and run again to assert false

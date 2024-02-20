@@ -48,6 +48,7 @@ bool SelectorLexStringState::scan(const char character)
 	{
 		escape_flag = false;
 	}
+	return true;
 }
 
 void SelectorLexStringState::emit_memory()

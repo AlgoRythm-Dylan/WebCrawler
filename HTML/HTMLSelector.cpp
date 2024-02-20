@@ -4,7 +4,7 @@ bool HTMLSelector::is_satisfied_by(const shared_ptr<HTMLNode> node, const shared
 {
 	for (const auto& rule : rules)
 	{
-		if (rule.is_satisfied_by(node, search_root))
+		if (rule->is_satisfied_by(node, search_root))
 		{
 			return true;
 		}
