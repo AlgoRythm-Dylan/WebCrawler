@@ -184,6 +184,7 @@ void InteractiveCrawl::start_interactive_prompt()
 				if (!current_job->response->was_success())
 				{
 					std::cout << "This command will not execute because the HTTP request was not successful.\n";
+					continue;
 				}
 			}
 			auto command = commandCreator->creator();
