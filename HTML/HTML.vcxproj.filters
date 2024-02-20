@@ -74,10 +74,7 @@
     <ClInclude Include="SelectorLexGenericState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SelectorLexIdState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectorLexClassState.h">
+    <ClInclude Include="SelectorParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -139,10 +136,7 @@
     <ClCompile Include="SelectorLexGenericState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SelectorLexIdState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectorLexClassState.cpp">
+    <ClCompile Include="SelectorParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

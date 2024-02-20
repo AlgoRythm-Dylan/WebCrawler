@@ -5,6 +5,7 @@
 
 #include "PunctuationToken.h"
 #include "EOFToken.h"
+#include "WhitespaceToken.h"
 
 using std::string;
 using std::string_view;
@@ -22,4 +23,9 @@ void TokenBufferedLexer::str(string_view content)
 void TokenBufferedLexer::eof()
 {
 	add_token<EOFToken>();
+}
+
+void TokenBufferedLexer::wsp()
+{
+	add_token<WhitespaceToken>();
 }

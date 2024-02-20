@@ -1,8 +1,8 @@
 #pragma once
 
-#include <LexingState.h>
+#include <StringMemoryLexingState.h>
 
-class SelectorLexGenericState : public LexingState
+class SelectorLexGenericState : public StringMemoryLexingState
 {
 public:
 	bool scan(const char) override;

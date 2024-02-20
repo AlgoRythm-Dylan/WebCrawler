@@ -24,4 +24,5 @@ public:
 	void punct(string_view);
 	void str(string_view);
 	void eof();
+	void wsp();
 };

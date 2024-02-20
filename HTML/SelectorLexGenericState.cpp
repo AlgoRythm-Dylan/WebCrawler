@@ -3,39 +3,31 @@
 #include <PunctuationToken.h>
 
 #include "SelectorLexer.h"
-#include "SelectorLexIdState.h"
-#include "SelectorLexClassState.h"
 
 bool SelectorLexGenericState::scan(const char character)
 {
-	// If the character is a #, this is an ID
-	// if the character is a ., this is a class name
-	// if the character is a [, this is an attribtue
-	// if whitespace, ignore
-	// else, this is a tag name
-	if (character == '#')
+	// Punctuation for id, class, and rule separator, respectively
+	if (character == '#' || character == '.' || character == ',')
 	{
-		auto token = unique_ptr<Token>(new PunctuationToken("#"));
+		emit_memory();
 		auto lexer = (SelectorLexer*)machine;
-		lexer->token_buffer.push(std::move(token));
-		transition(new SelectorLexIdState());
+		lexer->punct(string(character, 1));
 	}
-	else if (character == '.')
-	{
-		auto token = unique_ptr<Token>(new PunctuationToken("."));
-		auto lexer = (SelectorLexer*)machine;
-		lexer->token_buffer.push(std::move(token));
-		transition(new SelectorLexClassState());
-	}
-	else if (character == '[')
+	/*else if (character == '[')
 	{
 
-	}
+	}*/
 	else
 	{
-		if (character != ' ')
+		if (character == ' ')
 		{
-
+			emit_memory();
+			auto lexer = (SelectorLexer*)machine;
+			lexer->wsp();
+		}
+		else
+		{
+			memory += character;
 		}
 	}
 	return true;
